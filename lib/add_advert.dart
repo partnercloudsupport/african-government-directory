@@ -43,6 +43,14 @@ bool _business_category_focus_active = false;
 //bool in foc
 bool clicked = false;
 
+//bool loading provinces
+bool _provinces_loaded = false;
+
+//bool loading business/government categories
+bool _categories_loaded = false;
+
+
+
 @override
 void initState(){
 super.initState();
@@ -100,9 +108,33 @@ void _on_province_form_field_click(){
       barrierDismissible: false,
       context: _scaffold_key.currentContext,
       builder: (BuildContext context){
-        return _province_dialog;
+        return AlertDialog(
+          title: Text('choose province'),
+          content: set_up_province_dialog(),
+          actions: <Widget>[
+            new FlatButton(
+              child: Text('close'),
+              onPressed: (){
+              _about_company_focus = new FocusNode();
+              _bussiness_category_focus = new FocusNode();
+              _province_focus = new FocusNode();
+
+              FocusScope.of(_scaffold_key.currentContext).requestFocus(_about_company_focus);
+              Navigator.of(_scaffold_key.currentContext).pop();
+              },
+            ),
+          ],
+        );
       }
     );
+
+    // showDialog(
+    //   barrierDismissible: false,
+    //   context: _scaffold_key.currentContext,
+    //   builder: (BuildContext context){
+    //     return _province_dialog;
+    //   }
+    // );
   }
 }
 
@@ -533,6 +565,34 @@ static SimpleDialog _category_dialog = SimpleDialog(
   ],
 );
 
+
+static Widget set_up_province_dialog(){
+  return Container(
+    height: MediaQuery.of(_scaffold_key.currentContext).size.height,
+    width: MediaQuery.of(_scaffold_key.currentContext).size.width,
+    child: ListView.builder(
+      shrinkWrap: true,
+      itemCount: 5,
+      itemBuilder: (BuildContext context, int index){
+        return ListTile(
+          onTap: (){
+            print('kzn $index');
+
+            _province_controller.text = "Kwazulu-natal $index";
+
+            _about_company_focus = new FocusNode();
+            _bussiness_category_focus = new FocusNode();
+            _province_focus = new FocusNode();
+
+            FocusScope.of(_scaffold_key.currentContext).requestFocus(_about_company_focus);
+            Navigator.of(_scaffold_key.currentContext).pop();
+          },
+          title: Text('kzn'),
+        );
+      },
+    ),
+  );
+}
 }
 //Text Form Fields
 //name

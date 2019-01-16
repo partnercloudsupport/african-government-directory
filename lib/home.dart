@@ -173,13 +173,13 @@ class _HomePageState extends State<HomePage>{
            return    new   Column(
              mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          // ListTile(
-          //   leading: Icon(Icons.favorite),
-          //   title: Text('Favourites'),
-          //   onTap: (){
-          //     print('favourites tabed');
-          //   },
-          // ),
+           ListTile(
+             leading: Icon(Icons.favorite),
+             title: Text('Favourites'),
+             onTap: (){
+               print('favourites tabed');
+             },
+           ),
           ListTile(
             leading: Icon(Icons.videocam),
             title: Text('Video Channel'),
@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage>{
           ),
           ListTile(
             leading: Icon(Icons.add),
-            title: Text('Add a free adds'),
+            title: Text('Add A Free Advert'),
             onTap: (){
               print('add free add tabed');
               Navigator.push(context, MaterialPageRoute(builder: (context) => add_advert()));
@@ -207,56 +207,6 @@ class _HomePageState extends State<HomePage>{
             },
           )
         ],
-      );
-      },
-
-
-    );
-  }
-}
-
-class _appDrawer extends StatelessWidget{
-  const _appDrawer();
-
-  @override
-  Widget build(BuildContext context){
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context){
-            child: Container(
-        color: Colors.green,
-        child:       Column(
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text('Favourites'),
-            onTap: (){
-              print('favourites tabed');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.videocam),
-            title: Text('Video Channel'),
-            onTap: (){
-              print('video channel tabbed');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.add),
-            title: Text('Add a free adds'),
-            onTap: (){
-              print('add free add tabed');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-            onTap: (){
-              print('log out tabed');
-            },
-          )
-        ],
-      ),
       );
       },
 
