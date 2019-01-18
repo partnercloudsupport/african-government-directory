@@ -9,7 +9,8 @@ class company_page extends StatefulWidget {
   company_page({Key key, this.company, this.old_context}) : super(key: key);
 
   @override
-  _company_page_state createState() => _company_page_state(this.company, this.old_context);
+  _company_page_state createState() =>
+      _company_page_state(this.company, this.old_context);
 }
 
 enum AppBarBehavior { normal, pinned, floating, snapping }
@@ -66,176 +67,177 @@ class _company_page_state extends State<company_page>
     super.dispose();
   }
 
-  void _show_company_connection(BuildContext context, String action){
+  void _show_company_connection(BuildContext context, String action) {
     Icon connection_icon;
     String company_connection_data;
     String title;
     bool _empty = false;
 
-    try{
-    if(action == 'phone'){
-      //show company phone number
-      connection_icon = new Icon(Icons.phone, color: Colors.cyan);
-      title = 'company phone number';
-      if(company.mobile.isEmpty){
-        _empty = true;
-      }else{
-        _empty = false;
-        company_connection_data = '${company.mobile}';
+    try {
+      if (action == 'phone') {
+        //show company phone number
+        connection_icon = new Icon(Icons.phone, color: Colors.cyan);
+        title = 'company phone number';
+        if (company.mobile.isEmpty) {
+          _empty = true;
+        } else {
+          _empty = false;
+          company_connection_data = '${company.mobile}';
+        }
       }
-    }
-    }catch(ex){
+    } catch (ex) {
       _empty = true;
       print('exception caught while checking company phone number');
     }
 
-    try{
-    if(action == 'fax'){
-      //show company fax number
-      connection_icon = new Icon(Icons.print, color: Colors.cyan);
-      title = 'company fax number';
-      if(company.fax.isEmpty){
-        _empty = true;
-      }else{
-        _empty = false;
-        company_connection_data = '${company.fax}';
+    try {
+      if (action == 'fax') {
+        //show company fax number
+        connection_icon = new Icon(Icons.print, color: Colors.cyan);
+        title = 'company fax number';
+        if (company.fax.isEmpty) {
+          _empty = true;
+        } else {
+          _empty = false;
+          company_connection_data = '${company.fax}';
+        }
       }
-    }
-    }catch(ex){
+    } catch (ex) {
       _empty = true;
       print('exception caught while checking company fax number');
     }
 
-    try{
-    if(action == 'email'){
-      //show company email
-      connection_icon = new Icon(Icons.email, color: Colors.cyan);
-      title = 'company email address';
-      if(company.email.isEmpty){
-        _empty = true;
-      }else{
-        _empty = false;
-        company_connection_data = '${company.email}';
+    try {
+      if (action == 'email') {
+        //show company email
+        connection_icon = new Icon(Icons.email, color: Colors.cyan);
+        title = 'company email address';
+        if (company.email.isEmpty) {
+          _empty = true;
+        } else {
+          _empty = false;
+          company_connection_data = '${company.email}';
+        }
       }
-    }
-    }catch(ex){
+    } catch (ex) {
       _empty = true;
       print('exception caught while checking company email address');
     }
 //catch exceptions in case one filed is null
-try{
-    if(action == 'web'){
-      //show company website
-      connection_icon = new Icon(Icons.web, color: Colors.cyan);
-      title = 'company website';
-      if(company.website.isEmpty){
-        _empty = true;
-      }else{
-        _empty = false;
-        company_connection_data = '${company.website}';
+    try {
+      if (action == 'web') {
+        //show company website
+        connection_icon = new Icon(Icons.web, color: Colors.cyan);
+        title = 'company website';
+        if (company.website.isEmpty) {
+          _empty = true;
+        } else {
+          _empty = false;
+          company_connection_data = '${company.website}';
+        }
       }
+    } catch (ex) {
+      _empty = true;
+      //company_connection_data = '';
+      print('exception caught while cheking company website');
     }
-}catch(ex){
-  _empty = true;
-  //company_connection_data = '';
-  print('exception caught while cheking company website');
-}
 
-try{
-    if(action == 'location'){
-      //show company location
-      connection_icon = new Icon(Icons.location_on, color: Colors.cyan);
-      title = 'company location';
-      if(company.address.isEmpty){
-        _empty = true;
-      }else{
-        _empty = false;
-        company_connection_data = '${company.address}';
+    try {
+      if (action == 'location') {
+        //show company location
+        connection_icon = new Icon(Icons.location_on, color: Colors.cyan);
+        title = 'company location';
+        if (company.address.isEmpty) {
+          _empty = true;
+        } else {
+          _empty = false;
+          company_connection_data = '${company.address}';
+        }
       }
-    }
-    }catch(ex){
-      _empty = true ;
+    } catch (ex) {
+      _empty = true;
       print('exception caught while trying to read company location');
     }
 
     showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context){
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              leading: connection_icon,
-              title: Text(title),
-            ),
-            new ListTile(
-              leading: new Text(''),
-              title: _empty ? Text('This company has no ${title}') : Text('${company_connection_data}'),
-            ),
-          SizedBox(
-            height: 15.0,
-          ),
-          ],
-        );
-      }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: connection_icon,
+                title: Text(title),
+              ),
+              new ListTile(
+                leading: new Text(''),
+                title: _empty
+                    ? Text('This company has no ${title}')
+                    : Text('${company_connection_data}'),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+            ],
+          );
+        });
   }
 
-  void _menu(BuildContext context){
+  void _menu(BuildContext context) {
     showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context){
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-          // ListTile(
-          //   leading: Icon(Icons.favorite),
-          //   title: Text('Favourites'),
-          //   onTap: (){
-          //     print('favourites tabed');
-          //   },
-          // ),
-          ListTile(
-            leading: Icon(Icons.videocam),
-            title: Text('Video Channel'),
-            onTap: (){
-              print('video channel tabbed');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.add),
-            title: Text('Add a free ad'),
-            onTap: (){
-              print('add free add tabed');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-            onTap: (){
-              print('log out tabed');
-            },
-          )
-          ],
-        );
-      }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // ListTile(
+              //   leading: Icon(Icons.favorite),
+              //   title: Text('Favourites'),
+              //   onTap: (){
+              //     print('favourites tabed');
+              //   },
+              // ),
+              ListTile(
+                leading: Icon(Icons.videocam),
+                title: Text('Video Channel'),
+                onTap: () {
+                  print('video channel tabbed');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.add),
+                title: Text('Add a free ad'),
+                onTap: () {
+                  print('add free add tabed');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Logout'),
+                onTap: () {
+                  print('log out tabed');
+                },
+              )
+            ],
+          );
+        });
   }
 
-  String render_company_image(){
+  String render_company_image() {
     bool _empty = false;
-    try{
-      if(company.url.isEmpty || company.url == null){
+    try {
+      if (company.url.isEmpty || company.url == null) {
         _empty = true;
       }
-    }catch(ex){
+    } catch (ex) {
       _empty = true;
-      print('rendering company image caused an exception but it was handled mate');
+      print(
+          'rendering company image caused an exception but it was handled mate');
     }
 
-    if(_empty){
+    if (_empty) {
       return 'http://jlouage.com/images/intro-bg.jpg';
-    }else{
+    } else {
       return 'http://cdn.adslive.com/${company.url}';
     }
   }
@@ -258,208 +260,231 @@ try{
 
     return Scaffold(
       body: //new Theme(
-        // data: new ThemeData( 
-        //   brightness: Brightness.light,
-        //   primaryColor: const Color.fromRGBO(106, 94, 175, 1.0),
-        //   platform: Theme.of(context).platform,
-        // ),
-         Container(
-          //width: width.value,
-          //height: height.value,
-          color: Colors.white, //const Color.fromRGBO(106, 94, 175, 1.0),
-          child: new Hero(
-            tag: "img",
-            child: new Card(
-              color: Colors.transparent,
-              child: new Container(
-                alignment: Alignment.center,
-                //width: width.value,
-                //height: height.value,
-                decoration: new BoxDecoration(
-                  color: Colors.white,
-                  //border radius
-                  //borderRadius: new BorderRadius.circular(10.0),
-                ),
-                child: new Stack(
-                  alignment: AlignmentDirectional.bottomCenter,
-                  children: <Widget>[
-                    new CustomScrollView(
-                      shrinkWrap: false,
-                      slivers: <Widget>[
-                        new SliverAppBar(
-                          iconTheme: IconThemeData(
-                            color: Colors.black,
-                          ),
-                          elevation: 0.0,
-                          forceElevated: true,
-                          // leading: new IconButton(
-                          //   onPressed: (){
-                          //     Navigator.of(context).pop();
-                          //   },
-                          //   icon: new Icon(Icons.arrow_back, color: Colors.cyan,size: 30.0,),
-                          // ),
-                          expandedHeight: _appBarHeight,
-                          pinned: _appBarBehavior == AppBarBehavior.pinned,
-                          floating:
-                              _appBarBehavior == AppBarBehavior.floating ||
-                                  _appBarBehavior == AppBarBehavior.snapping,
-                          flexibleSpace: new FlexibleSpaceBar(
-                            title: new Container(
-                              width: width.value,
-                              child: Container(
-                                decoration: new BoxDecoration(
-                                  color: Colors.black
-                                ),
-                                child: Text('${company.name}',style: TextStyle(color: Colors.white),),
+          // data: new ThemeData(
+          //   brightness: Brightness.light,
+          //   primaryColor: const Color.fromRGBO(106, 94, 175, 1.0),
+          //   platform: Theme.of(context).platform,
+          // ),
+          Container(
+        //width: width.value,
+        //height: height.value,
+        color: Colors.white, //const Color.fromRGBO(106, 94, 175, 1.0),
+        child: new Hero(
+          tag: "img",
+          child: new Card(
+            color: Colors.transparent,
+            child: new Container(
+              alignment: Alignment.center,
+              //width: width.value,
+              //height: height.value,
+              decoration: new BoxDecoration(
+                color: Colors.white,
+                //border radius
+                //borderRadius: new BorderRadius.circular(10.0),
+              ),
+              child: new Stack(
+                alignment: AlignmentDirectional.bottomCenter,
+                children: <Widget>[
+                  new CustomScrollView(
+                    shrinkWrap: false,
+                    slivers: <Widget>[
+                      new SliverAppBar(
+                        iconTheme: IconThemeData(
+                          color: Colors.black,
+                        ),
+                        elevation: 0.0,
+                        forceElevated: true,
+                        // leading: new IconButton(
+                        //   onPressed: (){
+                        //     Navigator.of(context).pop();
+                        //   },
+                        //   icon: new Icon(Icons.arrow_back, color: Colors.cyan,size: 30.0,),
+                        // ),
+                        expandedHeight: _appBarHeight,
+                        pinned: _appBarBehavior == AppBarBehavior.pinned,
+                        floating: _appBarBehavior == AppBarBehavior.floating ||
+                            _appBarBehavior == AppBarBehavior.snapping,
+                        flexibleSpace: new FlexibleSpaceBar(
+                          title: new Container(
+                            width: width.value,
+                            child: Container(
+                              decoration:
+                                  new BoxDecoration(color: Colors.black),
+                              child: Text(
+                                '${company.name}',
+                                style: TextStyle(color: Colors.white),
                               ),
-                              // child: Text('${company.name}',style: TextStyle(color: Colors.black),),
                             ),
-                            background: new Stack(
-                              fit: StackFit.expand,
-                              children: <Widget>[
-                                 new Container(
-                                   //width: width.value,
-                                   height: _appBarHeight,
-                                   decoration: new BoxDecoration(
-                                     image: new DecorationImage(
-                                       image: new NetworkImage(
+                            // child: Text('${company.name}',style: TextStyle(color: Colors.black),),
+                          ),
+                          background: new Stack(
+                            fit: StackFit.expand,
+                            children: <Widget>[
+                              new Container(
+                                //width: width.value,
+                                height: _appBarHeight,
+                                decoration: new BoxDecoration(
+                                  color: Colors.green,
+                                  image: new DecorationImage(
+                                    image: new NetworkImage(
                                         //company.url.isEmpty ? 'http://jlouage.com/images/intro-bg.jpg' : 'http://cdn.adslive.com/${company.url}'),
                                         render_company_image()),
-                                       fit: BoxFit.fill,
-                                     ),
-                                   ),
-                                 )
-                              ],
-                            ),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        new SliverList(
-                          delegate: new SliverChildListDelegate(<Widget>[
-                            new Container(
-                              color: Colors.white,
-                              child: new Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: new Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    new Container(
-                                      padding:
-                                          new EdgeInsets.only(bottom: 20.0),
-                                      alignment: Alignment.center,
-                                      decoration: new BoxDecoration(
-                                          color: Colors.white,
-                                          border: new Border(
-                                              bottom: new BorderSide(
-                                                  color: Colors.black12))),
-                                      child: new Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          new Row(
-                                            children: <Widget>[
-                                              IconButton(
-                                                icon: new Icon(Icons.phone,color: Colors.cyan,),
-                                                onPressed: (){
-                                                  //print('company image ${company.url}');
-                                                  _show_company_connection(context, 'phone');
-                                                },
-                                              ),
-                                              // new Padding(
-                                              //   padding: const EdgeInsets.all(8.0),
-                                              //   child: new Text("10:00 am"),
-                                              // )
-                                            ],
-                                          ),
-                                          new Row(
-                                            children: <Widget>[
-                                                  IconButton(
-                                                    icon: new Icon(
-                                                      Icons.print,
-                                                      color: Colors.cyan,
-                                                      ),
-                                                      onPressed: (){
-                                                        _show_company_connection(context, 'fax');
-                                                      },
+                      ),
+                      new SliverList(
+                        delegate: new SliverChildListDelegate(<Widget>[
+                          new Container(
+                            color: Colors.white,
+                            child: new Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: new Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  new Container(
+                                    padding: new EdgeInsets.only(bottom: 20.0),
+                                    alignment: Alignment.center,
+                                    decoration: new BoxDecoration(
+                                        color: Colors.white,
+                                        border: new Border(
+                                            bottom: new BorderSide(
+                                                color: Colors.black12))),
+                                    child: new Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        new Row(
+                                          children: <Widget>[
+                                            Column(
+                                              children: <Widget>[
+                                                IconButton(
+                                                  icon: new Icon(
+                                                    Icons.phone,
+                                                    color: Colors.cyan,
                                                   ),
-                                            ],
-                                          ),
-                                          new Row(
-                                            children: <Widget>[
-                                                  IconButton(
-                                                    icon: new Icon(
-                                                      Icons.email,
-                                                      color: Colors.cyan,
-                                                    ),
-                                                    onPressed: (){
-                                                      _show_company_connection(context, 'email');
-                                                    },
-                                                  ),
-                                            ],
-                                          ),
-                                          new Row(
-                                            children: <Widget>[
-                                              IconButton(
-                                                icon: new Icon(
-                                                  Icons.web,
-                                                  color: Colors.cyan,
+                                                  onPressed: () {
+                                                    //print('company image ${company.url}');
+                                                    _show_company_connection(
+                                                        context, 'phone');
+                                                  },
                                                 ),
-                                                // onPressed: () {
-                                                //   showBottomSheet<void>(
-                                                //     context: context, builder: (BuildContext context) => const _drawer(),
-                                                //   );
+                                                new Text("Telephone"),
+                                                // new Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.all(4.0),
+                                                //   child: new Text("Telephone"),
+                                                // )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        new Row(
+                                          children: <Widget>[
+                                            Column(
+                                              children: <Widget>[
+                                                                                            IconButton(
+                                              icon: new Icon(
+                                                Icons.print,
+                                                color: Colors.cyan,
+                                              ),
+                                              onPressed: () {
+                                                _show_company_connection(
+                                                    context, 'fax');
+                                              },
+                                            ),
+                                            Text('Fax'),
+                                              ],
+                                            ),
 
-                                                  
-                                                // },
-                                                onPressed: (){
-                                                  _show_company_connection(context,'web');
-                                                },
+                                          ],
+                                        ),
+                                        new Row(
+                                          children: <Widget>[
+                                            IconButton(
+                                              icon: new Icon(
+                                                Icons.email,
+                                                color: Colors.cyan,
                                               ),
-                                            ],
-                                          ),
-                                          new Row(
-                                            children: <Widget>[
-                                              IconButton(
-                                                icon: new Icon(
-                                                  Icons.location_on,
-                                                  color: Colors.cyan,
-                                                ),
-                                                onPressed: () {
-                                                  _show_company_connection(context, 'location');
-                                                },
+                                              onPressed: () {
+                                                _show_company_connection(
+                                                    context, 'email');
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        new Row(
+                                          children: <Widget>[
+                                            IconButton(
+                                              icon: new Icon(
+                                                Icons.web,
+                                                color: Colors.cyan,
                                               ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                              // onPressed: () {
+                                              //   showBottomSheet<void>(
+                                              //     context: context, builder: (BuildContext context) => const _drawer(),
+                                              //   );
+
+                                              // },
+                                              onPressed: () {
+                                                _show_company_connection(
+                                                    context, 'web');
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        new Row(
+                                          children: <Widget>[
+                                            IconButton(
+                                              icon: new Icon(
+                                                Icons.location_on,
+                                                color: Colors.cyan,
+                                              ),
+                                              onPressed: () {
+                                                _show_company_connection(
+                                                    context, 'location');
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    new Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 16.0, bottom: 8.0),
-                                      child: new Text(
-                                        'ABOUT',
-                                        style: new TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                  ),
+                                  new Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 16.0, bottom: 8.0),
+                                    child: new Text(
+                                      'ABOUT',
+                                      style: new TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    company.about_us.isEmpty ? Text('Company information not found') : Text('${company.about_us}'),
-                                    //new Text('${company.about_us}'),
-                                  ],
-                                ),
+                                  ),
+                                  company.about_us.isEmpty
+                                      ? Text('Company information not found')
+                                      : Text('${company.about_us}'),
+                                  //new Text('${company.about_us}'),
+                                ],
                               ),
-                            )
-                          ]),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                            ),
+                          )
+                        ]),
+                      )
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
         ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         elevation: 4.0,
+        backgroundColor: Colors.green,
         icon: const Icon(Icons.view_carousel),
         label: const Text('view ad'),
         onPressed: () {
@@ -481,7 +506,8 @@ try{
               icon: Icon(Icons.search),
               onPressed: () {
                 print('search pressed');
-                Navigator.push(context, MaterialPageRoute(builder: (context) => search_page()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => search_page()));
               },
             )
           ],
@@ -623,11 +649,11 @@ try{
   }
 }
 
-class _drawer extends StatelessWidget{
+class _drawer extends StatelessWidget {
   const _drawer();
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -637,11 +663,10 @@ class _drawer extends StatelessWidget{
     );
   }
 
-  Widget _custom_list_tile(){
+  Widget _custom_list_tile() {
     return ListTile(
       leading: Icon(Icons.face),
       title: Text('test'),
-
     );
   }
 }

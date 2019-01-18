@@ -35,7 +35,10 @@ class _LoginPageState extends State<LoginPage> {
     print('runned');
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       preferences = sp;
-      _logged_in = preferences.getBool(_logged_in_key);
+      setState((){
+        _logged_in = preferences.getBool(_logged_in_key);
+      });
+
       if(_logged_in == null){
         //set init value
         _logged_in = false;
@@ -181,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
     return new Scaffold(
       body: ModalProgressHUD(
         child: Center(
-        child: login_body(),
+        child: _logged_in ? Center(child: CircularProgressIndicator(),) : login_body(),
        ),
        inAsyncCall: _is_in_async_call,
        opacity: 0.5,
