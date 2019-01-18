@@ -283,6 +283,9 @@ SharedPreferences.getInstance().then((SharedPreferences sp){
 
 //focus events
 void _on_province_form_field_click(){
+  if(_province_focus.hasFocus){
+
+  }
   if(_province_focus_active){
     setState((){
       _province_focus_active = false;
