@@ -100,7 +100,6 @@ class _add_advert extends State<add_advert>{
         progressIndicator: CircularProgressIndicator(),
         inAsyncCall: _is_in_async_call,
         opacity: 0.5,
-        color: Colors.green,
       ),
     );
   }
@@ -251,14 +250,20 @@ SharedPreferences.getInstance().then((SharedPreferences sp){
     // });
     
     //print(data);
-    final response = await http.post('https://government.co.za/api/add_new_listing',body: data);
-    setState(() {
-      _is_in_async_call = false;
+    final response = await http.post('https://government.co.za/api/add_new_listing',body: data).then((response){
+      setState(() {
+        _is_in_async_call = false;
+      });
+      
+      var result = response.body;
+      var company = json.decode(result);
+      print('new company id ${company}');
+    }).catchError((error){
+      print(error);
+      setState(() {
+        _is_in_async_call = false;
+      });
     });
-
-    var result = response.body;
-    var company = json.decode(result);
-    print('new company id ${company['id']}');
   }
 
 
