@@ -162,6 +162,13 @@ static List<GovCategory> Government_categories = [];
 static List<Province> Provinces = [];
 
 
+_call_snackbar(message){
+  final snackBar = SnackBar(
+    content: Text(message),
+  );
+
+  _scaffold_key.currentState.showSnackBar(snackBar);
+}
 
 @override
 void initState(){
@@ -254,6 +261,9 @@ SharedPreferences.getInstance().then((SharedPreferences sp){
       setState(() {
         _is_in_async_call = false;
       });
+
+      _call_snackbar(_name_controller.text.toUpperCase() + ' Has Been Added!');
+      _clear_fields();
       
       var result = response.body;
       var company = json.decode(result);
@@ -264,6 +274,20 @@ SharedPreferences.getInstance().then((SharedPreferences sp){
         _is_in_async_call = false;
       });
     });
+  }
+
+  _clear_fields(){
+    _name_controller.clear();
+    _physical_address_controller.clear();
+    _postal_address_controller.clear();
+    _telephone_number_controller.clear();
+    _mobile_number_controller.clear();
+    _fax_number_controller.clear();
+    _email_address_controller.clear();
+    _company_website_controller.clear();
+    _about_us_controller.clear();
+    _category_controller.clear();
+    _province_controller.clear();
   }
 
 
