@@ -70,7 +70,7 @@ class company_list_tile extends StatelessWidget {
                                     print('star clicked');
                                   },
                                 ),
-                                Text('5M', style: TextStyle(color: Colors.grey),),
+                                //Text('5M', style: TextStyle(color: Colors.grey),),
                               ],
                             ),
                           ),
