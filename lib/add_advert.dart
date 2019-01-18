@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:government_directory/models/GovCategory.dart';
@@ -284,25 +282,6 @@ SharedPreferences.getInstance().then((SharedPreferences sp){
 //focus events
 void _on_province_form_field_click(){
   if(_province_focus.hasFocus){
-
-  }
-  if(_province_focus_active){
-    setState((){
-      _province_focus_active = false;
-    });
-  }
-  else{
-    print('province form field has been clicked');
-    setState((){
-      _province_focus_active = true;
-    });
-  }
-
-  if(_province_focus_active){
-    setState((){
-      clicked = true;
-    });
-
     showDialog(
       barrierDismissible: false,
       context: _scaffold_key.currentContext,
@@ -314,18 +293,36 @@ void _on_province_form_field_click(){
             new FlatButton(
               child: Text('close'),
               onPressed: (){
-              _about_company_focus = new FocusNode();
-              _bussiness_category_focus = new FocusNode();
-              _province_focus = new FocusNode();
-
-              FocusScope.of(_scaffold_key.currentContext).requestFocus(_about_company_focus);
-              Navigator.of(_scaffold_key.currentContext).pop();
+                _province_focus.unfocus();
+                Navigator.of(_scaffold_key.currentContext).pop();
               },
             ),
           ],
         );
       }
     );
+  }else{
+
+  }
+  
+  // if(_province_focus_active){
+  //   setState((){
+  //     _province_focus_active = false;
+  //   });
+  // }
+  // else{
+  //   print('province form field has been clicked');
+  //   setState((){
+  //     _province_focus_active = true;
+  //   });
+  // }
+
+  // if(_province_focus_active){
+  //   setState((){
+  //     clicked = true;
+  //   });
+
+
 
     // showDialog(
     //   barrierDismissible: false,
@@ -334,26 +331,11 @@ void _on_province_form_field_click(){
     //     return _province_dialog;
     //   }
     // );
-  }
+  //}
 }
 
 void _on_business_category_form_field_click(){
-  if(_business_category_focus_active){
-    setState((){
-      _business_category_focus_active = false;
-    });
-  }
-  else{
-    print('business category form field has been clicked');
-    setState((){
-      _business_category_focus_active = true;
-    });
-  }
-
-  if(_business_category_focus_active){
-    setState((){
-      clicked = true;
-    });
+  if(_bussiness_category_focus.hasFocus){
     showDialog(
       barrierDismissible: false,
       context: _scaffold_key.currentContext,
@@ -365,19 +347,36 @@ void _on_business_category_form_field_click(){
             new FlatButton(
               child: Text('close'),
               onPressed: (){
-              _about_company_focus = new FocusNode();
-              _bussiness_category_focus = new FocusNode();
-              _province_focus = new FocusNode();
-
-              FocusScope.of(_scaffold_key.currentContext).requestFocus(_about_company_focus);
-              Navigator.of(_scaffold_key.currentContext).pop();
-              },
+                _bussiness_category_focus.unfocus();
+                Navigator.of(_scaffold_key.currentContext).pop();
+                },
             ),
           ],
         );
       },
     );
+  }else{
+    
   }
+
+  // if(_business_category_focus_active){
+  //   setState((){
+  //     _business_category_focus_active = false;
+  //   });
+  // }
+  // else{
+  //   print('business category form field has been clicked');
+  //   setState((){
+  //     _business_category_focus_active = true;
+  //   });
+  // }
+
+  // if(_business_category_focus_active){
+  //   setState((){
+  //     clicked = true;
+  //   });
+
+  // }
 }
 
   static final _form_key = GlobalKey<FormState>();
@@ -784,19 +783,9 @@ if(_form_key.currentState.validate()){
         return ListTile(
           onTap: (){
              print(Government_categories[index].name);
-
              _category_controller.text = Government_categories[index].name;
-
-             _about_company_focus = new FocusNode();
-             _bussiness_category_focus = new FocusNode();
-             _province_focus = new FocusNode();
-
-            setState((){
-             category_id = Government_categories[index].id;
-            });
-
-            print('selected category id $category_id');
-             FocusScope.of(_scaffold_key.currentContext).requestFocus(_about_company_focus);
+             
+             _bussiness_category_focus.unfocus();
              Navigator.of(_scaffold_key.currentContext).pop();
            },
           title: Text(Government_categories[index].name),
@@ -817,19 +806,9 @@ Widget set_up_province_dialog(){
         return ListTile(
           onTap: (){
             print(Provinces[index].name);
-
             _province_controller.text = Provinces[index].name;
-
-            _about_company_focus = new FocusNode();
-            _bussiness_category_focus = new FocusNode();
-            _province_focus = new FocusNode();
-
-             setState((){
-               province_id = Provinces[index].id;
-             });
-
-             print('selected province id $province_id');
-            FocusScope.of(_scaffold_key.currentContext).requestFocus(_about_company_focus);
+            
+            _province_focus.unfocus();
             Navigator.of(_scaffold_key.currentContext).pop();
           },
           title: Text(Provinces[index].name),
