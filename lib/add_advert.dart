@@ -250,10 +250,15 @@ SharedPreferences.getInstance().then((SharedPreferences sp){
     //   });
     // });
     
-    print(data);
+    //print(data);
+    final response = await http.post('https://government.co.za/api/add_new_listing',body: data);
     setState(() {
-          _is_in_async_call = false;
-        });
+      _is_in_async_call = false;
+    });
+
+    var result = response.body;
+    var company = json.decode(result);
+    print('new company id ${company['id']}');
   }
 
 
