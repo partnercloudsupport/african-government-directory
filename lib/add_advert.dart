@@ -785,6 +785,9 @@ if(_form_key.currentState.validate()){
              print(Government_categories[index].name);
              _category_controller.text = Government_categories[index].name;
              
+             setState((){
+               category_id = Government_categories[index].id;
+             });
              _bussiness_category_focus.unfocus();
              Navigator.of(_scaffold_key.currentContext).pop();
            },
@@ -807,7 +810,10 @@ Widget set_up_province_dialog(){
           onTap: (){
             print(Provinces[index].name);
             _province_controller.text = Provinces[index].name;
-            
+
+            setState((){
+              province_id = Provinces[index].id;
+            });
             _province_focus.unfocus();
             Navigator.of(_scaffold_key.currentContext).pop();
           },
