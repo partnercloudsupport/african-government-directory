@@ -304,6 +304,10 @@ super.initState();
     }
   }
 
+  _render_icon(){
+    _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border);
+  }
+
   @override
   Widget build(BuildContext context) {
     timeDilation = 0.7;
@@ -371,7 +375,7 @@ super.initState();
                             width: width.value,
                             child: Container(
                               alignment: Alignment(1.0,1.0),
-                              child: IconButton(
+                              child: _is_in_async_call ? CircularProgressIndicator() : IconButton(
                                 icon: _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border),
                                 onPressed: (){
                                   print('favourite icon pressed');
