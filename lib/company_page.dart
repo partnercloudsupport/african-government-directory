@@ -42,7 +42,7 @@ class _company_page_state extends State<company_page>
   Future _is_my_favourite() async{
     var data = jsonEncode({'company_id':company.id,'user_id':user_id});
 
-    print('user id is ${this.user_id} company id is ${company.id}');
+    print('data is ' + data);
 
     setState((){
       _is_in_async_call = true;
@@ -52,9 +52,10 @@ class _company_page_state extends State<company_page>
       setState((){
         _is_in_async_call = false;
       });
+      var res = json.decode(response.body);
 
-      print('response is ${response.body}');
-      if(response.body == "yes"){
+      print('response is ${res}');
+      if(res['favourite'] == "yes"){
         setState((){
           _is_favourite = true;
         });
