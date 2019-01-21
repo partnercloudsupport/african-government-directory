@@ -74,7 +74,10 @@ class _company_page_state extends State<company_page>
     });
   }
 
-  void initState() {
+@override
+void initState(){
+super.initState();
+
    SharedPreferences.getInstance().then((SharedPreferences sp){
     _preferences = sp;
     setState(() {
@@ -84,7 +87,7 @@ class _company_page_state extends State<company_page>
       print('user id ${user_id}');
     });
 
-     _is_my_favourite();
+
 
     _containerController = new AnimationController(
         duration: new Duration(milliseconds: 2000), vsync: this);
@@ -115,6 +118,9 @@ class _company_page_state extends State<company_page>
       });
     });
     _containerController.forward();
+
+
+    _is_my_favourite();
   }
 
   @override
