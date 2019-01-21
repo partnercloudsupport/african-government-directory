@@ -43,9 +43,9 @@ class _HomePageState extends State<HomePage>{
 
     createPost(post).then((response){
       if(response.statusCode > 200){
-        print(response.body);
+       // print(response.body);
       }else{
-        print(response.statusCode);
+       // print(response.statusCode);
       }
     }).catchError((error){
       print('error : $error');
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage>{
   //get all government posts from api call
   Future<List<GovCategory>> get_all_categories(http.Client client) async{
     final response = await client.get('https://government.co.za/api/government_categories');
-    print(response.body);
+   // print(response.body);
     
     return compute(parse_category, response.body);
   }
