@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:government_directory/favourites.dart';
 import 'package:government_directory/search_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'models/company.dart';
+import 'package:http/http.dart' as http;
 
 class company_page extends StatefulWidget {
   final Company company;
@@ -30,7 +34,44 @@ class _company_page_state extends State<company_page>
   double _appBarHeight = 256.0;
   AppBarBehavior _appBarBehavior = AppBarBehavior.pinned;
 
+  SharedPreferences _preferences;
+
+  bool _is_in_async_call = false;
+  String user_id;
+
+  Future _is_my_favourite() async{
+    var data = jsonEncode({'company_id':company.id,'user_id':user_id});
+
+    setState((){
+      _is_in_async_call = true;
+    });
+
+    final response = await http.post('http://192.168.16.97/government.co.za/api/is_my_favourite',body: data).then((response){
+      setState((){
+        _is_in_async_call = false;
+      });
+      if(response.body == "yes"){
+        print('company is my favourite');
+      }else{
+        print('company is not my favourite');
+      }
+      
+    }).catchError((error){
+      print('error is ' + error);
+      setState((){
+        _is_in_async_call = false;
+      });
+    });
+  }
+
   void initState() {
+   SharedPreferences.getInstance().then((SharedPreferences sp){
+  _preferences = sp;
+  setState(() {
+      user_id = _preferences.getString('id');
+    });
+  });
+
     _containerController = new AnimationController(
         duration: new Duration(milliseconds: 2000), vsync: this);
     super.initState();
