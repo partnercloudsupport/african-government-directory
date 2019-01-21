@@ -176,21 +176,33 @@ class _HomePageState extends State<HomePage>{
         children: <Widget>[
            ListTile(
              leading: Icon(Icons.favorite),
-             title: Text('Favourites'),
+             title: Text('Favourites',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )),
              onTap: (){
                Navigator.push(context, MaterialPageRoute(builder: (context) => FavouritesPage()));
              },
            ),
           ListTile(
             leading: Icon(Icons.videocam),
-            title: Text('Video Channel'),
+            title: Text('Video Channel',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )),
             onTap: (){
               print('video channel tabbed');
             },
           ),
           ListTile(
             leading: Icon(Icons.add),
-            title: Text('Add A Free Advert'),
+            title: Text('Add A Free Advert',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )),
             onTap: (){
               print('add free add tabed');
               Navigator.push(context, MaterialPageRoute(builder: (context) => add_advert()));
@@ -199,7 +211,11 @@ class _HomePageState extends State<HomePage>{
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            title: Text('Logout',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )),
             onTap: (){
               print('log out tabed');
               _remove_local_data(_logged_in_key);

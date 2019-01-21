@@ -372,27 +372,43 @@ super.initState();
                             _appBarBehavior == AppBarBehavior.snapping,
                         flexibleSpace: new FlexibleSpaceBar(
                           title: new Container(
-                            width: width.value,
-                            child: Container(
-                              alignment: Alignment(1.0,1.0),
-                              child: _is_in_async_call ? CircularProgressIndicator() : IconButton(
-                                icon: _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border),
-                                onPressed: (){
-                                  print('favourite icon pressed');
-
-                                  if(_is_favourite){
-                                    setState((){
-                                      _is_favourite = false;
-                                    });
-                                  }else{
-                                    setState((){
-                                      _is_favourite = true;
-                                    });
-                                  }
-                                },
-                                //iconSize: 20.0,
-                              ),
+                            //alignment: Alignment(0,1.0),
+                            width: width.value - 200,
+                            child: _is_in_async_call ? LinearProgressIndicator() : GestureDetector(
+                              child: _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border),
+                              onTap: (){
+                                if(_is_favourite){
+                                  setState((){
+                                       _is_favourite = false;
+                                     });
+                                }else{
+                                  setState((){
+                                    _is_favourite = true;
+                                  });
+                                }
+                              },
                             ),
+                            // child: Container(
+                            //   //width: MediaQuery.of(context).size.width,
+                            //   //alignment: Alignment.centerLeft,
+                            //   child: _is_in_async_call ? CircularProgressIndicator() : IconButton(
+                            //     icon: _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border),
+                            //     onPressed: (){
+                            //       print('favourite icon pressed');
+
+                            //       if(_is_favourite){
+                            //         setState((){
+                            //           _is_favourite = false;
+                            //         });
+                            //       }else{
+                            //         setState((){
+                            //           _is_favourite = true;
+                            //         });
+                            //       }
+                            //     },
+                            //     //iconSize: 20.0,
+                            //   ),
+                            // ),
                             // child: Text('${company.name}',style: TextStyle(color: Colors.black),),
                           ),
                           background: new Stack(
@@ -424,6 +440,19 @@ super.initState();
                               child: new Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
+                                  // GestureDetector(
+                                  //   child:Container(
+                                  //     child: Row(
+                                  //     children: <Widget>[
+                                  //       Text('Add To Favourite'),
+                                  //       Icon(Icons.star),
+                                  //     ],
+                                  //   ),
+                                  //   ), 
+                                  //   onTap: (){
+                                      
+                                  //   },
+                                  // ),
                                   Text(company.name, style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -503,7 +532,7 @@ super.initState();
                                           children: <Widget>[
                                             IconButton(
                                               icon: new Icon(
-                                                Icons.web,
+                                                Icons.language,
                                                 color: Colors.cyan,
                                               ),
                                               // onPressed: () {

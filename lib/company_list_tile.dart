@@ -42,10 +42,15 @@ class company_list_tile extends StatelessWidget {
                                 12.0, 12.0, 12.0, 6.0),
                             child: Text(
                               companies[position].name,
+                              // style: TextStyle(
+                              //   fontSize: 15.0,
+                              //   fontWeight: FontWeight.w900,
+                              // ),
                               style: TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w900,
-                              ),
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )
                             ),
                           ),
                           Padding(
@@ -54,7 +59,7 @@ class company_list_tile extends StatelessWidget {
                             child: Text(
                               companies[position].address,
                               style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.w300),
+                                  fontSize: 15.0, fontWeight: FontWeight.w200),
                             ),
                           ),
                         ],
