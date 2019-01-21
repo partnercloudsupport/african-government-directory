@@ -78,10 +78,11 @@ class _company_page_state extends State<company_page>
     setState(() {
         user_id = _preferences.getString('id');
       });
+
+      print('user id ${user_id}');
     });
 
      _is_my_favourite();
-
 
     _containerController = new AnimationController(
         duration: new Duration(milliseconds: 2000), vsync: this);
