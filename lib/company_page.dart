@@ -308,12 +308,8 @@ class _company_page_state extends State<company_page>
                           title: new Container(
                             width: width.value,
                             child: Container(
-                              decoration:
-                                  new BoxDecoration(color: Colors.black),
-                              child: Text(
-                                '${company.name}',
-                                style: TextStyle(color: Colors.white),
-                              ),
+                              alignment: Alignment(1.0,1.0),
+                              child: Icon(Icons.star_border),
                             ),
                             // child: Text('${company.name}',style: TextStyle(color: Colors.black),),
                           ),
@@ -346,6 +342,10 @@ class _company_page_state extends State<company_page>
                               child: new Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
+                                  Text(company.name, style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  )),
                                   new Container(
                                     padding: new EdgeInsets.only(bottom: 20.0),
                                     alignment: Alignment.center,
