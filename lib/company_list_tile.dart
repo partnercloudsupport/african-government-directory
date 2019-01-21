@@ -7,6 +7,14 @@ class company_list_tile extends StatelessWidget {
 
   company_list_tile({Key key, this.companies}) : super(key: key);
 
+  _on_favourite_click(){
+
+  }
+
+  _change_favourite_icon(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -68,6 +76,8 @@ class company_list_tile extends StatelessWidget {
                                   ),
                                   onTap: (){
                                     print('star clicked');
+                                    _change_favourite_icon();
+                                    _on_favourite_click();
                                   },
                                 ),
                                 //Text('5M', style: TextStyle(color: Colors.grey),),
