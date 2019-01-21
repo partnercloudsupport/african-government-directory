@@ -42,16 +42,18 @@ class _company_page_state extends State<company_page>
   Future _is_my_favourite() async{
     var data = jsonEncode({'company_id':company.id,'user_id':user_id});
 
-    print('user id is ${user_id} company id is ${company.id}');
+    print('user id is ${this.user_id} company id is ${company.id}');
 
     setState((){
       _is_in_async_call = true;
     });
 
-    final response = await http.post('http://192.168.16.97/government.co.za/api/is_my_favourite',body: data).then((response){
+    final response = await http.post('https://government.co.za/api/is_my_favourite',body: data).then((response){
       setState((){
         _is_in_async_call = false;
       });
+
+      print('response is ${response.body}');
       if(response.body == "yes"){
         setState((){
           _is_favourite = true;
@@ -61,7 +63,7 @@ class _company_page_state extends State<company_page>
         setState((){
           _is_favourite = false;
         });
-        print('company is not my favourite');
+        print('company is not my favourite user id is ${user_id}');
       }
 
     }).catchError((error){
