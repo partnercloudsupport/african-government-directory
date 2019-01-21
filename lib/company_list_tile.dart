@@ -33,7 +33,7 @@ class company_list_tile extends StatelessWidget {
                     },
                     child: new Container(
                       padding: const EdgeInsets.all(1.0),
-                      width: MediaQuery.of(context).size.width * 0.8,
+                      width: MediaQuery.of(context).size.width * 0.9,
                       child: new Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -61,29 +61,29 @@ class company_list_tile extends StatelessWidget {
                       ),
                     ),
                   ),
-                                      Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
+                          //             Padding(
+                          //   padding: const EdgeInsets.all(8.0),
+                          //   child: Column(
+                          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          //     children: <Widget>[
                                 
-                                new GestureDetector(
-                                  child: Padding(
-                             padding: const EdgeInsets.all(8.0),
-                                  child: Icon(Icons.star_border,
-                                  size: 35.0,
-                                  color: Colors.grey,),
-                                  ),
-                                  onTap: (){
-                                    print('star clicked');
-                                    _change_favourite_icon();
-                                    _on_favourite_click();
-                                  },
-                                ),
-                                //Text('5M', style: TextStyle(color: Colors.grey),),
-                              ],
-                            ),
-                          ),
+                          //       new GestureDetector(
+                          //         child: Padding(
+                          //    padding: const EdgeInsets.all(8.0),
+                          //         child: Icon(Icons.star_border,
+                          //         size: 35.0,
+                          //         color: Colors.grey,),
+                          //         ),
+                          //         onTap: (){
+                          //           print('star clicked');
+                          //           _change_favourite_icon();
+                          //           _on_favourite_click();
+                          //         },
+                          //       ),
+                          //       //Text('5M', style: TextStyle(color: Colors.grey),),
+                          //     ],
+                          //   ),
+                          // ),
                 ],
               ),
               Divider(

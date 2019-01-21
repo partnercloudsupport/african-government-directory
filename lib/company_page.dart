@@ -67,6 +67,8 @@ class _company_page_state extends State<company_page>
     super.dispose();
   }
 
+  bool _is_favourite = false;
+
   void _show_company_connection(BuildContext context, String action) {
     Icon connection_icon;
     String company_connection_data;
@@ -309,7 +311,23 @@ class _company_page_state extends State<company_page>
                             width: width.value,
                             child: Container(
                               alignment: Alignment(1.0,1.0),
-                              child: Icon(Icons.star_border),
+                              child: IconButton(
+                                icon: _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border),
+                                onPressed: (){
+                                  print('favourite icon pressed');
+
+                                  if(_is_favourite){
+                                    setState((){
+                                      _is_favourite = false;
+                                    });
+                                  }else{
+                                    setState((){
+                                      _is_favourite = true;
+                                    });
+                                  }
+                                },
+                                //iconSize: 20.0,
+                              ),
                             ),
                             // child: Text('${company.name}',style: TextStyle(color: Colors.black),),
                           ),
