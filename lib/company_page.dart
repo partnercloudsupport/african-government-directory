@@ -84,7 +84,7 @@ super.initState();
         user_id = _preferences.getString('id');
       });
 
-      print('user id ${user_id}');
+       _is_my_favourite();
     });
 
 
@@ -118,9 +118,6 @@ super.initState();
       });
     });
     _containerController.forward();
-
-
-    _is_my_favourite();
   }
 
   @override
