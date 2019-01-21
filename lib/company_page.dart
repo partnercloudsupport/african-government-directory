@@ -42,6 +42,8 @@ class _company_page_state extends State<company_page>
   Future _is_my_favourite() async{
     var data = jsonEncode({'company_id':company.id,'user_id':user_id});
 
+    print('user id is ${user_id} company id is ${company.id}');
+
     setState((){
       _is_in_async_call = true;
     });
@@ -51,11 +53,17 @@ class _company_page_state extends State<company_page>
         _is_in_async_call = false;
       });
       if(response.body == "yes"){
+        setState((){
+          _is_favourite = true;
+        });
         print('company is my favourite');
       }else{
+        setState((){
+          _is_favourite = false;
+        });
         print('company is not my favourite');
       }
-      
+
     }).catchError((error){
       print('error is ' + error);
       setState((){
@@ -66,11 +74,14 @@ class _company_page_state extends State<company_page>
 
   void initState() {
    SharedPreferences.getInstance().then((SharedPreferences sp){
-  _preferences = sp;
-  setState(() {
-      user_id = _preferences.getString('id');
+    _preferences = sp;
+    setState(() {
+        user_id = _preferences.getString('id');
+      });
     });
-  });
+
+     _is_my_favourite();
+
 
     _containerController = new AnimationController(
         duration: new Duration(milliseconds: 2000), vsync: this);
