@@ -8,6 +8,11 @@ class FavouritesPage extends StatefulWidget{
 class _FavouritesPageState extends State<FavouritesPage>{
   @override
   Widget build(BuildContext context){
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text('Favourite Companies'),
+      ),
+    );
   }
 }

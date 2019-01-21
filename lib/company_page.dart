@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:government_directory/favourites.dart';
 import 'package:government_directory/search_page.dart';
 import 'models/company.dart';
 
@@ -192,13 +193,13 @@ class _company_page_state extends State<company_page>
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              // ListTile(
-              //   leading: Icon(Icons.favorite),
-              //   title: Text('Favourites'),
-              //   onTap: (){
-              //     print('favourites tabed');
-              //   },
-              // ),
+               ListTile(
+                 leading: Icon(Icons.favorite),
+                 title: Text('Favourites'),
+                 onTap: (){
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => FavouritesPage()));
+                 },
+               ),
               ListTile(
                 leading: Icon(Icons.videocam),
                 title: Text('Video Channel'),

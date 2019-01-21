@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:government_directory/add_advert.dart';
+import 'package:government_directory/favourites.dart';
 import 'package:government_directory/search_page.dart';
 import 'models/government_category.dart';
 import 'package:http/http.dart' as http;
@@ -177,7 +178,7 @@ class _HomePageState extends State<HomePage>{
              leading: Icon(Icons.favorite),
              title: Text('Favourites'),
              onTap: (){
-               print('favourites tabed');
+               Navigator.push(context, MaterialPageRoute(builder: (context) => FavouritesPage()));
              },
            ),
           ListTile(
