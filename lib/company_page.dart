@@ -466,7 +466,7 @@ class _company_page_state extends State<company_page>
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Container(
-                                        width: width.value,
+                                        width: MediaQuery.of(context).size.width - 100,
                                         child: Text(company.name,
                                             style: TextStyle(
                                               fontWeight: FontWeight.w400,
