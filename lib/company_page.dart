@@ -77,7 +77,30 @@ class _company_page_state extends State<company_page>
   }
 
   Future _add_company_to_favourite() async{
-    
+    var data = json.encode({'company_id':company.id, 'user_id':user_id});
+
+    print('adding company as my favourite ' + data);
+
+    setState((){
+      _is_in_async_call = true;
+    });
+
+    //sending data to the server
+
+    final response = await http
+    .post('https://government.co.za/api/add_favourite/', body: data)
+    .then((response){
+      setState((){
+        _is_in_async_call = false;
+      });
+      var incoming_data = json.decode(response.body);
+      print('response data is ' + incoming_data);
+    }).catchError((error){
+      print('error is ' + error);
+      setState((){
+        _is_in_async_call = false;
+      });
+    });
   }
 
   @override
