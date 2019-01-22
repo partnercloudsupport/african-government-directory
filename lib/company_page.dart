@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:government_directory/add_advert.dart';
 import 'package:government_directory/favourites.dart';
 import 'package:government_directory/search_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +20,7 @@ class company_page extends StatefulWidget {
 }
 
 enum AppBarBehavior { normal, pinned, floating, snapping }
-
+const String _logged_in_key = 'loggedin';
 class _company_page_state extends State<company_page>
     with TickerProviderStateMixin {
   final Company company;
@@ -322,21 +323,36 @@ class _company_page_state extends State<company_page>
               ),
               ListTile(
                 leading: Icon(Icons.add),
-                title: Text('Add a free ad'),
+                title: Text('Add A Free Advert',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )),
                 onTap: () {
                   print('add free add tabed');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => add_advert()));
                 },
               ),
               ListTile(
                 leading: Icon(Icons.exit_to_app),
-                title: Text('Logout'),
+                title: Text('Logout',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )),
                 onTap: () {
                   print('log out tabed');
+                  _remove_local_data(_logged_in_key);
+                  Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
                 },
               )
             ],
           );
         });
+  }
+
+  void _remove_local_data(String key){
+    _preferences?.remove(key);
   }
 
   String render_company_image() {
@@ -549,6 +565,8 @@ class _company_page_state extends State<company_page>
                                         ),
                                         new Row(
                                           children: <Widget>[
+                                            Column(
+                                              children: <Widget>[
                                             IconButton(
                                               icon: new Icon(
                                                 Icons.email,
@@ -559,30 +577,51 @@ class _company_page_state extends State<company_page>
                                                     context, 'email');
                                               },
                                             ),
+                                            Text('Email'),
+                                              ],
+                                            )
+
                                           ],
                                         ),
+                                        //old version
+                                        // new Row(
+                                        //   children: <Widget>[
+                                        //     IconButton(
+                                        //       icon: new Icon(
+                                        //         Icons.language,
+                                        //         color: Colors.cyan,
+                                        //       ),
+                                        //       onPressed: () {
+                                        //         _show_company_connection(
+                                        //             context, 'web');
+                                        //       },
+                                        //     ),
+                                        //   ],
+                                        // ),
                                         new Row(
                                           children: <Widget>[
+                                            Column(
+                                              children: <Widget>[
                                             IconButton(
                                               icon: new Icon(
                                                 Icons.language,
                                                 color: Colors.cyan,
                                               ),
-                                              // onPressed: () {
-                                              //   showBottomSheet<void>(
-                                              //     context: context, builder: (BuildContext context) => const _drawer(),
-                                              //   );
-
-                                              // },
                                               onPressed: () {
                                                 _show_company_connection(
                                                     context, 'web');
                                               },
                                             ),
+                                            Text('Web')
+                                              ],
+                                            )
+
                                           ],
                                         ),
                                         new Row(
                                           children: <Widget>[
+                                            Column(
+                                              children: <Widget>[
                                             IconButton(
                                               icon: new Icon(
                                                 Icons.location_on,
@@ -593,6 +632,10 @@ class _company_page_state extends State<company_page>
                                                     context, 'location');
                                               },
                                             ),
+                                                Text('Location')
+                                              ],
+                                            )
+
                                           ],
                                         ),
                                       ],

@@ -59,7 +59,7 @@ class company_list_tile extends StatelessWidget {
                             child: Text(
                               companies[position].address,
                               style: TextStyle(
-                                  fontSize: 15.0, fontWeight: FontWeight.w200),
+                                  fontSize: 15.0, fontWeight: FontWeight.w400,color: Colors.grey),
                             ),
                           ),
                         ],
