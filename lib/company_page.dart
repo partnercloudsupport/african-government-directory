@@ -355,6 +355,9 @@ super.initState();
                     shrinkWrap: false,
                     slivers: <Widget>[
                       new SliverAppBar(
+                        actions: <Widget>[
+                          Icon(Icons.star),
+                        ],
                         iconTheme: IconThemeData(
                           color: Colors.black,
                         ),
