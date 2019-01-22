@@ -39,56 +39,59 @@ class _company_page_state extends State<company_page>
   bool _is_in_async_call = false;
   String user_id;
 
-  Future _is_my_favourite() async{
-    var data = jsonEncode({'company_id':company.id,'user_id':user_id});
+  Future _is_my_favourite() async {
+    var data = jsonEncode({'company_id': company.id, 'user_id': user_id});
 
     print('data is ' + data);
 
-    setState((){
+    setState(() {
       _is_in_async_call = true;
     });
 
-    final response = await http.post('https://government.co.za/api/is_my_favourite',body: data).then((response){
-      setState((){
+    final response = await http
+        .post('https://government.co.za/api/is_my_favourite', body: data)
+        .then((response) {
+      setState(() {
         _is_in_async_call = false;
       });
       var res = json.decode(response.body);
 
       print('response is ${res}');
-      if(res['favourite'] == "yes"){
-        setState((){
+      if (res['favourite'] == "yes") {
+        setState(() {
           _is_favourite = true;
         });
         print('company is my favourite');
-      }else{
-        setState((){
+      } else {
+        setState(() {
           _is_favourite = false;
         });
         print('company is not my favourite user id is ${user_id}');
       }
-
-    }).catchError((error){
+    }).catchError((error) {
       print('error is ' + error);
-      setState((){
+      setState(() {
         _is_in_async_call = false;
       });
     });
   }
 
-@override
-void initState(){
-super.initState();
+  Future _add_company_to_favourite() async{
+    
+  }
 
-   SharedPreferences.getInstance().then((SharedPreferences sp){
-    _preferences = sp;
-    setState(() {
+  @override
+  void initState() {
+    super.initState();
+
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      _preferences = sp;
+      setState(() {
         user_id = _preferences.getString('id');
       });
 
-       _is_my_favourite();
+      _is_my_favourite();
     });
-
-
 
     _containerController = new AnimationController(
         duration: new Duration(milliseconds: 2000), vsync: this);
@@ -252,13 +255,16 @@ super.initState();
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-               ListTile(
-                 leading: Icon(Icons.favorite),
-                 title: Text('Favourites'),
-                 onTap: (){
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => FavouritesPage()));
-                 },
-               ),
+              ListTile(
+                leading: Icon(Icons.favorite),
+                title: Text('Favourites'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FavouritesPage()));
+                },
+              ),
               ListTile(
                 leading: Icon(Icons.videocam),
                 title: Text('Video Channel'),
@@ -304,7 +310,7 @@ super.initState();
     }
   }
 
-  _render_icon(){
+  _render_icon() {
     _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border);
   }
 
@@ -341,12 +347,8 @@ super.initState();
             color: Colors.transparent,
             child: new Container(
               alignment: Alignment.center,
-              //width: width.value,
-              //height: height.value,
               decoration: new BoxDecoration(
                 color: Colors.white,
-                //border radius
-                //borderRadius: new BorderRadius.circular(10.0),
               ),
               child: new Stack(
                 alignment: AlignmentDirectional.bottomCenter,
@@ -355,65 +357,17 @@ super.initState();
                     shrinkWrap: false,
                     slivers: <Widget>[
                       new SliverAppBar(
-                        actions: <Widget>[
-                          Icon(Icons.star),
-                        ],
                         iconTheme: IconThemeData(
                           color: Colors.black,
                         ),
                         elevation: 0.0,
                         forceElevated: true,
-                        // leading: new IconButton(
-                        //   onPressed: (){
-                        //     Navigator.of(context).pop();
-                        //   },
-                        //   icon: new Icon(Icons.arrow_back, color: Colors.cyan,size: 30.0,),
-                        // ),
                         expandedHeight: _appBarHeight,
                         pinned: _appBarBehavior == AppBarBehavior.pinned,
                         floating: _appBarBehavior == AppBarBehavior.floating ||
                             _appBarBehavior == AppBarBehavior.snapping,
                         flexibleSpace: new FlexibleSpaceBar(
-                          title: new Container(
-                            //alignment: Alignment(0,1.0),
-                            width: width.value - 200,
-                            child: _is_in_async_call ? LinearProgressIndicator() : GestureDetector(
-                              child: _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border),
-                              onTap: (){
-                                if(_is_favourite){
-                                  setState((){
-                                       _is_favourite = false;
-                                     });
-                                }else{
-                                  setState((){
-                                    _is_favourite = true;
-                                  });
-                                }
-                              },
-                            ),
-                            // child: Container(
-                            //   //width: MediaQuery.of(context).size.width,
-                            //   //alignment: Alignment.centerLeft,
-                            //   child: _is_in_async_call ? CircularProgressIndicator() : IconButton(
-                            //     icon: _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border),
-                            //     onPressed: (){
-                            //       print('favourite icon pressed');
-
-                            //       if(_is_favourite){
-                            //         setState((){
-                            //           _is_favourite = false;
-                            //         });
-                            //       }else{
-                            //         setState((){
-                            //           _is_favourite = true;
-                            //         });
-                            //       }
-                            //     },
-                            //     //iconSize: 20.0,
-                            //   ),
-                            // ),
-                            // child: Text('${company.name}',style: TextStyle(color: Colors.black),),
-                          ),
+                          title: new Container(),
                           background: new Stack(
                             fit: StackFit.expand,
                             children: <Widget>[
@@ -443,23 +397,51 @@ super.initState();
                               child: new Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  // GestureDetector(
-                                  //   child:Container(
-                                  //     child: Row(
-                                  //     children: <Widget>[
-                                  //       Text('Add To Favourite'),
-                                  //       Icon(Icons.star),
-                                  //     ],
-                                  //   ),
-                                  //   ), 
-                                  //   onTap: (){
-                                      
-                                  //   },
-                                  // ),
-                                  Text(company.name, style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  )),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Container(
+                                        width: width.value,
+                                        child: Text(company.name,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black,
+                                              fontSize: 20.0,
+                                            )),
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        child: _is_in_async_call ? CircularProgressIndicator() : GestureDetector(
+                                          child: _is_favourite ? Icon(Icons.star,size: 35.0,color: Colors.grey,) : Icon(Icons.star_border,size: 35.0,color: Colors.grey,),
+                                          onTap: (){
+                                            if(_is_favourite){
+                                              setState((){
+                                                _is_favourite = false;
+                                              });
+                                            }else{
+                                              setState((){
+                                                _is_favourite = true;
+                                              });
+                                              _add_company_to_favourite();
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                      // GestureDetector(
+                                      //   child: Icon(
+                                      //     Icons.star_border,
+                                      //     size: 35.0,
+                                      //     color: Colors.grey,
+                                      //   ),
+                                      //   onTap: () {},
+                                      // ),
+                                    ],
+                                  ),
+                                  // Text(company.name, style: TextStyle(
+                                  //   fontWeight: FontWeight.bold,
+                                  //   fontSize: 20,
+                                  // )),
                                   new Container(
                                     padding: new EdgeInsets.only(bottom: 20.0),
                                     alignment: Alignment.center,
@@ -501,20 +483,19 @@ super.initState();
                                           children: <Widget>[
                                             Column(
                                               children: <Widget>[
-                                                                                            IconButton(
-                                              icon: new Icon(
-                                                Icons.print,
-                                                color: Colors.cyan,
-                                              ),
-                                              onPressed: () {
-                                                _show_company_connection(
-                                                    context, 'fax');
-                                              },
-                                            ),
-                                            Text('Fax'),
+                                                IconButton(
+                                                  icon: new Icon(
+                                                    Icons.print,
+                                                    color: Colors.cyan,
+                                                  ),
+                                                  onPressed: () {
+                                                    _show_company_connection(
+                                                        context, 'fax');
+                                                  },
+                                                ),
+                                                Text('Fax'),
                                               ],
                                             ),
-
                                           ],
                                         ),
                                         new Row(
