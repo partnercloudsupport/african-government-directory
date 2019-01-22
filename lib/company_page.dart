@@ -95,8 +95,33 @@ class _company_page_state extends State<company_page>
       });
       var incoming_data = json.decode(response.body);
       print('response data is ' + incoming_data);
+      print('company added to favourites');
     }).catchError((error){
       print('error is ' + error);
+      setState((){
+        _is_in_async_call = false;
+      });
+    });
+  }
+
+  Future _delete_company_from_favourite_list() async {
+    var data = json.encode({'company_id':company.id, 'user_id':user_id});
+
+    setState((){
+      _is_in_async_call = true;
+    });
+
+    final response = await http
+    .post('https://government.co.za/api/delete_favourite/')
+    .then((response){
+      setState((){
+        _is_in_async_call = false;
+      });
+      var incoming_data = json.decode(response.body);
+      
+      print('company removed from favourites');
+    }).catchError((error){
+      print('error occured' + error.toString());
       setState((){
         _is_in_async_call = false;
       });
@@ -442,6 +467,7 @@ class _company_page_state extends State<company_page>
                                               setState((){
                                                 _is_favourite = false;
                                               });
+                                              _delete_company_from_favourite_list();
                                             }else{
                                               setState((){
                                                 _is_favourite = true;
