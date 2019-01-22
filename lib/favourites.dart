@@ -129,6 +129,7 @@ class _FavouritesPageState extends State<FavouritesPage>{
                         //handling callback from push
                         if(nav == true || nav == null){
                           print('i am back');
+                          _favourite_companies = [];
                           _get_favourite_companies();
                         }
                       },

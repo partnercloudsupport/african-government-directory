@@ -375,7 +375,7 @@ class _company_page_state extends State<company_page>
   }
 
   _render_icon() {
-    _is_favourite ? Icon(Icons.star) : Icon(Icons.star_border);
+    _is_favourite ? Icon(Icons.favorite) : Icon(Icons.favorite_border);
   }
 
   @override
@@ -477,7 +477,7 @@ class _company_page_state extends State<company_page>
                                       Spacer(),
                                       Container(
                                         child: _is_in_async_call ? CircularProgressIndicator() : GestureDetector(
-                                          child: _is_favourite ? Icon(Icons.star,size: 35.0,color: Colors.grey,) : Icon(Icons.star_border,size: 35.0,color: Colors.grey,),
+                                          child: _is_favourite ? Icon(Icons.favorite,size: 35.0,color: Colors.grey,) : Icon(Icons.favorite_border,size: 35.0,color: Colors.grey,),
                                           onTap: (){
                                             if(_is_favourite){
                                               setState((){
