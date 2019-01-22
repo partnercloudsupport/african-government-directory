@@ -112,7 +112,7 @@ class _company_page_state extends State<company_page>
     });
 
     final response = await http
-    .post('https://government.co.za/api/delete_favourite/')
+    .post('https://government.co.za/api/delete_favourite/',body: data)
     .then((response){
       setState((){
         _is_in_async_call = false;
