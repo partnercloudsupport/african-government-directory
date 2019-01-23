@@ -10,6 +10,10 @@ import 'services/post_service.dart';
 import 'list_view_posts.dart';
 import 'models/GovCategory.dart';
 import 'GovCategory_list_tile.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 //shared preferences import
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,6 +55,46 @@ class _HomePageState extends State<HomePage> {
   void _remove_local_data(String key) {
     preferences?.remove(key);
   }
+  var gridView = new GridView.builder(
+        itemCount: 20,
+        gridDelegate:
+            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemBuilder: (BuildContext context, int index) {
+          return new GestureDetector(
+            child: new Card(
+              elevation: 5.0,
+              child: new Container(
+                alignment: Alignment.center,
+                child: new Text('Item $index'),
+              ),
+            ),
+            onTap: () {
+              showDialog(
+                barrierDismissible: false,
+                context: context,
+                child: new CupertinoAlertDialog(
+                  title: new Column(
+                    children: <Widget>[
+                      new Text("GridView"),
+                      new Icon(
+                        Icons.favorite,
+                        color: Colors.green,
+                      ),
+                    ],
+                  ),
+                  content: new Text("Selected Item $index"),
+                  actions: <Widget>[
+                    new FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: new Text("OK"))
+                  ],
+                ),
+              );
+            },
+          );
+        });
 
   @override
   Widget build(BuildContext context) {
@@ -78,17 +122,18 @@ class _HomePageState extends State<HomePage> {
             )
           ];
         },
-        body: FutureBuilder<List<GovCategory>>(
-          future: get_all_categories(http.Client()),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              print(snapshot.error);
-            }
-            return snapshot.hasData
-                ? GovCategory_list_tile(gov_categories: snapshot.data)
-                : Center(child: CircularProgressIndicator());
-          },
-        ),
+        body: gridView,
+        // body: FutureBuilder<List<GovCategory>>(
+        //   future: get_all_categories(http.Client()),
+        //   builder: (context, snapshot) {
+        //     if (snapshot.hasError) {
+        //       print(snapshot.error);
+        //     }
+        //     return snapshot.hasData
+        //         ? GovCategory_list_tile(gov_categories: snapshot.data)
+        //         : Center(child: CircularProgressIndicator());
+        //   },
+        // ),
       ),
       bottomNavigationBar: new BottomAppBar(
         child: new Row(
