@@ -56,9 +56,9 @@ class _HomePageState extends State<HomePage> {
     preferences?.remove(key);
   }
   var gridView = new GridView.builder(
-        itemCount: 20,
+        itemCount: 10,
         gridDelegate:
-            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
           return new GestureDetector(
             child: new Card(
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  content: new Text("SelecteD Item $index"),
+                  content: new Text("Selected Item $index"),
                   actions: <Widget>[
                     new FlatButton(
                         onPressed: () {
