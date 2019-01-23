@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  content: new Text("Selected Item $index"),
+                  content: new Text("SelecteD Item $index"),
                   actions: <Widget>[
                     new FlatButton(
                         onPressed: () {
