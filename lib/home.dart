@@ -56,13 +56,13 @@ class _HomePageState extends State<HomePage> {
     preferences?.remove(key);
   }
   var gridView = new GridView.builder(
-        itemCount: 10,
+        itemCount: 20,
         gridDelegate:
-            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
         itemBuilder: (BuildContext context, int index) {
           return new GestureDetector(
             child: new Card(
-              elevation: 5.0,
+              elevation: 1.0,
               child: new Container(
                 alignment: Alignment.center,
                 child: new Text('Item $index'),
@@ -122,7 +122,52 @@ class _HomePageState extends State<HomePage> {
             )
           ];
         },
-        body: gridView,
+        body: Column(
+          children: <Widget>[
+                        SizedBox(
+              height: 5.0,
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width / 4,
+                child: Center(child:Text('Browse Categories',style: TextStyle(fontSize: 25.0,color: Colors.black, fontWeight: FontWeight.w600),),
+              ),)  
+              //Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,height: MediaQuery.of(context).size.width / 4,width: MediaQuery.of(context).size.width,),
+              ],
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.white30,
+                child: GridView.builder(
+                  itemCount: 20,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
+                  itemBuilder: (BuildContext context, int index){
+                    return GridTile(
+                      child: FlatButton(
+                        color: Colors.orange,
+                        //padding: EdgeInsets.all(1.0),
+                        onPressed: (){},
+                        child:Center(child: 
+                        Column(
+                          children: <Widget>[
+                            Icon(Icons.flag),
+                            Text('flag')
+                          ],
+                        ),) 
+                      ),
+                    );
+                  },
+                )
+              ),
+            ),
+          ],
+        )
         // body: FutureBuilder<List<GovCategory>>(
         //   future: get_all_categories(http.Client()),
         //   builder: (context, snapshot) {
