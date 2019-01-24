@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
     preferences?.remove(key);
   }
   var gridView = new GridView.builder(
-        itemCount: 20,
+        itemCount: 15,
         gridDelegate:
             new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
         itemBuilder: (BuildContext context, int index) {
@@ -147,14 +147,13 @@ class _HomePageState extends State<HomePage> {
                 child: GridView.builder(
                   //remove space in the top
                   padding: EdgeInsets.only(top: 5.0,bottom: 5.0,left: 5.0,right: 5.0),
-                  //shrinkWrap: true,
-                  itemCount: 20,
+                  shrinkWrap: false,
+                  primary: true,
+                  itemCount: 15,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
                   itemBuilder: (BuildContext context, int index){
                     return GridTile(
                       child: RaisedButton(
-                        
-                        
                         child: SizedBox(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -274,7 +273,7 @@ class _HomePageState extends State<HomePage> {
                 print('log out tabed');
                 _remove_local_data(_logged_in_key);
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
+                    '/', (Route<dynamic> route) => false);
               },
             )
           ],
