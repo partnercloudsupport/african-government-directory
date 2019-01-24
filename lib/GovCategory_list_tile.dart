@@ -51,25 +51,48 @@ class GovCategory_list_tile extends StatelessWidget{
                   shrinkWrap: false,
                   primary: true,
                   itemCount: gov_categories.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
                   itemBuilder: (BuildContext context, int index){
                     return GridTile(
-                      child: RaisedButton(
-                        child: SizedBox(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                            Icon(Icons.business_center,size: 35.0,),
-                            Text('${gov_categories[index].name}',style: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w300
-                            ),)
-                            ],
-                          ),
+                      child: Card(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Image.network("https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681",fit: BoxFit.fill,),
+                            Expanded(
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 8.0,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 5.0,right: 5.0),
+                                      child: Text("${gov_categories[index].name}"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                        color: Colors.white,
-                        //padding: EdgeInsets.all(1.0),
-                        onPressed: (){},) 
+                      ),
+                      // child: RaisedButton(
+                      //   child: SizedBox(
+                      //     child: Column(
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       children: <Widget>[
+                      //       Icon(Icons.business_center,size: 25.0,),
+                      //       Text('${gov_categories[index].name}',style: TextStyle(
+                      //         color: Colors.grey,
+                      //         fontWeight: FontWeight.w300
+                      //       ),)
+                      //       ],
+                      //     ),
+                      //   ),
+                      //   color: Colors.white,
+                      //   //padding: EdgeInsets.all(1.0),
+                      //   onPressed: (){},) 
                     );
                   },
                 )
