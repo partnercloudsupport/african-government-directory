@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.width / 4,
-                child: Center(child:Text('Browse Categories',style: TextStyle(fontSize: 25.0,color: Colors.black, fontWeight: FontWeight.w600),),
+                child: Center(child:Text('Image Here',style: TextStyle(fontSize: 25.0,color: Colors.black, fontWeight: FontWeight.w600),),
               ),)  
               //Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,height: MediaQuery.of(context).size.width / 4,width: MediaQuery.of(context).size.width,),
               ],
@@ -146,13 +146,15 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white30,
                 child: GridView.builder(
                   //remove space in the top
-                  padding: EdgeInsets.all(0.0),
-                  shrinkWrap: true,
+                  padding: EdgeInsets.only(top: 5.0,bottom: 5.0,left: 5.0,right: 5.0),
+                  //shrinkWrap: true,
                   itemCount: 20,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
                   itemBuilder: (BuildContext context, int index){
                     return GridTile(
-                      child: FlatButton(
+                      child: RaisedButton(
+                        
+                        
                         child: SizedBox(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -160,12 +162,12 @@ class _HomePageState extends State<HomePage> {
                             Icon(Icons.credit_card,size: 35.0,),
                             Text('Train',style: TextStyle(
                               color: Colors.grey,
-                              fontWeight: FontWeight.bold
+                              fontWeight: FontWeight.w300
                             ),)
                             ],
                           ),
                         ),
-                        color: Colors.white70,
+                        color: Colors.white,
                         //padding: EdgeInsets.all(1.0),
                         onPressed: (){},) 
                     );
