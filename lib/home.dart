@@ -99,18 +99,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffold_key,
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              backgroundColor: Colors.green,
-              expandedHeight: 100.0,
-              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text(
+            appBar: AppBar(
+              primary: true,
+        elevation: 0.0,
+        backgroundColor: Colors.green,
+              title: Text(
                   'GOVERNMENT DIRECTORY',
                   style: TextStyle(
                     fontWeight: FontWeight.w300,
@@ -118,10 +111,9 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 16.0,
                   ),
                 ),
-              ),
-            )
-          ];
-        },
+                
+      ),
+      key: _scaffold_key,
         body: body_ui(),
         // body: Column(
         //   children: <Widget>[
@@ -165,7 +157,7 @@ class _HomePageState extends State<HomePage> {
         //         : Center(child: CircularProgressIndicator());
         //   },
         // ),
-      ),
+
       bottomNavigationBar: new BottomAppBar(
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -266,6 +258,9 @@ class body_ui extends StatelessWidget{
   Widget build(BuildContext context) {
     return new ListView(
       children: <Widget>[
+        SizedBox(
+          height: 10.0,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: new Container(
@@ -298,11 +293,11 @@ class body_ui extends StatelessWidget{
                       child: new Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          new Icon(
-                            Icons.drive_eta,
-                            color: Colors.white,
-                          ),
-                          new Text("Motor",
+                          // new Icon(
+                          //   Icons.account_balance,
+                          //   color: Colors.white,
+                          // ),
+                          new Text("Municipalities",
                               style: new TextStyle(color: Colors.white))
                         ],
                       ),
@@ -324,14 +319,14 @@ class body_ui extends StatelessWidget{
                               child: new Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: new Icon(
-                                      Icons.local_offer,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  new Text('Classified',
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 8.0),
+                                  //   child: new Icon(
+                                  //     Icons.local_offer,
+                                  //     color: Colors.white,
+                                  //   ),
+                                  // ),
+                                  new Text('Rehabilitation',
                                       style: new TextStyle(color: Colors.white))
                                 ],
                               ),
@@ -349,14 +344,14 @@ class body_ui extends StatelessWidget{
                               child: new Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: new Icon(
-                                      Icons.beenhere,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  new Text('Service',
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 8.0),
+                                  //   child: new Icon(
+                                  //     Icons.beenhere,
+                                  //     color: Colors.white,
+                                  //   ),
+                                  // ),
+                                  new Text('Social Services',
                                       style: new TextStyle(color: Colors.white))
                                 ],
                               ),
@@ -379,20 +374,11 @@ class body_ui extends StatelessWidget{
                               decoration: new BoxDecoration(
                                   color: Color(0XFF53CEDB),
                                   borderRadius: new BorderRadius.circular(5.0)),
-                              child: new Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: new Icon(
-                                      Icons.account_balance,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  new Text('Properties',
-                                      style: new TextStyle(color: Colors.white))
-                                ],
-                              ),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
                             ),
                           ),
                         ),
@@ -403,20 +389,11 @@ class body_ui extends StatelessWidget{
                               decoration: new BoxDecoration(
                                   color: Color(0XFFF1B069),
                                   borderRadius: new BorderRadius.circular(5.0)),
-                              child: new Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: new Icon(
-                                      Icons.art_track,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  new Text('Jobs',
-                                      style: new TextStyle(color: Colors.white))
-                                ],
-                              ),
+                              child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Educational institutions',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
                             ),
                           ),
                         ),
@@ -431,14 +408,119 @@ class body_ui extends StatelessWidget{
               Row(
                 children: <Widget>[
                   new Expanded(
-                      child: new Text("Popular Trending",
+                      child: new Text("Government",
                           style: new TextStyle(fontSize: 18.0))),
+                  // new Expanded(
+                  //     child: new Text(
+                  //   "View All",
+                  //   style: new TextStyle(color: Color(0XFF2BD093)),
+                  //   textAlign: TextAlign.end,
+                  // ))
+                ],
+              ),
+              new SizedBox(
+                height: 10.0,
+              ),
+              Column(
+                children: <Widget>[
+                  Row(
+                children: <Widget>[
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
+                          ),
+                        ),
+                  new SizedBox(
+                    width: 5.0,
+                  ),
+                  Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
+                          ),
+                        ),
+                  new SizedBox(
+                    width: 5.0,
+                  ),
+                  Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
+                          ),
+                        ),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+
+              Row(
+                children: <Widget>[
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
+                          ),
+                        ),
+                ],
+              ),
+  
+                ],
+              ),
+              
+              new SizedBox(
+                height: 15.0,
+              ),
+              Row(
+                children: <Widget>[
                   new Expanded(
-                      child: new Text(
-                    "View All",
-                    style: new TextStyle(color: Color(0XFF2BD093)),
-                    textAlign: TextAlign.end,
-                  ))
+                      child: new Text("Services",
+                          style: new TextStyle(fontSize: 18.0))),
                 ],
               ),
               new SizedBox(
@@ -446,77 +528,63 @@ class body_ui extends StatelessWidget{
               ),
               Row(
                 children: <Widget>[
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'https://www.howtogeek.com/wp-content/uploads/2016/01/steam-and-xbox-controllers.jpg'),
-                                    fit: BoxFit.cover)),
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
                           ),
-                          new Text(
-                            "Play Station",
-                            style: new TextStyle(fontSize: 16.0),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                   new SizedBox(
                     width: 5.0,
                   ),
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'https://pawanjewellers.in/wp-content/uploads/2016/09/Jewellery-new.jpg'),
-                                    fit: BoxFit.cover)),
+                  Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
                           ),
-                          new Text("Jewellery and Watches ",
-                              style: new TextStyle(fontSize: 16.0),
-                              textAlign: TextAlign.center)
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                   new SizedBox(
                     width: 5.0,
                   ),
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'http://images4.fanpop.com/image/photos/21600000/Electronics-hd-wallpaper-21627626-1920-1200.jpg'),
-                                    fit: BoxFit.cover)),
+                  Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
                           ),
-                          new Text('Electronics',
-                              style: new TextStyle(fontSize: 16.0),
-                              textAlign: TextAlign.center)
-                        ],
-                      ),
-                    ),
-                  )
+                        ),
                 ],
               ),
               new SizedBox(
@@ -525,14 +593,14 @@ class body_ui extends StatelessWidget{
               Row(
                 children: <Widget>[
                   new Expanded(
-                      child: new Text("Popular Trending",
+                      child: new Text("More",
                           style: new TextStyle(fontSize: 18.0))),
-                  new Expanded(
-                      child: new Text(
-                    "View All",
-                    style: new TextStyle(color: Color(0XFF2BD093)),
-                    textAlign: TextAlign.end,
-                  ))
+                  // new Expanded(
+                  //     child: new Text(
+                  //   "View All",
+                  //   style: new TextStyle(color: Color(0XFF2BD093)),
+                  //   textAlign: TextAlign.end,
+                  // ))
                 ],
               ),
               new SizedBox(
@@ -540,171 +608,63 @@ class body_ui extends StatelessWidget{
               ),
               Row(
                 children: <Widget>[
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'https://s1.cdn.autoevolution.com/images/gallery/LEXUS-HS-250h-3892_26.jpg'),
-                                    fit: BoxFit.cover)),
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
                           ),
-                          new Text(
-                            "Motors",
-                            style: new TextStyle(fontSize: 16.0),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                   new SizedBox(
                     width: 5.0,
                   ),
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'https://d3tvpxjako9ywy.cloudfront.net/blog/content/uploads/2015/03/company-culture-why-it-matters.jpg?av=6219bb831e993c907ca622baef062556'),
-                                    fit: BoxFit.cover)),
+                  Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
                           ),
-                          new Text("Jobs",
-                              style: new TextStyle(fontSize: 16.0),
-                              textAlign: TextAlign.center)
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                   new SizedBox(
                     width: 5.0,
                   ),
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'http://images4.fanpop.com/image/photos/21600000/Electronics-hd-wallpaper-21627626-1920-1200.jpg'),
-                                    fit: BoxFit.cover)),
+                  Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF53CEDB),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0),
+                                    child: new Text('Local government',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
                           ),
-                          new Text('Electronics',
-                              style: new TextStyle(fontSize: 16.0),
-                              textAlign: TextAlign.center)
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              new SizedBox(
-                height: 15.0,
-              ),
-              Row(
-                children: <Widget>[
-                  new Expanded(
-                      child: new Text("Popular Trending",
-                          style: new TextStyle(fontSize: 18.0))),
-                  new Expanded(
-                      child: new Text(
-                    "View All",
-                    style: new TextStyle(color: Color(0XFF2BD093)),
-                    textAlign: TextAlign.end,
-                  ))
-                ],
-              ),
-              new SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: <Widget>[
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'https://www.howtogeek.com/wp-content/uploads/2016/01/steam-and-xbox-controllers.jpg'),
-                                    fit: BoxFit.cover)),
-                          ),
-                          new Text(
-                            "Play Station",
-                            style: new TextStyle(fontSize: 16.0),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  new SizedBox(
-                    width: 5.0,
-                  ),
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'https://pawanjewellers.in/wp-content/uploads/2016/09/Jewellery-new.jpg'),
-                                    fit: BoxFit.cover)),
-                          ),
-                          new Text("Jewellery and Watches ",
-                              style: new TextStyle(fontSize: 16.0),
-                              textAlign: TextAlign.center)
-                        ],
-                      ),
-                    ),
-                  ),
-                  new SizedBox(
-                    width: 5.0,
-                  ),
-                  new Expanded(
-                    child: Container(
-                      height: 150.0,
-                      child: new Column(
-                        children: <Widget>[
-                          new Container(
-                            height: 100.0,
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                image: new DecorationImage(
-                                    image: new NetworkImage(
-                                        'http://images4.fanpop.com/image/photos/21600000/Electronics-hd-wallpaper-21627626-1920-1200.jpg'),
-                                    fit: BoxFit.cover)),
-                          ),
-                          new Text('Electronics',
-                              style: new TextStyle(fontSize: 16.0),
-                              textAlign: TextAlign.center)
-                        ],
-                      ),
-                    ),
-                  )
+                        ),
                 ],
               )
             ],
