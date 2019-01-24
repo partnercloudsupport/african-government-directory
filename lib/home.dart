@@ -142,37 +142,14 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Expanded(
-              child: Container(
-                color: Colors.white30,
-                child: GridView.builder(
-                  //remove space in the top
-                  padding: EdgeInsets.only(top: 5.0,bottom: 5.0,left: 5.0,right: 5.0),
-                  shrinkWrap: false,
-                  primary: true,
-                  itemCount: 15,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
-                  itemBuilder: (BuildContext context, int index){
-                    return GridTile(
-                      child: RaisedButton(
-                        child: SizedBox(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                            Icon(Icons.business_center,size: 35.0,),
-                            Text('Train',style: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w300
-                            ),)
-                            ],
-                          ),
-                        ),
-                        color: Colors.white,
-                        //padding: EdgeInsets.all(1.0),
-                        onPressed: (){},) 
-                    );
-                  },
-                )
-              ),
+              child: FutureBuilder<List<GovCategory>>(
+                future: get_all_categories(http.Client()),
+                builder: (context, snapshot){
+                  if(snapshot.hasError)
+                    print(Error);
+                  return snapshot.hasData ? GovCategory_list_tile(gov_categories: snapshot.data,) : Center(child: CircularProgressIndicator(),);
+                },
+              )
             ),
           ],
         )

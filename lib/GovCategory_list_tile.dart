@@ -12,38 +12,67 @@ class GovCategory_list_tile extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      child: ListView.builder(
-        itemCount: gov_categories.length,
-        padding: const EdgeInsets.all(0.0),
-        itemBuilder: (context, position){
-          return Column(
-            children: <Widget>[
-              Divider(
-                height: 10.0,
-              ),
-              ListTile(
-                title: 
-                Text(
-                  '${gov_categories[position].name.toUpperCase()}',
-                  // style: TextStyle(
-                  //   fontSize: 15.0,
-                  //   fontWeight: FontWeight.w900,
-                  style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  color: Colors.black,
-                  fontSize: 16.0,
+      // child: ListView.builder(
+      //   itemCount: gov_categories.length,
+      //   padding: const EdgeInsets.all(0.0),
+      //   itemBuilder: (context, position){
+      //     return Column(
+      //       children: <Widget>[
+      //         Divider(
+      //           height: 10.0,
+      //         ),
+      //         ListTile(
+      //           title: 
+      //           Text(
+      //             '${gov_categories[position].name.toUpperCase()}',
+      //             // style: TextStyle(
+      //             //   fontSize: 15.0,
+      //             //   fontWeight: FontWeight.w900,
+      //             style: TextStyle(
+      //             fontWeight: FontWeight.w300,
+      //             color: Colors.black,
+      //             fontSize: 16.0,
                 
-                    //color: Colors.grey,
+      //               //color: Colors.grey,
                     
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                onTap: () => _show_category(context, gov_categories[position]),
-              )
-            ],
-          );
-        },
-      ),
+      //             ),
+      //             textAlign: TextAlign.left,
+      //           ),
+      //           onTap: () => _show_category(context, gov_categories[position]),
+      //         )
+      //       ],
+      //     );
+      //   },
+      // ),
+       color: Colors.white30,
+                 child: GridView.builder(
+                  //remove space in the top
+                  padding: EdgeInsets.only(top: 5.0,bottom: 5.0,left: 5.0,right: 5.0),
+                  shrinkWrap: false,
+                  primary: true,
+                  itemCount: gov_categories.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
+                  itemBuilder: (BuildContext context, int index){
+                    return GridTile(
+                      child: RaisedButton(
+                        child: SizedBox(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                            Icon(Icons.business_center,size: 35.0,),
+                            Text('${gov_categories[index].name}',style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w300
+                            ),)
+                            ],
+                          ),
+                        ),
+                        color: Colors.white,
+                        //padding: EdgeInsets.all(1.0),
+                        onPressed: (){},) 
+                    );
+                  },
+                )
     );
   }
 
