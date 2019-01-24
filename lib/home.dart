@@ -141,7 +141,9 @@ class _HomePageState extends State<HomePage> {
               //Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,height: MediaQuery.of(context).size.width / 4,width: MediaQuery.of(context).size.width,),
               ],
             ),
-            Expanded(
+            Padding(
+              padding: EdgeInsets.fromLTRB(0.0, 10, 0.0, 0.0),
+              child: Expanded(
               child: Container(
                 color: Colors.white30,
                 child: GridView.builder(
@@ -165,7 +167,9 @@ class _HomePageState extends State<HomePage> {
                   },
                 )
               ),
+            ),,
             ),
+
           ],
         )
         // body: FutureBuilder<List<GovCategory>>(
