@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white30,
                 child: GridView.builder(
                   itemCount: 20,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
                   itemBuilder: (BuildContext context, int index){
                     return GridTile(
                       child: FlatButton(
