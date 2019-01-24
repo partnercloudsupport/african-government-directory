@@ -53,30 +53,53 @@ class GovCategory_list_tile extends StatelessWidget{
                   itemCount: gov_categories.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
                   itemBuilder: (BuildContext context, int index){
-                    return GridTile(
-                      child: Card(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Image.network("https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681",fit: BoxFit.fill,),
-                            Expanded(
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    SizedBox(
-                                      height: 8.0,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 5.0,right: 5.0),
-                                      child: Text("${gov_categories[index].name}"),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                    return                   new Expanded(
+                    child: Container(
+                      height: 150.0,
+                      child: new Column(
+                        children: <Widget>[
+                          new Container(
+                            height: 100.0,
+                            decoration: new BoxDecoration(
+                                borderRadius: new BorderRadius.circular(5.0),
+                                image: new DecorationImage(
+                                    image: new NetworkImage(
+                                        'https://www.howtogeek.com/wp-content/uploads/2016/01/steam-and-xbox-controllers.jpg'),
+                                    fit: BoxFit.cover)),
+                          ),
+                          new Text(
+                            "Play Station",
+                            style: new TextStyle(fontSize: 16.0),
+                            textAlign: TextAlign.center,
+                          )
+                        ],
                       ),
+                    ),
+
+                    // return GridTile(
+                    //   child: Card(
+                    //     child: Column(
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       children: <Widget>[
+                    //         Image.network("https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681",fit: BoxFit.fill,),
+                    //         Expanded(
+                    //           child: Center(
+                    //             child: Column(
+                    //               children: <Widget>[
+                    //                 SizedBox(
+                    //                   height: 8.0,
+                    //                 ),
+                    //                 Padding(
+                    //                   padding: EdgeInsets.only(left: 5.0,right: 5.0),
+                    //                   child: Text("${gov_categories[index].name}"),
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
                       // child: RaisedButton(
                       //   child: SizedBox(
                       //     child: Column(
