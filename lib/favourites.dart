@@ -99,12 +99,14 @@ class _FavouritesPageState extends State<FavouritesPage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         backgroundColor: Colors.green,
         title: Text('Favourite Companies'.toUpperCase(),style: TextStyle(
                   fontWeight: FontWeight.w300,
                   color: Colors.white,
                   fontSize: 20.0,
                 ),),
+                
       ),
       body: _is_in_sync_call ? Center(child: CircularProgressIndicator()) : _build_favourite_companies(),
     );

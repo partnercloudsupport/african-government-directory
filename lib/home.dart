@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                            Icon(Icons.credit_card,size: 35.0,),
+                            Icon(Icons.business_center,size: 35.0,),
                             Text('Train',style: TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.w300
