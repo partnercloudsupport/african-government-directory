@@ -141,35 +141,35 @@ class _HomePageState extends State<HomePage> {
               //Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,height: MediaQuery.of(context).size.width / 4,width: MediaQuery.of(context).size.width,),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 10, 0.0, 0.0),
-              child: Expanded(
+            Expanded(
               child: Container(
                 color: Colors.white30,
                 child: GridView.builder(
+                  //remove space in the top
+                  padding: EdgeInsets.all(0.0),
+                  shrinkWrap: true,
                   itemCount: 20,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 1.0,crossAxisSpacing: 4.0,mainAxisSpacing: 4.0),
                   itemBuilder: (BuildContext context, int index){
                     return GridTile(
                       child: FlatButton(
-                        color: Colors.orange,
+                        child: SizedBox(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                            Icon(Icons.train,size: 35.0,),
+                            Text('Train')
+                            ],
+                          ),
+                        ),
+                        color: Colors.white70,
                         //padding: EdgeInsets.all(1.0),
-                        onPressed: (){},
-                        child:Center(child: 
-                        Column(
-                          children: <Widget>[
-                            Icon(Icons.flag),
-                            Text('flag')
-                          ],
-                        ),) 
-                      ),
+                        onPressed: (){},) 
                     );
                   },
                 )
               ),
             ),
-            ),
-
           ],
         )
         // body: FutureBuilder<List<GovCategory>>(
