@@ -38,6 +38,7 @@ const String _status_key = 'status';
 
 class _main_page_state extends State<_main_page>{
   bool _logged_in;
+  bool _in_async_call = false;
   SharedPreferences preferences;
 
   @override
@@ -49,6 +50,7 @@ class _main_page_state extends State<_main_page>{
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       preferences = sp;
       setState(() {
+        _in_async_call = true;
         _logged_in = preferences.getBool(_logged_in_key);
       });
 
@@ -64,6 +66,10 @@ class _main_page_state extends State<_main_page>{
         //_remove_local_data(_logged_in_key);
         print('user logged in');
         print('logged in user is ${_get_local_data(_name_key)}');
+
+        setState((){
+          _in_async_call = false;
+        });
 
         Navigator.pushReplacementNamed(context, '/home');
       }
@@ -86,7 +92,7 @@ class _main_page_state extends State<_main_page>{
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: Center(
+      body: _logged_in ? Center(child: CircularProgressIndicator(),) :  Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
