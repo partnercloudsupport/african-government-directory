@@ -16,7 +16,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 //shared preferences import
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'gov_cat.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -44,26 +44,24 @@ class _HomePageState extends State<HomePage> {
 
   //get all government posts from api call
   Future<List<GovCategory>> get_all_categories(http.Client client) async {
-
-    setState((){
+    setState(() {
       _is_in_async_call = true;
     });
-    final response =
-        await client.get('https://government.co.za/api/government_categories').then((response){
-          setState((){
-            _is_in_async_call = false;
+    final response = await client
+        .get('https://government.co.za/api/government_categories')
+        .then((response) {
+      setState(() {
+        _is_in_async_call = false;
 
-            _government_categories = parse_category(response.body);
-          });
+        _government_categories = parse_category(response.body);
+      });
+    }).catchError((error) {
+      setState(() {
+        _is_in_async_call = false;
+      });
 
-
-        }).catchError((error){
-          setState((){
-            _is_in_async_call = false;
-          });
-
-          print('Error ' + error);
-        });
+      print('Error ' + error);
+    });
   }
 
   static List<GovCategory> parse_category(String responseBody) {
@@ -76,108 +74,112 @@ class _HomePageState extends State<HomePage> {
   void _remove_local_data(String key) {
     preferences?.remove(key);
   }
+
   var gridView = new GridView.builder(
-        itemCount: 15,
-        gridDelegate:
-            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-        itemBuilder: (BuildContext context, int index) {
-          return new GestureDetector(
-            child: new Card(
-              elevation: 1.0,
-              child: new Container(
-                alignment: Alignment.center,
-                child: new Text('Item $index'),
-              ),
+      itemCount: 15,
+      gridDelegate:
+          new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+      itemBuilder: (BuildContext context, int index) {
+        return new GestureDetector(
+          child: new Card(
+            elevation: 1.0,
+            child: new Container(
+              alignment: Alignment.center,
+              child: new Text('Item $index'),
             ),
-            onTap: () {
-              showDialog(
-                barrierDismissible: false,
-                context: context,
-                child: new CupertinoAlertDialog(
-                  title: new Column(
-                    children: <Widget>[
-                      new Text("GridView"),
-                      new Icon(
-                        Icons.favorite,
-                        color: Colors.green,
-                      ),
-                    ],
-                  ),
-                  content: new Text("Selected Item $index"),
-                  actions: <Widget>[
-                    new FlatButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: new Text("OK"))
+          ),
+          onTap: () {
+            showDialog(
+              barrierDismissible: false,
+              context: context,
+              child: new CupertinoAlertDialog(
+                title: new Column(
+                  children: <Widget>[
+                    new Text("GridView"),
+                    new Icon(
+                      Icons.favorite,
+                      color: Colors.green,
+                    ),
                   ],
                 ),
-              );
-            },
-          );
-        });
+                content: new Text("Selected Item $index"),
+                actions: <Widget>[
+                  new FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: new Text("OK"))
+                ],
+              ),
+            );
+          },
+        );
+      });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(
-              primary: true,
+      appBar: AppBar(
+        primary: true,
         elevation: 0.0,
         backgroundColor: Colors.green,
-              title: Text(
-                  'GOVERNMENT DIRECTORY',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    color: Colors.white,
-                    fontSize: 16.0,
-                  ),
-                ),
-                
+        title: Text(
+          'GOVERNMENT DIRECTORY',
+          style: TextStyle(
+            fontWeight: FontWeight.w300,
+            color: Colors.white,
+            fontSize: 16.0,
+          ),
+        ),
       ),
       key: _scaffold_key,
-        body: _is_in_async_call ? Center(child: CircularProgressIndicator(),) :body_ui(categories: _government_categories),
-        // body: Column(
-        //   children: <Widget>[
-        //                 SizedBox(
-        //       height: 5.0,
-        //     ),
-        //     Stack(
-        //       alignment: Alignment.center,
-        //       children: <Widget>[
-        //       Container(
-        //         decoration: BoxDecoration(
-        //           color: Colors.white,
-        //         ),
-        //         width: MediaQuery.of(context).size.width,
-        //         height: MediaQuery.of(context).size.width / 4,
-        //         child: Center(child:Text('Image Here',style: TextStyle(fontSize: 25.0,color: Colors.black, fontWeight: FontWeight.w600),),
-        //       ),)  
-        //       //Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,height: MediaQuery.of(context).size.width / 4,width: MediaQuery.of(context).size.width,),
-        //       ],
-        //     ),
-        //     Expanded(
-        //       child: FutureBuilder<List<GovCategory>>(
-        //         future: get_all_categories(http.Client()),
-        //         builder: (context, snapshot){
-        //           if(snapshot.hasError)
-        //             print(Error);
-        //           return snapshot.hasData ? GovCategory_list_tile(gov_categories: snapshot.data,) : Center(child: CircularProgressIndicator(),);
-        //         },
-        //       )
-        //     ),
-        //   ],
-        // )
-        // body: FutureBuilder<List<GovCategory>>(
-        //   future: get_all_categories(http.Client()),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasError) {
-        //       print(snapshot.error);
-        //     }
-        //     return snapshot.hasData
-        //         ? GovCategory_list_tile(gov_categories: snapshot.data)
-        //         : Center(child: CircularProgressIndicator());
-        //   },
-        // ),
+      body: _is_in_async_call
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : body_ui(categories: _government_categories),
+      // body: Column(
+      //   children: <Widget>[
+      //                 SizedBox(
+      //       height: 5.0,
+      //     ),
+      //     Stack(
+      //       alignment: Alignment.center,
+      //       children: <Widget>[
+      //       Container(
+      //         decoration: BoxDecoration(
+      //           color: Colors.white,
+      //         ),
+      //         width: MediaQuery.of(context).size.width,
+      //         height: MediaQuery.of(context).size.width / 4,
+      //         child: Center(child:Text('Image Here',style: TextStyle(fontSize: 25.0,color: Colors.black, fontWeight: FontWeight.w600),),
+      //       ),)
+      //       //Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,height: MediaQuery.of(context).size.width / 4,width: MediaQuery.of(context).size.width,),
+      //       ],
+      //     ),
+      //     Expanded(
+      //       child: FutureBuilder<List<GovCategory>>(
+      //         future: get_all_categories(http.Client()),
+      //         builder: (context, snapshot){
+      //           if(snapshot.hasError)
+      //             print(Error);
+      //           return snapshot.hasData ? GovCategory_list_tile(gov_categories: snapshot.data,) : Center(child: CircularProgressIndicator(),);
+      //         },
+      //       )
+      //     ),
+      //   ],
+      // )
+      // body: FutureBuilder<List<GovCategory>>(
+      //   future: get_all_categories(http.Client()),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.hasError) {
+      //       print(snapshot.error);
+      //     }
+      //     return snapshot.hasData
+      //         ? GovCategory_list_tile(gov_categories: snapshot.data)
+      //         : Center(child: CircularProgressIndicator());
+      //   },
+      // ),
 
       bottomNavigationBar: new BottomAppBar(
         child: new Row(
@@ -274,11 +276,14 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class body_ui extends StatelessWidget{
+class body_ui extends StatelessWidget {
   final List<GovCategory> categories;
 
-  body_ui({Key key, this.categories}) : super(key:key);
+  body_ui({Key key, this.categories}) : super(key: key);
 
+  _show_companies(BuildContext context, GovCategory category) async{
+     Map result = await Navigator.push(context, MaterialPageRoute(builder: (context) => gov_cat(govCategory: category)));
+  }
   @override
   Widget build(BuildContext context) {
     return new ListView(
@@ -293,62 +298,76 @@ class body_ui extends StatelessWidget{
             children: <Widget>[
               Column(
                 children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 2.5),
-                      child: Container(
-                        height: 170.0,
-                        decoration: BoxDecoration(
-                          color: Color(0xfff1b069),
-                          borderRadius:BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5)),
-                        ),
-                            child: Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 2.5),
+                          child: Container(
+                            height: 170.0,
+                            decoration: BoxDecoration(
+                              color: Color(0xfff1b069),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5)),
                             ),
-                      ),
-                    ),
-                  )
+                            child: Image.network(
+                              'https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 2.5, bottom: 2.5),
+                          child: Container(
+                            height: 70.0,
+                            decoration: BoxDecoration(
+                              //color: Color(0xfff1b069),
+                              borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(3),
+                                  bottomLeft: Radius.circular(3)),
+                            ),
+                            child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 9.0, right: 9.0, top: 5.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    new Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: new Text(
+                                          "first row dummy text dsfdfdfsdfsd df dsf sdf dsf dsf d ds fd fsd f sd "
+                                              .toUpperCase(),
+                                          style: TextStyle(
+                                              color: Color(0xff333333),
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 16.0,
+                                              fontStyle: FontStyle.italic),
+                                        )),
+                                    SizedBox(
+                                      height: 1.0,
+                                    ),
+                                    //new Align(alignment: Alignment.centerLeft, child: new Text("second row dummy text",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w300, fontSize: 20.0),))
+                                  ],
+                                )),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
               SizedBox(
-                height: 10.0,
+                height: 2.0,
               ),
-                Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 2.5, bottom: 2.5),
-                      child: Container(
-                        height: 70.0,
-                        decoration: BoxDecoration(
-                          //color: Color(0xfff1b069),
-                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(3),bottomLeft: Radius.circular(3)),
-                        ),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 9.0,right: 9.0,top: 5.0),
-                            child: Column(
-                              children: <Widget>[
-new Align(alignment: Alignment.centerLeft, child: new Text("first row dummy text dsfdfdfsdfsd df dsf sdf dsf dsf d ds fd fsd f sd ".toUpperCase(),style: TextStyle(color: Color(0xff333333),fontWeight: FontWeight.w700, fontSize: 16.0,fontStyle: FontStyle.italic),)),
-                 SizedBox(
-                   height: 1.0,
-                 ),
-                  //new Align(alignment: Alignment.centerLeft, child: new Text("second row dummy text",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w300, fontSize: 20.0),))
-                              ],
-                            )
-                          ),
-
-                      ),
-                    ),
-                  )
-                ],
-              ),
-                ],
-              ),
-                               SizedBox(
-                   height: 2.0,
-                 ),
-
               Row(
                 children: <Widget>[
                   new Text(
@@ -367,37 +386,38 @@ new Align(alignment: Alignment.centerLeft, child: new Text("first row dummy text
                 children: <Widget>[
                   new Expanded(
                     child: GestureDetector(
-                      onTap: (){
-                        print("${categories[0].name} Taped");
-                      },
-child: Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: new Container(
-                      height: 100.0,
-                      decoration: new BoxDecoration(
-                          borderRadius: new BorderRadius.circular(5.0),
-                          color: Colors.green),
-                      child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          // new Icon(
-                          //   Icons.account_balance,
-                          //   color: Colors.white,
-                          // ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                            child: Center(
-                              child: new Text("${categories[0].name}",
-                              style: new TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+                        onTap: () {
+                          print("${categories[0].name} Taped");
+                          _show_companies(context,categories[0]);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 5.0),
+                          child: new Container(
+                            height: 100.0,
+                            decoration: new BoxDecoration(
+                                borderRadius: new BorderRadius.circular(5.0),
+                                color: Colors.green),
+                            child: new Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                // new Icon(
+                                //   Icons.account_balance,
+                                //   color: Colors.white,
+                                // ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 9.0, right: 9.0),
+                                  child: Center(
+                                    child: new Text("${categories[0].name}",
+                                        style: new TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          
-                        ],
-                      ),
-                    ),
-                  )
-                    ),
-                      
+                        )),
                   ),
                   new Expanded(
                       child: new Container(
@@ -405,7 +425,12 @@ child: Padding(
                     child: Column(
                       children: <Widget>[
                         Expanded(
-                          child: Padding(
+                          child: GestureDetector(
+                            onTap: (){
+                              print('${categories[13].name} Taped');
+                              _show_companies(context,categories[13]);
+                            },
+                            child: Padding(
                             padding:
                                 const EdgeInsets.only(bottom: 2.5, right: 2.5),
                             child: new Container(
@@ -422,31 +447,46 @@ child: Padding(
                                   //     color: Colors.white,
                                   //   ),
                                   // ),
-                                  Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[13].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,)
+                                  Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 9.0, right: 9.0),
+                                      child: new Text('${categories[13].name}',
+                                          style: new TextStyle(
+                                              color: Colors.white)),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
                           ),
+                          ) 
                         ),
                         Expanded(
-                          child: Padding(
+                          child: GestureDetector(
+                            onTap: (){
+                              print("${categories[5].name} Taped");
+                              _show_companies(context,categories[5]);
+                            },
+                            child: Padding(
                             padding:
                                 const EdgeInsets.only(top: 2.5, right: 2.5),
                             child: new Container(
-                              decoration: new BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                 child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                decoration: new BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius:
+                                        new BorderRadius.circular(5.0)),
+                                child: Center(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 9.0, right: 9.0),
                                     child: new Text('${categories[5].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,)
-                            ),
+                                        style:
+                                            new TextStyle(color: Colors.white)),
+                                  ),
+                                )),
                           ),
+                          )
                         ),
                       ],
                     ),
@@ -457,35 +497,55 @@ child: Padding(
                     child: Column(
                       children: <Widget>[
                         Expanded(
-                          child: Padding(
+                          child: GestureDetector(
+                            onTap: (){
+                              print("${categories[6].name} Taped");
+                              _show_companies(context,categories[6]);
+                            },
+                            child: Padding(
                             padding:
                                 const EdgeInsets.only(left: 2.5, bottom: 2.5),
                             child: new Container(
                               decoration: new BoxDecoration(
                                   color: Colors.green,
                                   borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[6].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
+                              child: Center(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 9.0, right: 9.0),
+                                  child: new Text('${categories[6].name}',
+                                      style:
+                                          new TextStyle(color: Colors.white)),
+                                ),
+                              ),
                             ),
+                          ),
                           ),
                         ),
                         Expanded(
-                          child: Padding(
+                          child: GestureDetector(
+                            onTap: (){
+                              print("${categories[12].name} Taped");
+                              _show_companies(context,categories[12]);
+                            },
+                            child: Padding(
                             padding: const EdgeInsets.only(left: 2.5, top: 2.5),
                             child: new Container(
                               decoration: new BoxDecoration(
                                   color: Colors.green,
                                   borderRadius: new BorderRadius.circular(5.0)),
-                              child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[12].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
+                              child: Center(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 9.0, right: 9.0),
+                                  child: new Text('${categories[12].name}',
+                                      style:
+                                          new TextStyle(color: Colors.white)),
+                                ),
+                              ),
                             ),
                           ),
+                          )
                         ),
                       ],
                     ),
@@ -514,95 +574,124 @@ child: Padding(
               Column(
                 children: <Widget>[
                   Row(
-                children: <Widget>[
-                        Expanded(
+                    children: <Widget>[
+                      Expanded(
+                        child: GestureDetector(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFF2BD093),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[4].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
+                          padding:
+                              const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                          child: new Container(
+                            height: 100.0,
+                            decoration: new BoxDecoration(
+                                color: Color(0XFF2BD093),
+                                borderRadius: new BorderRadius.circular(5.0)),
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                                child: new Text('${categories[4].name}',
+                                    style: new TextStyle(color: Colors.white)),
+                              ),
                             ),
                           ),
                         ),
-                  new SizedBox(
-                    width: 5.0,
+                        onTap: (){
+                          print("${categories[4].name} Taped");
+                          _show_companies(context,categories[4]);
+                        },
+                        )
+                      ),
+                      new SizedBox(
+                        width: 5.0,
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                          child: new Container(
+                            height: 100.0,
+                            decoration: new BoxDecoration(
+                                color: Color(0XFF53CEDB),
+                                borderRadius: new BorderRadius.circular(5.0)),
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                                child: new Text('${categories[7].name}',
+                                    style: new TextStyle(color: Colors.white)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: (){
+                          print("${categories[7].name} Taped");
+                          _show_companies(context,categories[7]);
+                        },
+                        )
+                      ),
+                      new SizedBox(
+                        width: 5.0,
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                          child: new Container(
+                            height: 100.0,
+                            decoration: new BoxDecoration(
+                                color: Color(0XFFFC7B4D),
+                                borderRadius: new BorderRadius.circular(5.0)),
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                                child: new Text('${categories[11].name}',
+                                    style: new TextStyle(color: Colors.white)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: (){
+                          print("${categories[11].name} Taped");
+                          _show_companies(context,categories[11]);
+                        },
+                        )
+                      ),
+                    ],
                   ),
-                  Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[7].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
-                          ),
-                        ),
-                  new SizedBox(
-                    width: 5.0,
+                  SizedBox(
+                    height: 10.0,
                   ),
-                  Expanded(
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: (){
+                            print("${categories[10].name} Taped");
+                            _show_companies(context,categories[10]);
+                          },
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFFFC7B4D),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[11].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
+                          padding:
+                              const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                          child: new Container(
+                            height: 100.0,
+                            decoration: new BoxDecoration(
+                                color: Color(0XFFF1B069),
+                                borderRadius: new BorderRadius.circular(5.0)),
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                                child: new Text('${categories[10].name}',
+                                    style: new TextStyle(color: Colors.white)),
+                              ),
                             ),
                           ),
                         ),
+                        )
+                      ),
+                    ],
+                  ),
                 ],
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-
-              Row(
-                children: <Widget>[
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFFF1B069),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[10].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
-                          ),
-                        ),
-                ],
-              ),
-  
-                ],
-              ),
-              
               new SizedBox(
                 height: 15.0,
               ),
@@ -618,63 +707,84 @@ child: Padding(
               ),
               Row(
                 children: <Widget>[
-                        Expanded(
+                  Expanded(
+                    child: GestureDetector(
+                      child: Padding(
+                      padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      child: new Container(
+                        height: 100.0,
+                        decoration: new BoxDecoration(
+                            color: Color(0xFFFD7384),
+                            borderRadius: new BorderRadius.circular(5.0)),
+                        child: Center(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0xFFFD7384),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[1].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
+                            padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                            child: new Text('${categories[1].name}',
+                                style: new TextStyle(color: Colors.white)),
                           ),
                         ),
+                      ),
+                    ),
+                    onTap: (){
+                      print("${categories[1].name} Taped");
+                      _show_companies(context,categories[1]);
+                    },
+                    ),
+                  ),
                   new SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
+                    child: GestureDetector(
+                      child: Padding(
+                      padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      child: new Container(
+                        height: 100.0,
+                        decoration: new BoxDecoration(
+                            color: Color(0XFF2BD093),
+                            borderRadius: new BorderRadius.circular(5.0)),
+                        child: Center(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFF2BD093),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[2].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
+                            padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                            child: new Text('${categories[2].name}',
+                                style: new TextStyle(color: Colors.white)),
                           ),
                         ),
+                      ),
+                    ),
+                    onTap: (){
+                      print("${categories[2].name} Taped");
+                      _show_companies(context,categories[2]);
+                    },
+                    )
+                  ),
                   new SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
+                    child: GestureDetector(
+                      child: Padding(
+                      padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      child: new Container(
+                        height: 100.0,
+                        decoration: new BoxDecoration(
+                            color: Color(0XFF53CEDB),
+                            borderRadius: new BorderRadius.circular(5.0)),
+                        child: Center(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[3].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
+                            padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                            child: new Text('${categories[3].name}',
+                                style: new TextStyle(color: Colors.white)),
                           ),
                         ),
+                      ),
+                    ),
+                    onTap: (){
+                      print("${categories[3].name} Taped");
+                      _show_companies(context,categories[3]);
+                    },
+                    )
+                  ),
                 ],
               ),
               new SizedBox(
@@ -698,63 +808,84 @@ child: Padding(
               ),
               Row(
                 children: <Widget>[
-                        Expanded(
+                  Expanded(
+                    child: GestureDetector(
+                      child: Padding(
+                      padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      child: new Container(
+                        height: 100.0,
+                        decoration: new BoxDecoration(
+                            color: Color(0XFFFC7B4D),
+                            borderRadius: new BorderRadius.circular(5.0)),
+                        child: Center(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFFFC7B4D),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[8].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
+                            padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                            child: new Text('${categories[8].name}',
+                                style: new TextStyle(color: Colors.white)),
                           ),
                         ),
+                      ),
+                    ),
+                    onTap: (){
+                      print("${categories[8].name} Taped");
+                      _show_companies(context,categories[8]);
+                    },
+                    )
+                  ),
                   new SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
+                    child: GestureDetector(
+                      child: Padding(
+                      padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      child: new Container(
+                        height: 100.0,
+                        decoration: new BoxDecoration(
+                            color: Color(0XFFF1B069),
+                            borderRadius: new BorderRadius.circular(5.0)),
+                        child: Center(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFFF1B069),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[9].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
+                            padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                            child: new Text('${categories[9].name}',
+                                style: new TextStyle(color: Colors.white)),
                           ),
                         ),
+                      ),
+                    ),
+                    onTap: (){
+                      print("${categories[9].name} Taped");
+                      _show_companies(context,categories[9]);
+                    },
+                    )
+                  ),
                   new SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
+                    child: GestureDetector(
+                      child: Padding(
+                      padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      child: new Container(
+                        height: 100.0,
+                        decoration: new BoxDecoration(
+                            color: Color(0xFFFD7384),
+                            borderRadius: new BorderRadius.circular(5.0)),
+                        child: Center(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0xFFFD7384),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                                    child: new Text('${categories[14].name}',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
+                            padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                            child: new Text('${categories[14].name}',
+                                style: new TextStyle(color: Colors.white)),
                           ),
                         ),
+                      ),
+                    ),
+                    onTap: (){
+                      print("${categories[14].name} Taped");
+                      _show_companies(context,categories[14]);
+                    },
+                    )
+                  ),
                 ],
               )
             ],
