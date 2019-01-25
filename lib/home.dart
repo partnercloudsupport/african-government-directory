@@ -293,6 +293,33 @@ class body_ui extends StatelessWidget{
             children: <Widget>[
               Row(
                 children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      child: Container(
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xfff1b069),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                            child: Text(
+                              'banner image to be inserted here',
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: <Widget>[
                   new Text(
                     "Explore",
                     style: new TextStyle(
