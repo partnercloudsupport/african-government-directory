@@ -298,10 +298,25 @@ class body_ui extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: <Widget>[
+                                    SizedBox(
+                    height: 20.0,
+                  ),
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text('What Are You Looking For Today?',style: TextStyle(
+                        child: Text('What Are You',style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w300
+                        ),),
+                      )
+                    ],
+                  ),                  SizedBox(
+                    height: 5.0,
+                  ),
+                                    Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text('Looking For Today?',style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.w300
                         ),),
