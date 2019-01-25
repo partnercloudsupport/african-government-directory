@@ -291,33 +291,64 @@ class body_ui extends StatelessWidget{
           child: new Container(
               child: new Column(
             children: <Widget>[
+              Column(
+                children: <Widget>[
               Row(
                 children: <Widget>[
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      padding: EdgeInsets.only(left: 2.5),
                       child: Container(
-                        height: 100.0,
+                        height: 170.0,
                         decoration: BoxDecoration(
                           color: Color(0xfff1b069),
-                          borderRadius: BorderRadius.circular(5.0),
+                          borderRadius:BorderRadius.only(topLeft: Radius.circular(5),topRight: Radius.circular(5)),
                         ),
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 9.0,right: 9.0),
-                            child: Text(
-                              'banner image to be inserted here',
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                            child: Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,
                             ),
-                          ),
-                        ),
                       ),
                     ),
                   )
                 ],
               ),
+              SizedBox(
+                height: 10.0,
+              ),
+                Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 2.5, bottom: 2.5),
+                      child: Container(
+                        height: 70.0,
+                        decoration: BoxDecoration(
+                          //color: Color(0xfff1b069),
+                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(3),bottomLeft: Radius.circular(3)),
+                        ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 9.0,right: 9.0,top: 5.0),
+                            child: Column(
+                              children: <Widget>[
+new Align(alignment: Alignment.centerLeft, child: new Text("first row dummy text dsfdfdfsdfsd df dsf sdf dsf dsf d ds fd fsd f sd ".toUpperCase(),style: TextStyle(color: Color(0xff333333),fontWeight: FontWeight.w700, fontSize: 16.0,fontStyle: FontStyle.italic),)),
+                 SizedBox(
+                   height: 1.0,
+                 ),
+                  //new Align(alignment: Alignment.centerLeft, child: new Text("second row dummy text",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w300, fontSize: 20.0),))
+                              ],
+                            )
+                          ),
+
+                      ),
+                    ),
+                  )
+                ],
+              ),
+                ],
+              ),
+                               SizedBox(
+                   height: 2.0,
+                 ),
+
               Row(
                 children: <Widget>[
                   new Text(
@@ -335,13 +366,17 @@ class body_ui extends StatelessWidget{
               Row(
                 children: <Widget>[
                   new Expanded(
-                      child: Padding(
+                    child: GestureDetector(
+                      onTap: (){
+                        print("${categories[0].name} Taped");
+                      },
+child: Padding(
                     padding: const EdgeInsets.only(right: 5.0),
                     child: new Container(
                       height: 100.0,
                       decoration: new BoxDecoration(
                           borderRadius: new BorderRadius.circular(5.0),
-                          color: Color(0xFFFD7384)),
+                          color: Colors.green),
                       child: new Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -353,14 +388,17 @@ class body_ui extends StatelessWidget{
                             padding: EdgeInsets.only(left: 9.0,right: 9.0),
                             child: Center(
                               child: new Text("${categories[0].name}",
-                              style: new TextStyle(color: Colors.white)),
+                              style: new TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
                             ),
                           ),
                           
                         ],
                       ),
                     ),
-                  )),
+                  )
+                    ),
+                      
+                  ),
                   new Expanded(
                       child: new Container(
                     height: 100.0,
@@ -372,7 +410,7 @@ class body_ui extends StatelessWidget{
                                 const EdgeInsets.only(bottom: 2.5, right: 2.5),
                             child: new Container(
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF2BD093),
+                                  color: Colors.green,
                                   borderRadius: new BorderRadius.circular(5.0)),
                               child: new Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -400,7 +438,7 @@ class body_ui extends StatelessWidget{
                                 const EdgeInsets.only(top: 2.5, right: 2.5),
                             child: new Container(
                               decoration: new BoxDecoration(
-                                  color: Color(0XFFFC7B4D),
+                                  color: Colors.green,
                                   borderRadius: new BorderRadius.circular(5.0)),
                                  child: Center(child:Padding(
                                     padding: EdgeInsets.only(left: 9.0,right: 9.0),
@@ -424,7 +462,7 @@ class body_ui extends StatelessWidget{
                                 const EdgeInsets.only(left: 2.5, bottom: 2.5),
                             child: new Container(
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
+                                  color: Colors.green,
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
                                     padding: EdgeInsets.only(left: 9.0,right: 9.0),
@@ -439,7 +477,7 @@ class body_ui extends StatelessWidget{
                             padding: const EdgeInsets.only(left: 2.5, top: 2.5),
                             child: new Container(
                               decoration: new BoxDecoration(
-                                  color: Color(0XFFF1B069),
+                                  color: Colors.green,
                                   borderRadius: new BorderRadius.circular(5.0)),
                               child: Center(child:Padding(
                                     padding: EdgeInsets.only(left: 9.0,right: 9.0),
