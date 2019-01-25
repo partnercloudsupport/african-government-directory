@@ -22,6 +22,7 @@ class company_list_tile extends StatelessWidget {
               GestureDetector(
                 onTap: (){
                   print(companies[position].name);
+                  _show_company(context,companies[position]);
                 },
                 child:Padding(
                 padding: EdgeInsets.all(1.0),
