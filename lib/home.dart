@@ -28,6 +28,8 @@ class _HomePageState extends State<HomePage> {
   bool _logged_in;
   final GlobalKey<ScaffoldState> _scaffold_key = new GlobalKey<ScaffoldState>();
   SharedPreferences preferences;
+  List<GovCategory> _government_categories = [];
+  bool _is_in_async_call = false;
 
   @override
   void initState() {
@@ -35,14 +37,33 @@ class _HomePageState extends State<HomePage> {
     print('runned');
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       preferences = sp;
+
+      get_all_categories(http.Client());
     });
   }
 
   //get all government posts from api call
   Future<List<GovCategory>> get_all_categories(http.Client client) async {
+
+    setState((){
+      _is_in_async_call = true;
+    });
     final response =
-        await client.get('https://government.co.za/api/government_categories');
-    return compute(parse_category, response.body);
+        await client.get('https://government.co.za/api/government_categories').then((response){
+          setState((){
+            _is_in_async_call = false;
+
+            _government_categories = parse_category(response.body);
+          });
+
+
+        }).catchError((error){
+          setState((){
+            _is_in_async_call = false;
+          });
+
+          print('Error ' + error);
+        });
   }
 
   static List<GovCategory> parse_category(String responseBody) {
@@ -114,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                 
       ),
       key: _scaffold_key,
-        body: body_ui(),
+        body: _is_in_async_call ? Center(child: CircularProgressIndicator(),) :body_ui(categories: _government_categories),
         // body: Column(
         //   children: <Widget>[
         //                 SizedBox(
@@ -254,6 +275,10 @@ class _HomePageState extends State<HomePage> {
 }
 
 class body_ui extends StatelessWidget{
+  final List<GovCategory> categories;
+
+  body_ui({Key key, this.categories}) : super(key:key);
+
   @override
   Widget build(BuildContext context) {
     return new ListView(
@@ -297,8 +322,14 @@ class body_ui extends StatelessWidget{
                           //   Icons.account_balance,
                           //   color: Colors.white,
                           // ),
-                          new Text("Municipalities",
-                              style: new TextStyle(color: Colors.white))
+                          Padding(
+                            padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                            child: Center(
+                              child: new Text("${categories[0].name}",
+                              style: new TextStyle(color: Colors.white)),
+                            ),
+                          ),
+                          
                         ],
                       ),
                     ),
@@ -326,8 +357,11 @@ class body_ui extends StatelessWidget{
                                   //     color: Colors.white,
                                   //   ),
                                   // ),
-                                  new Text('Rehabilitation',
-                                      style: new TextStyle(color: Colors.white))
+                                  Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[13].name}',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,)
                                 ],
                               ),
                             ),
@@ -341,20 +375,11 @@ class body_ui extends StatelessWidget{
                               decoration: new BoxDecoration(
                                   color: Color(0XFFFC7B4D),
                                   borderRadius: new BorderRadius.circular(5.0)),
-                              child: new Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  // Padding(
-                                  //   padding: const EdgeInsets.only(right: 8.0),
-                                  //   child: new Icon(
-                                  //     Icons.beenhere,
-                                  //     color: Colors.white,
-                                  //   ),
-                                  // ),
-                                  new Text('Social Services',
-                                      style: new TextStyle(color: Colors.white))
-                                ],
-                              ),
+                                 child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[5].name}',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,)
                             ),
                           ),
                         ),
@@ -375,8 +400,8 @@ class body_ui extends StatelessWidget{
                                   color: Color(0XFF53CEDB),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[6].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -390,8 +415,8 @@ class body_ui extends StatelessWidget{
                                   color: Color(0XFFF1B069),
                                   borderRadius: new BorderRadius.circular(5.0)),
                               child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Educational institutions',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[12].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -408,7 +433,7 @@ class body_ui extends StatelessWidget{
               Row(
                 children: <Widget>[
                   new Expanded(
-                      child: new Text("Government",
+                      child: new Text("Services",
                           style: new TextStyle(fontSize: 18.0))),
                   // new Expanded(
                   //     child: new Text(
@@ -432,11 +457,11 @@ class body_ui extends StatelessWidget{
                             child: new Container(
                               height: 100.0,
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
+                                  color: Color(0XFF2BD093),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[4].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -455,8 +480,8 @@ class body_ui extends StatelessWidget{
                                   color: Color(0XFF53CEDB),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[7].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -472,11 +497,11 @@ class body_ui extends StatelessWidget{
                             child: new Container(
                               height: 100.0,
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
+                                  color: Color(0XFFFC7B4D),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[11].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -497,11 +522,11 @@ class body_ui extends StatelessWidget{
                             child: new Container(
                               height: 100.0,
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
+                                  color: Color(0XFFF1B069),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[10].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -519,7 +544,7 @@ class body_ui extends StatelessWidget{
               Row(
                 children: <Widget>[
                   new Expanded(
-                      child: new Text("Services",
+                      child: new Text("Government",
                           style: new TextStyle(fontSize: 18.0))),
                 ],
               ),
@@ -535,11 +560,31 @@ class body_ui extends StatelessWidget{
                             child: new Container(
                               height: 100.0,
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
+                                  color: Color(0xFFFD7384),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[1].name}',
+                                      style: new TextStyle(color: Colors.white)),
+                                  ) ,),
+                            ),
+                          ),
+                        ),
+                  new SizedBox(
+                    width: 5.0,
+                  ),
+                  Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                            child: new Container(
+                              height: 100.0,
+                              decoration: new BoxDecoration(
+                                  color: Color(0XFF2BD093),
+                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  child: Center(child:Padding(
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[2].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -558,28 +603,8 @@ class body_ui extends StatelessWidget{
                                   color: Color(0XFF53CEDB),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
-                                      style: new TextStyle(color: Colors.white)),
-                                  ) ,),
-                            ),
-                          ),
-                        ),
-                  new SizedBox(
-                    width: 5.0,
-                  ),
-                  Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              height: 100.0,
-                              decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                                  child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[3].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -615,11 +640,11 @@ class body_ui extends StatelessWidget{
                             child: new Container(
                               height: 100.0,
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
+                                  color: Color(0XFFFC7B4D),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[8].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -635,11 +660,11 @@ class body_ui extends StatelessWidget{
                             child: new Container(
                               height: 100.0,
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
+                                  color: Color(0XFFF1B069),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[9].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
@@ -655,11 +680,11 @@ class body_ui extends StatelessWidget{
                             child: new Container(
                               height: 100.0,
                               decoration: new BoxDecoration(
-                                  color: Color(0XFF53CEDB),
+                                  color: Color(0xFFFD7384),
                                   borderRadius: new BorderRadius.circular(5.0)),
                                   child: Center(child:Padding(
-                                    padding: EdgeInsets.only(left: 9.0),
-                                    child: new Text('Local government',
+                                    padding: EdgeInsets.only(left: 9.0,right: 9.0),
+                                    child: new Text('${categories[14].name}',
                                       style: new TextStyle(color: Colors.white)),
                                   ) ,),
                             ),
