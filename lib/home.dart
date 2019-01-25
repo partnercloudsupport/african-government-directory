@@ -301,72 +301,154 @@ class body_ui extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 2.5),
-                          child: Container(
-                            height: 170.0,
-                            decoration: BoxDecoration(
-                              color: Color(0xfff1b069),
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5)),
-                            ),
-                            child: Image.network(
-                              'https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
+                        child: Text('What Are You Looking For Today?',style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w300
+                        ),),
                       )
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text('News',style: TextStyle(fontSize: 20.0),)
                     ],
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 2.5, bottom: 2.5),
-                          child: Container(
-                            height: 70.0,
+                  Container(
+                    height: 200.0,
+                    child: 
+                      ListView(
+                        scrollDirection: Axis.horizontal, // <-- Like so
+                        children: <Widget>[
+                          Container(
                             decoration: BoxDecoration(
-                              //color: Color(0xfff1b069),
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(3),
-                                  bottomLeft: Radius.circular(3)),
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.red,
                             ),
-                            child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 9.0, right: 9.0, top: 5.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    new Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: new Text(
-                                          "first row dummy text dsfdfdfsdfsd df dsf sdf dsf dsf d ds fd fsd f sd "
-                                              .toUpperCase(),
-                                          style: TextStyle(
-                                              color: Color(0xff333333),
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 16.0,
-                                              fontStyle: FontStyle.italic),
-                                        )),
-                                    SizedBox(
-                                      height: 1.0,
-                                    ),
-                                    //new Align(alignment: Alignment.centerLeft, child: new Text("second row dummy text",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w300, fontSize: 20.0),))
-                                  ],
-                                )),
+                            width: MediaQuery.of(context).size.width - 100.0,
                           ),
-                        ),
-                      )
-                    ],
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Container(
+                            width:  MediaQuery.of(context).size.width - 100.0,
+                                                        decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.blue,
+                            ),
+                          ),
+                                                    SizedBox(
+                            width: 10.0,
+                          ),
+                          Container(
+                            width:  MediaQuery.of(context).size.width - 100.0,
+                                                        decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.green,
+                            ),
+                          ),
+                                                    SizedBox(
+                            width: 10.0,
+                          ),
+                          Container(
+                            width:  MediaQuery.of(context).size.width - 100.0,
+                                                        decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.yellow,
+                            ),
+                          ),
+                                                    SizedBox(
+                            width: 10.0,
+                          ),
+                          Container(
+                            width:  MediaQuery.of(context).size.width - 100.0,
+                                                        decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange,
+                            ),
+                          ),
+                        ],
+                      ),
                   ),
                 ],
               ),
+              // Column(
+              //   children: <Widget>[
+              //     Row(
+              //       children: <Widget>[
+              //         Expanded(
+              //           child: Padding(
+              //             padding: EdgeInsets.only(left: 2.5),
+              //             child: Container(
+              //               height: 170.0,
+              //               decoration: BoxDecoration(
+              //                 color: Color(0xfff1b069),
+              //                 borderRadius: BorderRadius.only(
+              //                     topLeft: Radius.circular(5),
+              //                     topRight: Radius.circular(5)),
+              //               ),
+              //               child: Image.network(
+              //                 'https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',
+              //                 fit: BoxFit.cover,
+              //               ),
+              //             ),
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     SizedBox(
+              //       height: 10.0,
+              //     ),
+              //     Row(
+              //       children: <Widget>[
+              //         Expanded(
+              //           child: Padding(
+              //             padding: EdgeInsets.only(left: 2.5, bottom: 2.5),
+              //             child: Container(
+              //               height: 70.0,
+              //               decoration: BoxDecoration(
+              //                 //color: Color(0xfff1b069),
+              //                 borderRadius: BorderRadius.only(
+              //                     bottomRight: Radius.circular(3),
+              //                     bottomLeft: Radius.circular(3)),
+              //               ),
+              //               child: Padding(
+              //                   padding: EdgeInsets.only(
+              //                       left: 9.0, right: 9.0, top: 5.0),
+              //                   child: Column(
+              //                     children: <Widget>[
+              //                       new Align(
+              //                           alignment: Alignment.centerLeft,
+              //                           child: new Text(
+              //                             "first row dummy text dsfdfdfsdfsd df dsf sdf dsf dsf d ds fd fsd f sd "
+              //                                 .toUpperCase(),
+              //                             style: TextStyle(
+              //                                 color: Color(0xff333333),
+              //                                 fontWeight: FontWeight.w700,
+              //                                 fontSize: 16.0,
+              //                                 fontStyle: FontStyle.italic),
+              //                           )),
+              //                       SizedBox(
+              //                         height: 1.0,
+              //                       ),
+              //                       //new Align(alignment: Alignment.centerLeft, child: new Text("second row dummy text",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w300, fontSize: 20.0),))
+              //                     ],
+              //                   )),
+              //             ),
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //   ],
+              // ),
               SizedBox(
-                height: 2.0,
+                height: 15.0,
               ),
               Row(
                 children: <Widget>[
