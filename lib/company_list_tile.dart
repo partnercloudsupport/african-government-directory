@@ -30,7 +30,7 @@ class company_list_tile extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Image.network('https://tinypng.com/images/social/website.jpg',height: 60,),
+                      child: Image.network(_rander_company_image(companies[position].url),height: 60,),
                     ),
                     Expanded(
                       child: Column(
@@ -237,6 +237,25 @@ class company_list_tile extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String _rander_company_image(String image__url){
+    bool _empty = false;
+
+    try{
+      if(image__url.isEmpty || image__url == null){
+        _empty = true;
+      }
+    }catch(ex){
+      _empty = true;
+      print('displaying company image failed');
+    }
+
+    if(_empty){
+      return 'https://www.labx.com/images/image-not-found.png';
+    }else{
+      return 'http://cdn.adslive.com/${image__url}';
+    }
   }
 
   void _show_company(BuildContext context, Company company) async {
