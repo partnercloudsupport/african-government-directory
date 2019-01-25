@@ -7,13 +7,9 @@ class company_list_tile extends StatelessWidget {
 
   company_list_tile({Key key, this.companies}) : super(key: key);
 
-  _on_favourite_click(){
+  _on_favourite_click() {}
 
-  }
-
-  _change_favourite_icon(){
-    
-  }
+  _change_favourite_icon() {}
 
   @override
   Widget build(BuildContext context) {
@@ -23,80 +19,221 @@ class company_list_tile extends StatelessWidget {
         itemBuilder: (context, position) {
           return Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  new GestureDetector(
-                    onTap: () {
-                      print(companies[position].name);
-                      _show_company(context, companies[position]);
-                    },
-                    child: new Container(
-                      padding: const EdgeInsets.all(1.0),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              GestureDetector(
+                onTap: (){
+                  print(companies[position].name);
+                },
+                child:Padding(
+                padding: EdgeInsets.all(1.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Image.network('https://tinypng.com/images/social/website.jpg',height: 60,),
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                                12.0, 12.0, 12.0, 6.0),
-                            child: Text(
-                              companies[position].name,
-                              // style: TextStyle(
-                              //   fontSize: 15.0,
-                              //   fontWeight: FontWeight.w900,
-                              // ),
-                              style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                  fontSize: 16.0,
-                )
+                            padding: EdgeInsets.only(top: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(text: companies[position].name, style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0, color: Colors.black)),
+                                        ]
+                                      ),overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+
+                              ],
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                                12.0, 6.0, 12.0, 12.0),
-                            child: Text(
-                              companies[position].address,
-                              style: TextStyle(
-                                  fontSize: 15.0, fontWeight: FontWeight.w400,color: Colors.grey),
+                            padding: EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    child: Text(companies[position].address,style: TextStyle(fontSize: 18.0),),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                          //             Padding(
-                          //   padding: const EdgeInsets.all(8.0),
-                          //   child: Column(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          //     children: <Widget>[
-                                
-                          //       new GestureDetector(
-                          //         child: Padding(
-                          //    padding: const EdgeInsets.all(8.0),
-                          //         child: Icon(Icons.star_border,
-                          //         size: 35.0,
-                          //         color: Colors.grey,),
-                          //         ),
-                          //         onTap: (){
-                          //           print('star clicked');
-                          //           _change_favourite_icon();
-                          //           _on_favourite_click();
-                          //         },
-                          //       ),
-                          //       //Text('5M', style: TextStyle(color: Colors.grey),),
-                          //     ],
-                          //   ),
-                          // ),
-                ],
+                  ],
+                ),
+              ) ,
               ),
-              Divider(
-                height: 2.0,
-                color: Colors.grey,
-              )
+              
+                                        Divider(),
             ],
           );
+          // return Column(
+          //   children: <Widget>[
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: <Widget>[
+          //         Container(
+          //           width: 80,
+          //           //height: 70,
+          //           child: Image.network('https://tinypng.com/images/social/website.jpg',fit: BoxFit.fill,),
+          //         ),
+          //         GestureDetector(
+          //           child: Container(
+          //             padding: EdgeInsets.all(1.0),
+          //             width: MediaQuery.of(context).size.width - 80,
+          //             child: Column(
+          //               crossAxisAlignment: CrossAxisAlignment.start,
+          //               children: <Widget>[
+          //                 Padding(
+          //                   padding: EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
+          //                   child: Text(companies[position].name,style: TextStyle(
+          //         fontWeight: FontWeight.w400,
+          //         color: Colors.black,
+          //         fontSize: 16.0,
+          //       )),
+          //                 ),
+          //                 Padding(
+          //                   padding: EdgeInsets.all(12.0),
+          //                   child: Text(companies[position].address,
+          //                     style: TextStyle(
+          //                         fontSize: 15.0, fontWeight: FontWeight.w400,color: Colors.grey)),
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //                     Divider(
+          //         height: 2.0,
+          //         color: Colors.grey,
+          //       ),
+          //   ],
+          // );
+          // return Padding(
+          //   padding: EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
+          //   child: GestureDetector(
+          //     child: Row(
+          //       children: <Widget>[
+          //         new Container(
+          //           height: 100.0,
+          //           width: 100.0,
+          //           child: Image.network('https://tinypng.com/images/social/website.jpg',fit: BoxFit.cover,
+          //           ),
+          //         ),
+          //         Expanded(
+          //           child: Padding(
+          //             padding: EdgeInsets.only(left: 5.0),
+          //             child: Container(
+          //             height: 100.0,
+          //             child: Column(
+          //               children: <Widget>[
+          //                 Expanded(
+          //                     child: new Container(
+          //                       child: Center(
+          //                             child: Padding(
+          //                               padding: EdgeInsets.only(
+          //                                   left: 9.0, right: 9.0),
+          //                               child: new Text(companies[position].name,
+          //                                   style: new TextStyle(
+          //                                       color: Colors.black,
+          //                                       fontSize: 16.0,
+          //                                       fontWeight: FontWeight.w400)),
+          //                             ),
+          //                           )                      
+          //                     ),
+          //                 ),
+          //                 Divider(
+          //                   height: 2.0,
+          //                   color: Colors.pink,
+          //                 ),
+          //                 Expanded(
+          //                     child: new Container(
+          //                       child: Center(
+          //                             child: Padding(
+          //                               padding: EdgeInsets.only(
+          //                                   left: 9.0, right: 9.0),
+          //                               child: new Text(companies[position].address,
+          //                                   style: new TextStyle(
+          //                                       color: Colors.grey,
+          //                                       fontSize: 15.0,
+          //                                       fontWeight: FontWeight.w400)),
+          //                             ),
+          //                           )                      
+          //                     ),
+          //                 ),
+          //               ],
+          //             ),
+          //           )
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //     onTap: () {},
+          //   ),
+          // );
+          // return Column(
+          //   children: <Widget>[
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: <Widget>[
+          //         new GestureDetector(
+          //           onTap: () {
+          //             print(companies[position].name);
+          //             _show_company(context, companies[position]);
+          //           },
+          //           child: new Container(
+          //             padding: const EdgeInsets.all(1.0),
+          //             width: MediaQuery.of(context).size.width * 0.9,
+          //             child: new Column(
+          //               crossAxisAlignment: CrossAxisAlignment.start,
+          //               children: <Widget>[
+          //                 Padding(
+          //                   padding: const EdgeInsets.fromLTRB(
+          //                       12.0, 12.0, 12.0, 6.0),
+          //                   child: Text(companies[position].name,
+          //                       style: TextStyle(
+          //                         fontWeight: FontWeight.w400,
+          //                         color: Colors.black,
+          //                         fontSize: 16.0,
+          //                       )),
+          //                 ),
+          //                 Padding(
+          //                   padding: const EdgeInsets.fromLTRB(
+          //                       12.0, 6.0, 12.0, 12.0),
+          //                   child: Text(
+          //                     companies[position].address,
+          //                     style: TextStyle(
+          //                         fontSize: 15.0,
+          //                         fontWeight: FontWeight.w400,
+          //                         color: Colors.grey),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     Divider(
+          //       height: 2.0,
+          //       color: Colors.grey,
+          //     )
+          //   ],
+          // );
         },
       ),
     );

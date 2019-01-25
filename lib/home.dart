@@ -537,20 +537,14 @@ class body_ui extends StatelessWidget {
                               child: new Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  // Padding(
-                                  //   padding: const EdgeInsets.only(right: 8.0),
-                                  //   child: new Icon(
-                                  //     Icons.local_offer,
-                                  //     color: Colors.white,
-                                  //   ),
-                                  // ),
                                   Center(
                                     child: Padding(
                                       padding: EdgeInsets.only(
                                           left: 9.0, right: 9.0),
                                       child: new Text('${categories[13].name}',
                                           style: new TextStyle(
-                                              color: Colors.white)),
+                                              color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                                     ),
                                   )
                                 ],
@@ -579,7 +573,8 @@ class body_ui extends StatelessWidget {
                                         EdgeInsets.only(left: 9.0, right: 9.0),
                                     child: new Text('${categories[5].name}',
                                         style:
-                                            new TextStyle(color: Colors.white)),
+                                            new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                                   ),
                                 )),
                           ),
@@ -612,7 +607,8 @@ class body_ui extends StatelessWidget {
                                       EdgeInsets.only(left: 9.0, right: 9.0),
                                   child: new Text('${categories[6].name}',
                                       style:
-                                          new TextStyle(color: Colors.white)),
+                                          new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                                 ),
                               ),
                             ),
@@ -637,7 +633,8 @@ class body_ui extends StatelessWidget {
                                       EdgeInsets.only(left: 9.0, right: 9.0),
                                   child: new Text('${categories[12].name}',
                                       style:
-                                          new TextStyle(color: Colors.white)),
+                                          new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                                 ),
                               ),
                             ),
@@ -686,7 +683,8 @@ class body_ui extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
                                 child: new Text('${categories[4].name}',
-                                    style: new TextStyle(color: Colors.white)),
+                                    style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                               ),
                             ),
                           ),
@@ -714,7 +712,8 @@ class body_ui extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
                                 child: new Text('${categories[7].name}',
-                                    style: new TextStyle(color: Colors.white)),
+                                    style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                               ),
                             ),
                           ),
@@ -742,7 +741,8 @@ class body_ui extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
                                 child: new Text('${categories[11].name}',
-                                    style: new TextStyle(color: Colors.white)),
+                                    style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                               ),
                             ),
                           ),
@@ -772,13 +772,14 @@ class body_ui extends StatelessWidget {
                           child: new Container(
                             height: 100.0,
                             decoration: new BoxDecoration(
-                                color: Color(0XFFF1B069),
+                                color: Colors.green,
                                 borderRadius: new BorderRadius.circular(5.0)),
                             child: Center(
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
                                 child: new Text('${categories[10].name}',
-                                    style: new TextStyle(color: Colors.white)),
+                                    style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                               ),
                             ),
                           ),
@@ -817,7 +818,8 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[1].name}',
-                                style: new TextStyle(color: Colors.white)),
+                                style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
@@ -844,7 +846,8 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[2].name}',
-                                style: new TextStyle(color: Colors.white)),
+                                style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
@@ -871,7 +874,8 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[3].name}',
-                                style: new TextStyle(color: Colors.white)),
+                                style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
@@ -918,7 +922,8 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[8].name}',
-                                style: new TextStyle(color: Colors.white)),
+                                style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
@@ -945,7 +950,8 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[9].name}',
-                                style: new TextStyle(color: Colors.white)),
+                                style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
@@ -972,7 +978,8 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[14].name}',
-                                style: new TextStyle(color: Colors.white)),
+                                style: new TextStyle(color: Colors.white,
+                                            fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
