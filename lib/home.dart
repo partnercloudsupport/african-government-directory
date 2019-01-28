@@ -391,7 +391,7 @@ class body_ui extends StatelessWidget {
                                 color: Colors.black.withOpacity(0.9),
                                 child: Padding(
                                   padding: EdgeInsets.all(10.0),
-                                  child: Text(news[position].title,style: TextStyle(color: Colors.grey.withOpacity(1)),)
+                                  child: Text(news[position].title,style: TextStyle(color: Colors.white),)
                                 ) ,
                               ),
                                 ), 
