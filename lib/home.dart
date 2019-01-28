@@ -364,10 +364,21 @@ class body_ui extends StatelessWidget {
                   ),
                   Row(
                     children: <Widget>[
-                      Text(
-                        'News',
-                        style: TextStyle(fontSize: 20.0),
-                      )
+                      Expanded(
+                        child: Text('News',style: TextStyle(fontSize: 20.0),),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          child: Text('View all', style: TextStyle(
+                          color: Color(0XFF2BD093),
+                        ),
+                                                  textAlign: TextAlign.end,
+                        ),
+                        onTap: (){
+                          print('view all clicked');
+                        },
+                        ) 
+                      ),
                     ],
                   ),
                   SizedBox(
