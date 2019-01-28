@@ -88,7 +88,6 @@ Widget _getImageNetwork(url){
         children: <Widget>[
           _getTittle(),
           _getDate(),
-          //
           _getDescription(),
           _getAntLink(),
           _getLink(context)
@@ -162,7 +161,7 @@ Widget _getImageNetwork(url){
         print('Could not launch $url');
       }
     //}else{
-     // Clipboard.setData(new ClipboardData(text: url));
+      //Clipboard.setData(new ClipboardData(text: url));
       //_showDialog(context);
     //}
   }
