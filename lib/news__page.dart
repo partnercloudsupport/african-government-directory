@@ -132,7 +132,7 @@ Widget _getImageNetwork(url){
     Widget _getAntLink() {
     return new Container(
       margin: new EdgeInsets.only(top: 30.0),
-      child: new Text("Mais detalhes acesse:",
+      child: new Text("More Details:",
         style: new TextStyle(fontWeight: FontWeight.bold,
             color: Colors.grey[600]
         ),
@@ -177,11 +177,11 @@ Widget _getImageNetwork(url){
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          content: new Text("text_copy"),
+          content: new Text("${news.link}"),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
-              child: new Text("text_fechar"),
+              child: new Text("copy"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
