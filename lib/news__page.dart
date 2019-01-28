@@ -88,6 +88,7 @@ Widget _getImageNetwork(url){
         children: <Widget>[
           _getTittle(),
           _getDate(),
+          //
           _getDescription(),
           _getAntLink(),
           _getLink(context)
