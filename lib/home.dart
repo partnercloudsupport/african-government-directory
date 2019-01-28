@@ -383,21 +383,28 @@ class body_ui extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.all(5.0),
                               child: Container(
-                              child: Stack(
-                                children: <Widget>[
-                                  Image.network(
-                                    news[position].thumbnail,fit: BoxFit.cover,
-                                  ),
-                                  Center(
-                                    child: Text(news[position].title),
-                                  ),
-                                ],
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding: EdgeInsets.all(0),
+                                  child: Container(
+                                  width: MediaQuery.of(context).size.width - 100,
+                                color: Colors.black.withOpacity(0.9),
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.0),
+                                  child: Text(news[position].title,style: TextStyle(color: Colors.grey.withOpacity(1)),)
+                                ) ,
                               ),
+                                ), 
                               height: 190.0,
                               width: MediaQuery.of(context).size.width - 100.0,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
                                 color: Colors.blue,
+                                image: DecorationImage(
+                                  image: new NetworkImage(
+                                    news[position].thumbnail
+                                  ),
+                                  fit: BoxFit.fill
+                                )
                               ),
                             ),
                             ),
