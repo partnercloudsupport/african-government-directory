@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:government_directory/add_advert.dart';
 import 'package:government_directory/favourites.dart';
+import 'package:government_directory/models/news.dart';
 import 'package:government_directory/search_page.dart';
 import 'models/government_category.dart';
 import 'package:http/http.dart' as http;
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   SharedPreferences preferences;
   List<GovCategory> _government_categories = [];
   bool _is_in_async_call = false;
+  List<News> _news = [];
 
   @override
   void initState() {
@@ -39,7 +41,25 @@ class _HomePageState extends State<HomePage> {
       preferences = sp;
 
       get_all_categories(http.Client());
+
+      _get_news().then((data){
+        print('printing mews ${_news}');
+      });
     });
+  }
+    Future<List<News>> _get_news() async {
+    final response = await http.get('http://192.168.16.97/government.co.za/api/news');
+
+    setState(() {
+     _news = parse_news(response.body); 
+    });
+  }
+
+    List<News> parse_news(String responseBody) {
+    final parsed_data = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed_data
+        .map<News>((json) => News.fromjson(json))
+        .toList();
   }
 
   //get all government posts from api call
