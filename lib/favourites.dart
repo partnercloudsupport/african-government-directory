@@ -118,82 +118,90 @@ class _FavouritesPageState extends State<FavouritesPage>{
         child: ListView.builder(
         itemCount: _favourite_companies.length,
         itemBuilder: (context,position){
-           return Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          return Column(
+            children: <Widget>[
+              GestureDetector(
+                onTap: ()async{
+                  var navigate = await Navigator.push(context, MaterialPageRoute(builder: (context) => company_page(company: _favourite_companies[position],old_context: context)));
+
+                  //handling return from pushing a company page or opening a company page
+                  if(navigate == true || navigate == null){
+                    _favourite_companies = [];
+                    _get_favourite_companies();
+                  }
+                },
+                child:Padding(
+                padding: EdgeInsets.all(1.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    new GestureDetector(
-                      onTap: () async {
-                        print(_favourite_companies[position].name);
-                        var nav = await Navigator.push(context, MaterialPageRoute(builder: (context) => company_page(company: _favourite_companies[position],old_context: context,)));
-                        
-                        //handling callback from push
-                        if(nav == true || nav == null){
-                          print('i am back');
-                          _favourite_companies = [];
-                          _get_favourite_companies();
-                        }
-                      },
-                      child: new Container(
-                        padding: const EdgeInsets.all(1.0),
-                        width: MediaQuery.of(context).size.width - 80,
-                        child: new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
-                              child: Text(_favourite_companies[position].name,style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                  fontSize: 16.0,
-                )),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Image.network(_rander_company_image(_favourite_companies[position].url),height: 60,),
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(text: _favourite_companies[position].name, style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0, color: Colors.black)),
+                                        ]
+                                      ),overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
-                              child: Text(_favourite_companies[position].address,
-                              style: TextStyle(
-                                  fontSize: 15.0, fontWeight: FontWeight.w400,color: Colors.grey)),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    child: Text(_favourite_companies[position].address,style: TextStyle(fontSize: 18.0),),
+                                  ),
+                                )
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                                                           Padding(
-                             padding: const EdgeInsets.all(8.0),
-                             child: Column(
-                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                               children: <Widget>[
-                                
-                                 new GestureDetector(
-                                   child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                                   child: Icon(Icons.delete,
-                                   size: 35.0,
-                                   color: Colors.grey,),
-                                   ),
-                                   onTap: (){
-                                     print('delete clicked');
-                                      _delete_company_from_favourite_list(_favourite_companies[position].id).then((data){
-                                      setState((){
-                                        _favourite_companies = [];
-                                      });
-                                       _get_favourite_companies();
-                                     });
-                                   },
-                                 ),
-                                 //Text('5M', style: TextStyle(color: Colors.grey),),
-                               ],
-                             ),
-                           ),
+                    GestureDetector(
+                      onTap: (){
+                        _delete_company_from_favourite_list(_favourite_companies[position].id).then((data){
+                          setState((){
+                            _favourite_companies = [];
+                          });
+
+                          _get_favourite_companies();
+                        });
+                      },
+                      child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Icon(Icons.delete),
+                    ),
+                    ),              
                   ],
                 ),
-                Divider(
-                  height: 2.0,
-                  color: Colors.grey,
-                ),
-              ],
-            ); 
+              ) ,
+              ),
+              
+                                        Divider(),
+            ],
+          );
         },
       ),);
     }else{
@@ -202,4 +210,24 @@ class _FavouritesPageState extends State<FavouritesPage>{
       );
     }
   }
+
+    String _rander_company_image(String image__url){
+    bool _empty = false;
+
+    try{
+      if(image__url.isEmpty || image__url == null){
+        _empty = true;
+      }
+    }catch(ex){
+      _empty = true;
+      print('displaying company image failed');
+    }
+
+    if(_empty){
+      return 'https://www.labx.com/images/image-not-found.png';
+    }else{
+      return 'http://cdn.adslive.com/${image__url}';
+    }
+  }
+
 }

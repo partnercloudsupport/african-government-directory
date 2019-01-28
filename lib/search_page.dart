@@ -101,47 +101,110 @@ class _search_page_state extends State<search_page> {
           itemCount: found_companies.length,
           itemBuilder: (context,position){
             return Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => company_page(company: found_companies[position],old_context: context,)));
+                },
+                child:Padding(
+                padding: EdgeInsets.all(1.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    new GestureDetector(
-                      onTap: (){
-                        print(found_companies[position].name);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => company_page(company: found_companies[position],old_context: context,)));
-                      },
-                      child: new Container(
-                        padding: const EdgeInsets.all(1.0),
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
-                              child: Text(found_companies[position].name,style: TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w900,
-                              ),),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Image.network(_rander_company_image(found_companies[position].url),height: 60,),
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(text: found_companies[position].name, style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0, color: Colors.black)),
+                                        ]
+                                      ),overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
-                              child: Text(found_companies[position].address, style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w300
-                              ),),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    child: Text(found_companies[position].address,style: TextStyle(fontSize: 18.0),),
+                                  ),
+                                )
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    )
+                    ),          
                   ],
                 ),
-                Divider(
-                  height: 2.0,
-                  color: Colors.grey,
-                ),
-              ],
-            );
+              ) ,
+              ),
+              
+                                        Divider(),
+            ],
+          );
+            // return Column(
+            //   children: <Widget>[
+            //     Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: <Widget>[
+            //         new GestureDetector(
+            //           onTap: (){
+            //             print(found_companies[position].name);
+            //             Navigator.push(context, MaterialPageRoute(builder: (context) => company_page(company: found_companies[position],old_context: context,)));
+            //           },
+            //           child: new Container(
+            //             padding: const EdgeInsets.all(1.0),
+            //             width: MediaQuery.of(context).size.width * 0.9,
+            //             child: new Column(
+            //               crossAxisAlignment: CrossAxisAlignment.start,
+            //               children: <Widget>[
+            //                 Padding(
+            //                   padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
+            //                   child: Text(found_companies[position].name,style: TextStyle(
+            //                     fontSize: 15.0,
+            //                     fontWeight: FontWeight.w900,
+            //                   ),),
+            //                 ),
+            //                 Padding(
+            //                   padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
+            //                   child: Text(found_companies[position].address, style: TextStyle(
+            //                     fontSize: 18.0,
+            //                     fontWeight: FontWeight.w300
+            //                   ),),
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
+            //         )
+            //       ],
+            //     ),
+            //     Divider(
+            //       height: 2.0,
+            //       color: Colors.grey,
+            //     ),
+            //   ],
+            // );
           },
         );
       }else{
@@ -231,73 +294,6 @@ class _search_page_state extends State<search_page> {
                 new Expanded(
                   child: new Container(
                     child: _is_searching ? new Center(child: CircularProgressIndicator() ) : _not_searching(),
-                    // child: found_companies.isEmpty
-                    //     ? Center(
-                    //         child: Text('Search For Something'),
-                    //       )
-                    //     : ListView.builder(
-                    //         itemCount: found_companies.length,
-                    //         itemBuilder: (context, position) {
-                    //           return Column(
-                    //             children: <Widget>[
-                    //               Row(
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceBetween,
-                    //                 children: <Widget>[
-                    //                   new GestureDetector(
-                    //                     onTap: () {
-                    //                       print(found_companies[position].name);
-                    //                     },
-                    //                     child: new Container(
-                    //                       padding: const EdgeInsets.all(1.0),
-                    //                       width: MediaQuery.of(context)
-                    //                               .size
-                    //                               .width *
-                    //                           0.9,
-                    //                       child: new Column(
-                    //                         crossAxisAlignment:
-                    //                             CrossAxisAlignment.start,
-                    //                         children: <Widget>[
-                    //                           Padding(
-                    //                             padding:
-                    //                                 const EdgeInsets.fromLTRB(
-                    //                                     12.0, 12.0, 12.0, 6.0),
-                    //                             child: Text(
-                    //                               found_companies[position]
-                    //                                   .name,
-                    //                               style: TextStyle(
-                    //                                 fontSize: 15.0,
-                    //                                 fontWeight: FontWeight.w900,
-                    //                               ),
-                    //                             ),
-                    //                           ),
-                    //                           Padding(
-                    //                             padding:
-                    //                                 const EdgeInsets.fromLTRB(
-                    //                                     12.0, 6.0, 12.0, 12.0),
-                    //                             child: Text(
-                    //                               found_companies[position]
-                    //                                   .address,
-                    //                               style: TextStyle(
-                    //                                   fontSize: 18.0,
-                    //                                   fontWeight:
-                    //                                       FontWeight.w300),
-                    //                             ),
-                    //                           ),
-                    //                         ],
-                    //                       ),
-                    //                     ),
-                    //                   )
-                    //                 ],
-                    //               ),
-                    //               Divider(
-                    //                 height: 2.0,
-                    //                 color: Colors.grey,
-                    //               )
-                    //             ],
-                    //           );
-                    //         },
-                    //       ),
                   ),
                 ),
               ],
@@ -320,6 +316,25 @@ class _search_page_state extends State<search_page> {
     } else {
       print('empty');
       _call_snackbar('Enter Company Name');
+    }
+  }
+
+      String _rander_company_image(String image__url){
+    bool _empty = false;
+
+    try{
+      if(image__url.isEmpty || image__url == null){
+        _empty = true;
+      }
+    }catch(ex){
+      _empty = true;
+      print('displaying company image failed');
+    }
+
+    if(_empty){
+      return 'https://www.labx.com/images/image-not-found.png';
+    }else{
+      return 'http://cdn.adslive.com/${image__url}';
     }
   }
 }
