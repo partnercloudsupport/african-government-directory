@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:government_directory/add_advert.dart';
 import 'package:government_directory/favourites.dart';
 import 'package:government_directory/models/news.dart';
+import 'package:government_directory/news__page.dart';
 import 'package:government_directory/search_page.dart';
 import 'models/government_category.dart';
 import 'package:http/http.dart' as http;
@@ -378,7 +379,11 @@ class body_ui extends StatelessWidget {
                       scrollDirection: Axis.horizontal, // <-- Like so
                       itemCount: news.length,
                       itemBuilder: (BuildContext context, int position) {
-                        return Column(
+                        return GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => news_page(news:news[position]) ));
+                          },
+                          child:Column(
                           children: <Widget>[
                             Padding(
                               padding: EdgeInsets.all(5.0),
@@ -410,7 +415,8 @@ class body_ui extends StatelessWidget {
                             ),
 
                           ],
-                        );
+                        ),
+                        ); 
                       },
                     ),
                     //stop here man
