@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       _is_in_async_call = true;
     });
     final response = await http
-        .get('http://192.168.16.97/government.co.za/api/news')
+        .get('https://government.co.za/api/news')
         .then((response) {
       setState(() {
         _is_in_async_call = false;
