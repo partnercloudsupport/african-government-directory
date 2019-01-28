@@ -40,11 +40,13 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       preferences = sp;
 
-      get_all_categories(http.Client());
-
+      get_all_categories(http.Client()).then((data){
       _get_news().then((data){
         print('printing mews ${_news}');
       });
+      });
+
+
     });
   }
     Future<List<News>> _get_news() async {
