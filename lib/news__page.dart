@@ -154,16 +154,16 @@ Widget _getImageNetwork(url){
   }
 
   _launchURL(url,context) async {
-    if(Platform.isAndroid) {
+    //if(Platform.isAndroid) {
       if (await canLaunch(url)) {
         await launch(url);
       } else {
         print('Could not launch $url');
       }
-    }else{
-      Clipboard.setData(new ClipboardData(text: url));
-      _showDialog(context);
-    }
+    //}else{
+     // Clipboard.setData(new ClipboardData(text: url));
+      //_showDialog(context);
+    //}
   }
 
    Future shareNotice() async {
