@@ -343,7 +343,7 @@ class _company_page_state extends State<company_page>
                 onTap: () {
                   print('log out tabed');
                   _remove_local_data(_logged_in_key);
-                  Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                  Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
                 },
               )
             ],
