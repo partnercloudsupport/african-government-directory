@@ -18,6 +18,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 //shared preferences import
 import 'package:shared_preferences/shared_preferences.dart';
 import 'gov_cat.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -40,28 +41,27 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       preferences = sp;
 
-      get_all_categories(http.Client()).then((data){
-      _get_news().then((data){
-        print('printing mews ${_news}');
-      });
-      });
-
-
+      get_all_categories(http.Client());
     });
   }
-    Future<List<News>> _get_news() async {
-    final response = await http.get('http://192.168.16.97/government.co.za/api/news');
 
+  Future<List<News>> _get_news() async {
     setState(() {
-     _news = parse_news(response.body); 
+      _is_in_async_call = true;
+    });
+    final response = await http
+        .get('http://192.168.16.97/government.co.za/api/news')
+        .then((response) {
+      setState(() {
+        _is_in_async_call = false;
+        _news = parse_news(response.body);
+      });
     });
   }
 
-    List<News> parse_news(String responseBody) {
+  List<News> parse_news(String responseBody) {
     final parsed_data = json.decode(responseBody).cast<Map<String, dynamic>>();
-    return parsed_data
-        .map<News>((json) => News.fromjson(json))
-        .toList();
+    return parsed_data.map<News>((json) => News.fromjson(json)).toList();
   }
 
   //get all government posts from api call
@@ -77,6 +77,8 @@ class _HomePageState extends State<HomePage> {
 
         _government_categories = parse_category(response.body);
       });
+
+      _get_news();
     }).catchError((error) {
       setState(() {
         _is_in_async_call = false;
@@ -159,7 +161,10 @@ class _HomePageState extends State<HomePage> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : body_ui(categories: _government_categories),
+          : body_ui(
+              categories: _government_categories,
+              news: _news,
+            ),
       // body: Column(
       //   children: <Widget>[
       //                 SizedBox(
@@ -300,12 +305,17 @@ class _HomePageState extends State<HomePage> {
 
 class body_ui extends StatelessWidget {
   final List<GovCategory> categories;
+  final List<News> news;
 
-  body_ui({Key key, this.categories}) : super(key: key);
+  body_ui({Key key, this.categories, this.news}) : super(key: key);
 
-  _show_companies(BuildContext context, GovCategory category) async{
-     Map result = await Navigator.push(context, MaterialPageRoute(builder: (context) => gov_cat(govCategory: category)));
+  _show_companies(BuildContext context, GovCategory category) async {
+    Map result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => gov_cat(govCategory: category)));
   }
+
   @override
   Widget build(BuildContext context) {
     return new ListView(
@@ -320,38 +330,43 @@ class body_ui extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                                    SizedBox(
+                  SizedBox(
                     height: 20.0,
                   ),
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text('What Are You',style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.w300
-                        ),),
+                        child: Text(
+                          'What Are You',
+                          style: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.w300),
+                        ),
                       )
                     ],
-                  ),                  SizedBox(
+                  ),
+                  SizedBox(
                     height: 5.0,
                   ),
-                                    Row(
+                  Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text('Looking For Today?',style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.w300
-                        ),),
+                        child: Text(
+                          'Looking For Today?',
+                          style: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.w300),
+                        ),
                       )
                     ],
                   ),
-
                   SizedBox(
                     height: 15.0,
                   ),
                   Row(
                     children: <Widget>[
-                      Text('News',style: TextStyle(fontSize: 20.0),)
+                      Text(
+                        'News',
+                        style: TextStyle(fontSize: 20.0),
+                      )
                     ],
                   ),
                   SizedBox(
@@ -359,131 +374,42 @@ class body_ui extends StatelessWidget {
                   ),
                   Container(
                     height: 200.0,
-                    child: 
-                      ListView(
-                        scrollDirection: Axis.horizontal, // <-- Like so
-                        children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.red,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal, // <-- Like so
+                      itemCount: news.length,
+                      itemBuilder: (BuildContext context, int position) {
+                        return Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Container(
+                              child: Stack(
+                                children: <Widget>[
+                                  Image.network(
+                                    news[position].thumbnail,fit: BoxFit.cover,
+                                  ),
+                                  Center(
+                                    child: Text(news[position].title),
+                                  ),
+                                ],
+                              ),
+                              height: 190.0,
+                              width: MediaQuery.of(context).size.width - 100.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.blue,
+                              ),
                             ),
-                            width: MediaQuery.of(context).size.width - 100.0,
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            width:  MediaQuery.of(context).size.width - 100.0,
-                                                        decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.blue,
                             ),
-                          ),
-                                                    SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            width:  MediaQuery.of(context).size.width - 100.0,
-                                                        decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.green,
-                            ),
-                          ),
-                                                    SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            width:  MediaQuery.of(context).size.width - 100.0,
-                                                        decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.yellow,
-                            ),
-                          ),
-                                                    SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            width:  MediaQuery.of(context).size.width - 100.0,
-                                                        decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.orange,
-                            ),
-                          ),
-                        ],
-                      ),
+
+                          ],
+                        );
+                      },
+                    ),
+                    //stop here man
                   ),
                 ],
               ),
-              // Column(
-              //   children: <Widget>[
-              //     Row(
-              //       children: <Widget>[
-              //         Expanded(
-              //           child: Padding(
-              //             padding: EdgeInsets.only(left: 2.5),
-              //             child: Container(
-              //               height: 170.0,
-              //               decoration: BoxDecoration(
-              //                 color: Color(0xfff1b069),
-              //                 borderRadius: BorderRadius.only(
-              //                     topLeft: Radius.circular(5),
-              //                     topRight: Radius.circular(5)),
-              //               ),
-              //               child: Image.network(
-              //                 'https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',
-              //                 fit: BoxFit.cover,
-              //               ),
-              //             ),
-              //           ),
-              //         )
-              //       ],
-              //     ),
-              //     SizedBox(
-              //       height: 10.0,
-              //     ),
-              //     Row(
-              //       children: <Widget>[
-              //         Expanded(
-              //           child: Padding(
-              //             padding: EdgeInsets.only(left: 2.5, bottom: 2.5),
-              //             child: Container(
-              //               height: 70.0,
-              //               decoration: BoxDecoration(
-              //                 //color: Color(0xfff1b069),
-              //                 borderRadius: BorderRadius.only(
-              //                     bottomRight: Radius.circular(3),
-              //                     bottomLeft: Radius.circular(3)),
-              //               ),
-              //               child: Padding(
-              //                   padding: EdgeInsets.only(
-              //                       left: 9.0, right: 9.0, top: 5.0),
-              //                   child: Column(
-              //                     children: <Widget>[
-              //                       new Align(
-              //                           alignment: Alignment.centerLeft,
-              //                           child: new Text(
-              //                             "first row dummy text dsfdfdfsdfsd df dsf sdf dsf dsf d ds fd fsd f sd "
-              //                                 .toUpperCase(),
-              //                             style: TextStyle(
-              //                                 color: Color(0xff333333),
-              //                                 fontWeight: FontWeight.w700,
-              //                                 fontSize: 16.0,
-              //                                 fontStyle: FontStyle.italic),
-              //                           )),
-              //                       SizedBox(
-              //                         height: 1.0,
-              //                       ),
-              //                       //new Align(alignment: Alignment.centerLeft, child: new Text("second row dummy text",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w300, fontSize: 20.0),))
-              //                     ],
-              //                   )),
-              //             ),
-              //           ),
-              //         )
-              //       ],
-              //     ),
-              //   ],
-              // ),
               SizedBox(
                 height: 15.0,
               ),
@@ -507,7 +433,7 @@ class body_ui extends StatelessWidget {
                     child: GestureDetector(
                         onTap: () {
                           print("${categories[0].name} Taped");
-                          _show_companies(context,categories[0]);
+                          _show_companies(context, categories[0]);
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 5.0),
@@ -519,10 +445,6 @@ class body_ui extends StatelessWidget {
                             child: new Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                // new Icon(
-                                //   Icons.account_balance,
-                                //   color: Colors.white,
-                                // ),
                                 Padding(
                                   padding:
                                       EdgeInsets.only(left: 9.0, right: 9.0),
@@ -544,12 +466,12 @@ class body_ui extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         Expanded(
-                          child: GestureDetector(
-                            onTap: (){
-                              print('${categories[13].name} Taped');
-                              _show_companies(context,categories[13]);
-                            },
-                            child: Padding(
+                            child: GestureDetector(
+                          onTap: () {
+                            print('${categories[13].name} Taped');
+                            _show_companies(context, categories[13]);
+                          },
+                          child: Padding(
                             padding:
                                 const EdgeInsets.only(bottom: 2.5, right: 2.5),
                             child: new Container(
@@ -566,22 +488,21 @@ class body_ui extends StatelessWidget {
                                       child: new Text('${categories[13].name}',
                                           style: new TextStyle(
                                               color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                              fontWeight: FontWeight.w700)),
                                     ),
                                   )
                                 ],
                               ),
                             ),
                           ),
-                          ) 
-                        ),
+                        )),
                         Expanded(
-                          child: GestureDetector(
-                            onTap: (){
-                              print("${categories[5].name} Taped");
-                              _show_companies(context,categories[5]);
-                            },
-                            child: Padding(
+                            child: GestureDetector(
+                          onTap: () {
+                            print("${categories[5].name} Taped");
+                            _show_companies(context, categories[5]);
+                          },
+                          child: Padding(
                             padding:
                                 const EdgeInsets.only(top: 2.5, right: 2.5),
                             child: new Container(
@@ -594,14 +515,13 @@ class body_ui extends StatelessWidget {
                                     padding:
                                         EdgeInsets.only(left: 9.0, right: 9.0),
                                     child: new Text('${categories[5].name}',
-                                        style:
-                                            new TextStyle(color: Colors.white,
+                                        style: new TextStyle(
+                                            color: Colors.white,
                                             fontWeight: FontWeight.w700)),
                                   ),
                                 )),
                           ),
-                          )
-                        ),
+                        )),
                       ],
                     ),
                   )),
@@ -612,38 +532,39 @@ class body_ui extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               print("${categories[6].name} Taped");
-                              _show_companies(context,categories[6]);
+                              _show_companies(context, categories[6]);
                             },
                             child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                            child: new Container(
-                              decoration: new BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: new BorderRadius.circular(5.0)),
-                              child: Center(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 9.0, right: 9.0),
-                                  child: new Text('${categories[6].name}',
-                                      style:
-                                          new TextStyle(color: Colors.white,
+                              padding:
+                                  const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                              child: new Container(
+                                decoration: new BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius:
+                                        new BorderRadius.circular(5.0)),
+                                child: Center(
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 9.0, right: 9.0),
+                                    child: new Text('${categories[6].name}',
+                                        style: new TextStyle(
+                                            color: Colors.white,
                                             fontWeight: FontWeight.w700)),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          ),
                         ),
                         Expanded(
-                          child: GestureDetector(
-                            onTap: (){
-                              print("${categories[12].name} Taped");
-                              _show_companies(context,categories[12]);
-                            },
-                            child: Padding(
+                            child: GestureDetector(
+                          onTap: () {
+                            print("${categories[12].name} Taped");
+                            _show_companies(context, categories[12]);
+                          },
+                          child: Padding(
                             padding: const EdgeInsets.only(left: 2.5, top: 2.5),
                             child: new Container(
                               decoration: new BoxDecoration(
@@ -654,15 +575,14 @@ class body_ui extends StatelessWidget {
                                   padding:
                                       EdgeInsets.only(left: 9.0, right: 9.0),
                                   child: new Text('${categories[12].name}',
-                                      style:
-                                          new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                      style: new TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700)),
                                 ),
                               ),
                             ),
                           ),
-                          )
-                        ),
+                        )),
                       ],
                     ),
                   )),
@@ -692,8 +612,8 @@ class body_ui extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: GestureDetector(
-                          child: Padding(
+                          child: GestureDetector(
+                        child: Padding(
                           padding:
                               const EdgeInsets.only(left: 2.5, bottom: 2.5),
                           child: new Container(
@@ -705,24 +625,24 @@ class body_ui extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
                                 child: new Text('${categories[4].name}',
-                                    style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                    style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700)),
                               ),
                             ),
                           ),
                         ),
-                        onTap: (){
+                        onTap: () {
                           print("${categories[4].name} Taped");
-                          _show_companies(context,categories[4]);
+                          _show_companies(context, categories[4]);
                         },
-                        )
-                      ),
+                      )),
                       new SizedBox(
                         width: 5.0,
                       ),
                       Expanded(
-                        child: GestureDetector(
-                          child: Padding(
+                          child: GestureDetector(
+                        child: Padding(
                           padding:
                               const EdgeInsets.only(left: 2.5, bottom: 2.5),
                           child: new Container(
@@ -734,24 +654,24 @@ class body_ui extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
                                 child: new Text('${categories[7].name}',
-                                    style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                    style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700)),
                               ),
                             ),
                           ),
                         ),
-                        onTap: (){
+                        onTap: () {
                           print("${categories[7].name} Taped");
-                          _show_companies(context,categories[7]);
+                          _show_companies(context, categories[7]);
                         },
-                        )
-                      ),
+                      )),
                       new SizedBox(
                         width: 5.0,
                       ),
                       Expanded(
-                        child: GestureDetector(
-                          child: Padding(
+                          child: GestureDetector(
+                        child: Padding(
                           padding:
                               const EdgeInsets.only(left: 2.5, bottom: 2.5),
                           child: new Container(
@@ -763,18 +683,18 @@ class body_ui extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
                                 child: new Text('${categories[11].name}',
-                                    style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                    style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700)),
                               ),
                             ),
                           ),
                         ),
-                        onTap: (){
+                        onTap: () {
                           print("${categories[11].name} Taped");
-                          _show_companies(context,categories[11]);
+                          _show_companies(context, categories[11]);
                         },
-                        )
-                      ),
+                      )),
                     ],
                   ),
                   SizedBox(
@@ -783,12 +703,12 @@ class body_ui extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: GestureDetector(
-                          onTap: (){
-                            print("${categories[10].name} Taped");
-                            _show_companies(context,categories[10]);
-                          },
-                          child: Padding(
+                          child: GestureDetector(
+                        onTap: () {
+                          print("${categories[10].name} Taped");
+                          _show_companies(context, categories[10]);
+                        },
+                        child: Padding(
                           padding:
                               const EdgeInsets.only(left: 2.5, bottom: 2.5),
                           child: new Container(
@@ -800,14 +720,14 @@ class body_ui extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
                                 child: new Text('${categories[10].name}',
-                                    style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                    style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700)),
                               ),
                             ),
                           ),
                         ),
-                        )
-                      ),
+                      )),
                     ],
                   ),
                 ],
@@ -830,34 +750,35 @@ class body_ui extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       child: Padding(
-                      padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                      child: new Container(
-                        height: 100.0,
-                        decoration: new BoxDecoration(
-                            color: Color(0xFFFD7384),
-                            borderRadius: new BorderRadius.circular(5.0)),
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 9.0, right: 9.0),
-                            child: new Text('${categories[1].name}',
-                                style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                        padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
+                        child: new Container(
+                          height: 100.0,
+                          decoration: new BoxDecoration(
+                              color: Color(0xFFFD7384),
+                              borderRadius: new BorderRadius.circular(5.0)),
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 9.0, right: 9.0),
+                              child: new Text('${categories[1].name}',
+                                  style: new TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700)),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    onTap: (){
-                      print("${categories[1].name} Taped");
-                      _show_companies(context,categories[1]);
-                    },
+                      onTap: () {
+                        print("${categories[1].name} Taped");
+                        _show_companies(context, categories[1]);
+                      },
                     ),
                   ),
                   new SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      child: Padding(
+                      child: GestureDetector(
+                    child: Padding(
                       padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
                       child: new Container(
                         height: 100.0,
@@ -868,24 +789,24 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[2].name}',
-                                style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                style: new TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       print("${categories[2].name} Taped");
-                      _show_companies(context,categories[2]);
+                      _show_companies(context, categories[2]);
                     },
-                    )
-                  ),
+                  )),
                   new SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      child: Padding(
+                      child: GestureDetector(
+                    child: Padding(
                       padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
                       child: new Container(
                         height: 100.0,
@@ -896,18 +817,18 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[3].name}',
-                                style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                style: new TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       print("${categories[3].name} Taped");
-                      _show_companies(context,categories[3]);
+                      _show_companies(context, categories[3]);
                     },
-                    )
-                  ),
+                  )),
                 ],
               ),
               new SizedBox(
@@ -932,8 +853,8 @@ class body_ui extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Expanded(
-                    child: GestureDetector(
-                      child: Padding(
+                      child: GestureDetector(
+                    child: Padding(
                       padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
                       child: new Container(
                         height: 100.0,
@@ -944,24 +865,24 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[8].name}',
-                                style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                style: new TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       print("${categories[8].name} Taped");
-                      _show_companies(context,categories[8]);
+                      _show_companies(context, categories[8]);
                     },
-                    )
-                  ),
+                  )),
                   new SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      child: Padding(
+                      child: GestureDetector(
+                    child: Padding(
                       padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
                       child: new Container(
                         height: 100.0,
@@ -972,24 +893,24 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[9].name}',
-                                style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                style: new TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       print("${categories[9].name} Taped");
-                      _show_companies(context,categories[9]);
+                      _show_companies(context, categories[9]);
                     },
-                    )
-                  ),
+                  )),
                   new SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      child: Padding(
+                      child: GestureDetector(
+                    child: Padding(
                       padding: const EdgeInsets.only(left: 2.5, bottom: 2.5),
                       child: new Container(
                         height: 100.0,
@@ -1000,18 +921,18 @@ class body_ui extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
                             child: new Text('${categories[14].name}',
-                                style: new TextStyle(color: Colors.white,
-                                            fontWeight: FontWeight.w700)),
+                                style: new TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ),
                     ),
-                    onTap: (){
+                    onTap: () {
                       print("${categories[14].name} Taped");
-                      _show_companies(context,categories[14]);
+                      _show_companies(context, categories[14]);
                     },
-                    )
-                  ),
+                  )),
                 ],
               )
             ],

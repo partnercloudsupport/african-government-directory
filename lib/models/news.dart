@@ -20,8 +20,8 @@ class News{
   });
 
   factory News.fromjson(Map<String, dynamic> json) => new News(
-    itemID: json['itemID'],
-    id: json['id'],
+    itemID: json['itemID'].toString(),
+    id: json['id'].toString(),
     title: json['title'],
     link: json ['link'],
     date: json['date'],
