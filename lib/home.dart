@@ -370,7 +370,7 @@ class body_ui extends StatelessWidget {
                       ),
                       Expanded(
                         child: GestureDetector(
-                          child: Text('View More', style: TextStyle(
+                          child: Text('News App', style: TextStyle(
                           color: Color(0XFF2BD093),
                         ),
                           textAlign: TextAlign.end,
