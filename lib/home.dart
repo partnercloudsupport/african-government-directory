@@ -377,7 +377,7 @@ class body_ui extends StatelessWidget {
                         ),
                         onTap: (){
                           print('view all clicked');
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => all_news_page()));
+                          //Navigator.push(context, MaterialPageRoute(builder: (context) => all_news_page()));
                         },
                         ) 
                       ),
