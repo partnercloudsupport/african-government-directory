@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:government_directory/models/GovCategory.dart';
 import 'package:government_directory/models/Province.dart';
