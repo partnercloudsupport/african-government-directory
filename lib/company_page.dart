@@ -391,29 +391,10 @@ class _company_page_state extends State<company_page>
   Widget build(BuildContext context) {
     timeDilation = 0.7;
 
-    // Widget _fab(){
-    //   return Scaffold(
-    //     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    //     floatingActionButton: FloatingActionButton(
-    //             onPressed: (){},
-    //   tooltip: 'test',
-    //   child: Icon(Icons.add),
-    //   elevation: 2.0,
-    //     ),
-    //   );
-    // }
-
     return Scaffold(
-      body: //new Theme(
-          // data: new ThemeData(
-          //   brightness: Brightness.light,
-          //   primaryColor: const Color.fromRGBO(106, 94, 175, 1.0),
-          //   platform: Theme.of(context).platform,
-          // ),
+      body: 
           Container(
-        //width: width.value,
-        //height: height.value,
-        color: Colors.white, //const Color.fromRGBO(106, 94, 175, 1.0),
+
         child: new Hero(
           tag: "img",
           child: new Card(
@@ -451,7 +432,7 @@ class _company_page_state extends State<company_page>
                                   color: Colors.green,
                                   image: new DecorationImage(
                                     image: new NetworkImage(
-                                        //company.url.isEmpty ? 'http://jlouage.com/images/intro-bg.jpg' : 'http://cdn.adslive.com/${company.url}'),
+                                    
                                         render_company_image()),
                                     fit: BoxFit.fill,
                                   ),
@@ -502,20 +483,9 @@ class _company_page_state extends State<company_page>
                                           },
                                         ),
                                       ),
-                                      // GestureDetector(
-                                      //   child: Icon(
-                                      //     Icons.star_border,
-                                      //     size: 35.0,
-                                      //     color: Colors.grey,
-                                      //   ),
-                                      //   onTap: () {},
-                                      // ),
                                     ],
                                   ),
-                                  // Text(company.name, style: TextStyle(
-                                  //   fontWeight: FontWeight.bold,
-                                  //   fontSize: 20,
-                                  // )),
+
                                   new Container(
                                     padding: new EdgeInsets.only(bottom: 20.0),
                                     alignment: Alignment.center,
@@ -544,11 +514,6 @@ class _company_page_state extends State<company_page>
                                                   },
                                                 ),
                                                 new Text("Telephone"),
-                                                // new Padding(
-                                                //   padding:
-                                                //       const EdgeInsets.all(4.0),
-                                                //   child: new Text("Telephone"),
-                                                // )
                                               ],
                                             ),
                                           ],
@@ -592,21 +557,6 @@ class _company_page_state extends State<company_page>
 
                                           ],
                                         ),
-                                        //old version
-                                        // new Row(
-                                        //   children: <Widget>[
-                                        //     IconButton(
-                                        //       icon: new Icon(
-                                        //         Icons.language,
-                                        //         color: Colors.cyan,
-                                        //       ),
-                                        //       onPressed: () {
-                                        //         _show_company_connection(
-                                        //             context, 'web');
-                                        //       },
-                                        //     ),
-                                        //   ],
-                                        // ),
                                         new Row(
                                           children: <Widget>[
                                             Column(
@@ -710,138 +660,6 @@ class _company_page_state extends State<company_page>
         ),
       ),
     );
-
-    // return new Theme(
-
-    //   data: new ThemeData(
-    //     brightness: Brightness.light,
-    //     primaryColor: const Color.fromRGBO(106, 94, 175, 1.0),
-    //     platform: Theme.of(context).platform,
-    //   ),
-    //   child: new Container(
-    //     width: width.value,
-    //     height: height.value,
-    //     color: const Color.fromRGBO(106, 94, 175, 1.0),
-    //     child: new Hero(
-    //       tag: "img",
-    //       child: new Card(
-    //         color: Colors.transparent,
-    //         child: new Container(
-    //           alignment: Alignment.center,
-    //           width: width.value,
-    //           height: height.value,
-    //           decoration: new BoxDecoration(
-    //             color: Colors.white,
-    //             borderRadius: new BorderRadius.circular(10.0),
-    //           ),
-    //           child: new Stack(
-    //             alignment: AlignmentDirectional.bottomCenter,
-    //             children: <Widget>[
-    //               new CustomScrollView(
-    //                 shrinkWrap: false,
-    //                 slivers: <Widget>[
-    //                   new SliverAppBar(
-    //                     elevation: 0.0,
-    //                     forceElevated: true,
-    //                     // leading: new IconButton(
-    //                     //   onPressed: (){
-    //                     //     Navigator.of(context).pop();
-    //                     //   },
-    //                     //   icon: new Icon(Icons.arrow_back, color: Colors.cyan,size: 30.0,),
-    //                     // ),
-    //                     expandedHeight: _appBarHeight,
-    //                     pinned: _appBarBehavior == AppBarBehavior.pinned,
-    //                     floating: _appBarBehavior == AppBarBehavior.floating || _appBarBehavior == AppBarBehavior.snapping,
-    //                     flexibleSpace: new FlexibleSpaceBar(
-    //                       title: //new Text('${company.name}'),
-    //                       new Container(
-    //                         width: width.value,
-    //                         child: Text('${company.name}'),
-    //                       ),
-    //                       background: new Stack(
-    //                         fit: StackFit.expand,
-    //                         children: <Widget>[
-    //                           new Container(
-    //                             width: width.value,
-    //                             height: _appBarHeight,
-    //                             decoration: new BoxDecoration(
-    //                             //image: ,
-
-    //                             ),
-    //                           )
-    //                         ],
-    //                       ),
-    //                     ),
-    //                   ),
-    //                   new SliverList(
-    //                     delegate: new SliverChildListDelegate(<Widget>[
-    //                       new Container(
-    //                         color: Colors.white,
-    //                         child: new Padding(
-    //                           padding: const EdgeInsets.all(35.0),
-    //                           child: new Column(
-    //                             crossAxisAlignment: CrossAxisAlignment.start,
-    //                             children: <Widget>[
-    //                               new Container(
-    //                                 padding: new EdgeInsets.only(bottom: 20.0),
-    //                                 alignment: Alignment.center,
-    //                                 decoration: new BoxDecoration(
-    //                                   color: Colors.white,
-    //                                   border: new Border(
-    //                                     bottom: new BorderSide(
-    //                                       color: Colors.black12
-    //                                     )
-    //                                   )
-    //                                 ),
-    //                                 child: new Row(
-    //                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //                                   children: <Widget>[
-    //                                     new Row(
-    //                                       children: <Widget>[new Icon(Icons.access_time, color: Colors.cyan,),
-    //                                       new Padding(
-    //                                         padding: const EdgeInsets.all(8.0),
-    //                                         child: new Text("10:00 am"),
-    //                                       )
-    //                                       ],
-    //                                     ),
-    //                                     new Row(
-    //                                       children: <Widget>[
-    //                                         new Icon(Icons.map,
-    //                                         color: Colors.cyan,
-    //                                         ),
-    //                                         new Padding(
-    //                                           padding: const EdgeInsets.all(8.0),
-    //                                           child: new Text('15 miles'),
-    //                                         )
-    //                                       ],
-    //                                     )
-    //                                   ],
-    //                                 ),
-    //                               ),
-    //                               new Padding(
-    //                                 padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
-    //                                 child: new Text('ABOUT', style: new TextStyle(fontWeight: FontWeight.bold),
-    //                                 ),
-    //                               ),
-    //                               new Text(
-    //                                 '${company.about_us}'
-    //                               ),
-
-    //                             ],
-    //                           ),
-    //                         ),
-    //                       )
-    //                     ]),
-    //                   )
-    //                 ],
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }
 

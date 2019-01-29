@@ -167,48 +167,6 @@ class _HomePageState extends State<HomePage> {
               categories: _government_categories,
               news: _news,
             ),
-      // body: Column(
-      //   children: <Widget>[
-      //                 SizedBox(
-      //       height: 5.0,
-      //     ),
-      //     Stack(
-      //       alignment: Alignment.center,
-      //       children: <Widget>[
-      //       Container(
-      //         decoration: BoxDecoration(
-      //           color: Colors.white,
-      //         ),
-      //         width: MediaQuery.of(context).size.width,
-      //         height: MediaQuery.of(context).size.width / 4,
-      //         child: Center(child:Text('Image Here',style: TextStyle(fontSize: 25.0,color: Colors.black, fontWeight: FontWeight.w600),),
-      //       ),)
-      //       //Image.network('https://www.gettyimages.com/gi-resources/images/CreativeLandingPage/HP_Sept_24_2018/CR3_GettyImages-159018836.jpg',fit: BoxFit.cover,height: MediaQuery.of(context).size.width / 4,width: MediaQuery.of(context).size.width,),
-      //       ],
-      //     ),
-      //     Expanded(
-      //       child: FutureBuilder<List<GovCategory>>(
-      //         future: get_all_categories(http.Client()),
-      //         builder: (context, snapshot){
-      //           if(snapshot.hasError)
-      //             print(Error);
-      //           return snapshot.hasData ? GovCategory_list_tile(gov_categories: snapshot.data,) : Center(child: CircularProgressIndicator(),);
-      //         },
-      //       )
-      //     ),
-      //   ],
-      // )
-      // body: FutureBuilder<List<GovCategory>>(
-      //   future: get_all_categories(http.Client()),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasError) {
-      //       print(snapshot.error);
-      //     }
-      //     return snapshot.hasData
-      //         ? GovCategory_list_tile(gov_categories: snapshot.data)
-      //         : Center(child: CircularProgressIndicator());
-      //   },
-      // ),
 
       bottomNavigationBar: new BottomAppBar(
         child: new Row(
@@ -335,49 +293,21 @@ class body_ui extends StatelessWidget {
                   SizedBox(
                     height: 20.0,
                   ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          'What Are You',
-                          style: TextStyle(
-                              fontSize: 30.0, fontWeight: FontWeight.w300),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          'Looking For Today?',
-                          style: TextStyle(
-                              fontSize: 30.0, fontWeight: FontWeight.w300),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Row(
+                                    Row(
                     children: <Widget>[
                       Expanded(
                         child: Text('News',style: TextStyle(fontSize: 20.0),),
                       ),
                       Expanded(
                         child: GestureDetector(
-                          child: Text('News App', style: TextStyle(
+                          child: Text('View More', style: TextStyle(
                           color: Color(0XFF2BD093),
                         ),
                           textAlign: TextAlign.end,
                         ),
                         onTap: (){
                           print('view all clicked');
-                          //Navigator.push(context, MaterialPageRoute(builder: (context) => all_news_page()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => all_news_page()));
                         },
                         ) 
                       ),
@@ -432,12 +362,44 @@ class body_ui extends StatelessWidget {
                         ); 
                       },
                     ),
+                    
                     //stop here man
                   ),
+                                    SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      
+                      Expanded(
+                        child: Text(
+                          '',
+                          style: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.w300),
+                        ),
+                      )
+                    ],
+                  ),
+                  // SizedBox(
+                  //   height: 5.0,
+                  // ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Expanded(
+                  //       child: Text(
+                  //         'Looking For Today?',
+                  //         style: TextStyle(
+                  //             fontSize: 30.0, fontWeight: FontWeight.w300),
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+
+                  
                 ],
-              ),
-              SizedBox(
-                height: 15.0,
               ),
               Row(
                 children: <Widget>[
@@ -466,7 +428,7 @@ class body_ui extends StatelessWidget {
                           child: new Container(
                             height: 100.0,
                             decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(5.0),
+                               // borderRadius: new BorderRadius.circular(5.0),
                                 color: Colors.green),
                             child: new Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -503,7 +465,8 @@ class body_ui extends StatelessWidget {
                             child: new Container(
                               decoration: new BoxDecoration(
                                   color: Colors.green,
-                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  //borderRadius: new BorderRadius.circular(5.0)
+                                  ),
                               child: new Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
@@ -534,8 +497,8 @@ class body_ui extends StatelessWidget {
                             child: new Container(
                                 decoration: new BoxDecoration(
                                     color: Colors.green,
-                                    borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                   // borderRadius: new BorderRadius.circular(5.0)
+                                    ),
                                 child: Center(
                                   child: Padding(
                                     padding:
@@ -568,8 +531,8 @@ class body_ui extends StatelessWidget {
                               child: new Container(
                                 decoration: new BoxDecoration(
                                     color: Colors.green,
-                                    borderRadius:
-                                        new BorderRadius.circular(5.0)),
+                                   // borderRadius: new BorderRadius.circular(5.0)
+                                        ),
                                 child: Center(
                                   child: Padding(
                                     padding:
@@ -595,7 +558,8 @@ class body_ui extends StatelessWidget {
                             child: new Container(
                               decoration: new BoxDecoration(
                                   color: Colors.green,
-                                  borderRadius: new BorderRadius.circular(5.0)),
+                                  //borderRadius: new BorderRadius.circular(5.0)
+                                  ),
                               child: Center(
                                 child: Padding(
                                   padding:
@@ -643,10 +607,11 @@ class body_ui extends StatelessWidget {
                           padding:
                               const EdgeInsets.only(left: 2.5, bottom: 2.5),
                           child: new Container(
-                            height: 100.0,
+                            height: 50.0,
                             decoration: new BoxDecoration(
-                                color: Color(0XFF2BD093),
-                                borderRadius: new BorderRadius.circular(5.0)),
+                                color: Color(0XFF1A2229),
+                               // borderRadius: new BorderRadius.circular(5.0)
+                                ),
                             child: Center(
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -672,10 +637,11 @@ class body_ui extends StatelessWidget {
                           padding:
                               const EdgeInsets.only(left: 2.5, bottom: 2.5),
                           child: new Container(
-                            height: 100.0,
+                            height: 50.0,
                             decoration: new BoxDecoration(
-                                color: Color(0XFF53CEDB),
-                                borderRadius: new BorderRadius.circular(5.0)),
+                                color: Color(0XFF1A2229),
+                                //borderRadius: new BorderRadius.circular(5.0)
+                                ),
                             child: Center(
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -701,10 +667,11 @@ class body_ui extends StatelessWidget {
                           padding:
                               const EdgeInsets.only(left: 2.5, bottom: 2.5),
                           child: new Container(
-                            height: 100.0,
+                            height: 50.0,
                             decoration: new BoxDecoration(
-                                color: Color(0XFFFC7B4D),
-                                borderRadius: new BorderRadius.circular(5.0)),
+                                color: Color(0XFF1A2229),
+                                //borderRadius: new BorderRadius.circular(5.0)
+                                ),
                             child: Center(
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -741,7 +708,8 @@ class body_ui extends StatelessWidget {
                             height: 100.0,
                             decoration: new BoxDecoration(
                                 color: Colors.green,
-                                borderRadius: new BorderRadius.circular(5.0)),
+                                //borderRadius: new BorderRadius.circular(5.0)
+                                ),
                             child: Center(
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -780,8 +748,9 @@ class body_ui extends StatelessWidget {
                         child: new Container(
                           height: 100.0,
                           decoration: new BoxDecoration(
-                              color: Color(0xFFFD7384),
-                              borderRadius: new BorderRadius.circular(5.0)),
+                              color: Color(0XFF1A2229),
+                              //borderRadius: new BorderRadius.circular(5.0)
+                              ),
                           child: Center(
                             child: Padding(
                               padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -809,8 +778,9 @@ class body_ui extends StatelessWidget {
                       child: new Container(
                         height: 100.0,
                         decoration: new BoxDecoration(
-                            color: Color(0XFF2BD093),
-                            borderRadius: new BorderRadius.circular(5.0)),
+                            color: Color(0XFF1A2229),
+                            //borderRadius: new BorderRadius.circular(5.0)
+                            ),
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -837,8 +807,9 @@ class body_ui extends StatelessWidget {
                       child: new Container(
                         height: 100.0,
                         decoration: new BoxDecoration(
-                            color: Color(0XFF53CEDB),
-                            borderRadius: new BorderRadius.circular(5.0)),
+                            color: Color(0XFF1A2229),
+                            //borderRadius: new BorderRadius.circular(5.0)
+                            ),
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -865,12 +836,7 @@ class body_ui extends StatelessWidget {
                   new Expanded(
                       child: new Text("More",
                           style: new TextStyle(fontSize: 18.0))),
-                  // new Expanded(
-                  //     child: new Text(
-                  //   "View All",
-                  //   style: new TextStyle(color: Color(0XFF2BD093)),
-                  //   textAlign: TextAlign.end,
-                  // ))
+
                 ],
               ),
               new SizedBox(
@@ -885,8 +851,9 @@ class body_ui extends StatelessWidget {
                       child: new Container(
                         height: 100.0,
                         decoration: new BoxDecoration(
-                            color: Color(0XFFFC7B4D),
-                            borderRadius: new BorderRadius.circular(5.0)),
+                            color: Color(0XFF1A2229),
+                            //borderRadius: new BorderRadius.circular(5.0)
+                            ),
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -913,8 +880,9 @@ class body_ui extends StatelessWidget {
                       child: new Container(
                         height: 100.0,
                         decoration: new BoxDecoration(
-                            color: Color(0XFFF1B069),
-                            borderRadius: new BorderRadius.circular(5.0)),
+                            color: Color(0XFF1A2229),
+                            //borderRadius: new BorderRadius.circular(5.0)
+                            ),
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),
@@ -941,8 +909,9 @@ class body_ui extends StatelessWidget {
                       child: new Container(
                         height: 100.0,
                         decoration: new BoxDecoration(
-                            color: Color(0xFFFD7384),
-                            borderRadius: new BorderRadius.circular(5.0)),
+                            color: Color(0XFF1A2229),
+                           // borderRadius: new BorderRadius.circular(5.0)
+                            ),
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.only(left: 9.0, right: 9.0),

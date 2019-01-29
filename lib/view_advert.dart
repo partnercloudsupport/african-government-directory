@@ -25,15 +25,6 @@ class view_advert_state extends State<view_advert_page>{
       body: PhotoView(
         imageProvider: NetworkImage('https://cdn.adslive.com/${advert}'),
       ),
-      // body: Container(
-      //   child: FadeInImage.assetNetwork(
-      //     placeholder: 'assets/placeholder.png',
-      //     height: MediaQuery.of(context).size.height,
-      //     width: MediaQuery.of(context).size.width,
-      //     fit: BoxFit.fill,
-      //     image: 'https://cdn.adslive.com/${advert}',
-      //   ),
-      // )
     );
   }
 }

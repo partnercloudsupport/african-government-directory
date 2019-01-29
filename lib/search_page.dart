@@ -33,8 +33,6 @@ class _search_page_state extends State<search_page> {
     setState(() {
       _is_searching = false;
       _after_serching = false;
-      //found_companies = [];
-
     });
   }
 
@@ -70,13 +68,6 @@ class _search_page_state extends State<search_page> {
 
       print(found_companies);
     }
-
-    // if(response.body == '[]'){
-    //   print('company not found');
-    // }else{
-    //   print('company found');
-    //   //return compute(parse_companies, response.body);
-    // }
   }
 
   static List<Company> parse_companies(String response_body) {
@@ -96,7 +87,6 @@ class _search_page_state extends State<search_page> {
   Widget _not_searching(){
     if(_after_serching){
       if(found_companies.isNotEmpty){
-        //new Center(child: Text(''),);
         return ListView.builder(
           itemCount: found_companies.length,
           itemBuilder: (context,position){
@@ -163,48 +153,7 @@ class _search_page_state extends State<search_page> {
                                         Divider(),
             ],
           );
-            // return Column(
-            //   children: <Widget>[
-            //     Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: <Widget>[
-            //         new GestureDetector(
-            //           onTap: (){
-            //             print(found_companies[position].name);
-            //             Navigator.push(context, MaterialPageRoute(builder: (context) => company_page(company: found_companies[position],old_context: context,)));
-            //           },
-            //           child: new Container(
-            //             padding: const EdgeInsets.all(1.0),
-            //             width: MediaQuery.of(context).size.width * 0.9,
-            //             child: new Column(
-            //               crossAxisAlignment: CrossAxisAlignment.start,
-            //               children: <Widget>[
-            //                 Padding(
-            //                   padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
-            //                   child: Text(found_companies[position].name,style: TextStyle(
-            //                     fontSize: 15.0,
-            //                     fontWeight: FontWeight.w900,
-            //                   ),),
-            //                 ),
-            //                 Padding(
-            //                   padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
-            //                   child: Text(found_companies[position].address, style: TextStyle(
-            //                     fontSize: 18.0,
-            //                     fontWeight: FontWeight.w300
-            //                   ),),
-            //                 ),
-            //               ],
-            //             ),
-            //           ),
-            //         )
-            //       ],
-            //     ),
-            //     Divider(
-            //       height: 2.0,
-            //       color: Colors.grey,
-            //     ),
-            //   ],
-            // );
+            
           },
         );
       }else{
@@ -215,8 +164,6 @@ class _search_page_state extends State<search_page> {
     }else{
       return new Center(
         child: _starting(),
-        //child: Text('Search Government Directory')//Column(
-        
         );
     }
   }
@@ -225,7 +172,6 @@ class _search_page_state extends State<search_page> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         _on_not_searching()
-        //_on_not_searching(),
       ],
     ),
   );
@@ -259,7 +205,6 @@ class _search_page_state extends State<search_page> {
             child: new Column(
               children: <Widget>[
                 new Material(
-                  //elevation: 5.0,
                   color: Colors.green,
                   child: new Container(
                     margin: const EdgeInsets.all(7.0),

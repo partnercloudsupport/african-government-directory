@@ -84,12 +84,6 @@ class _add_advert extends State<add_advert>{
             width: double.infinity,
             child: submit_advert_button(),
           ),
-            //submit_advert(),
-
-            // Padding(
-            //   padding: EdgeInsets.only(top: 10.0),
-            //   child: submit_advert(),
-            // ),
           ],
         ),
       ),
@@ -228,34 +222,7 @@ SharedPreferences.getInstance().then((SharedPreferences sp){
       _is_in_async_call = true;
     });
     var data = jsonEncode({'name': _name_controller.text,'address':_physical_address_controller.text,'paddress':_postal_address_controller.text,'telephone':_telephone_number_controller.text,'mobile':_mobile_number_controller.text,'fax':_fax_number_controller.text,'email':_email_address_controller.text,'website':_company_website_controller.text,'about_us':_about_us_controller.text,'user_id':user_id,'province_id':province_id,'category_id':category_id});
-    //var request_duration = new Duration(minutes: 2);
-    //making call
-    // final response = await http.post('https://government.co.za/api/add_new_listing',body: data).then((value){
-    //   print('company created it id is ${value.body}');
-    //   setState((){
-    //     _is_in_async_call = false;
-    //   });
-    // }).catchError((error){
-    //   setState((){
-    //     _is_in_async_call = false;
-    //   });
-    //   print(error);
-    // });
 
-    // final response = await http.post('https://government.co.za/api/add_new_listing',body: data).then((value){
-    //   print('company created it id is ${value.body}');
-    // }).catchError((error){
-    //   setState((){
-    //     _is_in_async_call = false;
-    //   });
-    //   print(error);
-    // }).whenComplete((){
-    //   setState((){
-    //     _is_in_async_call = false;
-    //   });
-    // });
-    
-    //print(data);
     final response = await http.post('https://government.co.za/api/add_new_listing',body: data).then((response){
       setState(() {
         _is_in_async_call = false;
@@ -312,7 +279,6 @@ SharedPreferences.getInstance().then((SharedPreferences sp){
   super.dispose();
  }
 
-//focus events
 void _on_province_form_field_click(){
   if(_province_focus.hasFocus){
     showDialog(
@@ -337,34 +303,6 @@ void _on_province_form_field_click(){
   }else{
 
   }
-  
-  // if(_province_focus_active){
-  //   setState((){
-  //     _province_focus_active = false;
-  //   });
-  // }
-  // else{
-  //   print('province form field has been clicked');
-  //   setState((){
-  //     _province_focus_active = true;
-  //   });
-  // }
-
-  // if(_province_focus_active){
-  //   setState((){
-  //     clicked = true;
-  //   });
-
-
-
-    // showDialog(
-    //   barrierDismissible: false,
-    //   context: _scaffold_key.currentContext,
-    //   builder: (BuildContext context){
-    //     return _province_dialog;
-    //   }
-    // );
-  //}
 }
 
 void _on_business_category_form_field_click(){
@@ -391,30 +329,10 @@ void _on_business_category_form_field_click(){
   }else{
     
   }
-
-  // if(_business_category_focus_active){
-  //   setState((){
-  //     _business_category_focus_active = false;
-  //   });
-  // }
-  // else{
-  //   print('business category form field has been clicked');
-  //   setState((){
-  //     _business_category_focus_active = true;
-  //   });
-  // }
-
-  // if(_business_category_focus_active){
-  //   setState((){
-  //     clicked = true;
-  //   });
-
-  // }
 }
 
   static final _form_key = GlobalKey<FormState>();
   var _form_view = Container(
-    //color: Colors.grey.shade300,
     margin: EdgeInsets.all(8.0),
     padding: EdgeInsets.all(8.0),
     child: SingleChildScrollView(
@@ -468,14 +386,8 @@ void _on_business_category_form_field_click(){
           ),
           SizedBox(
             width: double.infinity,
-            //child: submit_advert_button(),
           ),
-            //submit_advert(),
-
-            // Padding(
-            //   padding: EdgeInsets.only(top: 10.0),
-            //   child: submit_advert(),
-            // ),
+   
           ],
         ),
       ),
@@ -676,26 +588,6 @@ static TextFormField _about_us_field(){
 }
 
 
-
-
-
-
-    static List<Map<String, dynamic>> test = [{"label":"test"}, {"label":"again"}];
-
-// static SingleSelectFormField category_field(){
-//   return SingleSelectFormField(
-//     controller: _category_controller,
-//     labelText: 'single select',
-//     //initialValue: test[0],
-//     validator: (value){
-//       if(value.isEmpty)
-//         return 'please select value';
-//     },
-
-//     options: test,
-//   );
-// }
-
  static TextFormField _category_field(){
    return TextFormField(
      controller: _category_controller,
@@ -750,61 +642,6 @@ if(_form_key.currentState.validate()){
   print('some validation failed');
 }
 }
-
-// static Widget ultimate_business = SimpleDialogOption(
-//   child: const Text('Ultimate Business In Africa'),
-//   onPressed: (){
-//     print('ultimate business in africa pressed');
-
-//     _category_controller.text = "Ultimate Business In Africa";
-    
-//     _about_company_focus = new FocusNode();
-//     _bussiness_category_focus = new FocusNode();
-//     _province_focus = new FocusNode();
-
-//     FocusScope.of(_scaffold_key.currentContext).requestFocus(_about_company_focus);
-//     Navigator.of(_scaffold_key.currentContext).pop();
-//   },
-// );
-
-// static Widget governement_departments = SimpleDialogOption(
-//   child: const Text('government departments'),
-//   onPressed: (){
-//     print('government departments pressed');
-//   },
-// );
-
-// static Widget Kwazulu_natal = SimpleDialogOption(
-//   child: const Text('Kwazulu-natal'),
-//   onPressed: (){
-//     print('Kwazulu-natal clicked');
-
-//     _province_controller.text = "Kwazulu-natal";
-
-//     _about_company_focus = new FocusNode();
-//     _bussiness_category_focus = new FocusNode();
-//     _province_focus = new FocusNode();
-
-//     FocusScope.of(_scaffold_key.currentContext).requestFocus(_about_company_focus);
-//     Navigator.of(_scaffold_key.currentContext).pop();
-//   },
-// );
-
-// static SimpleDialog _province_dialog = SimpleDialog(
-//   title: const Text('Choose Business Province'),
-//   children: <Widget>[
-//     Kwazulu_natal,
-//   ],
-// );
-
-// static SimpleDialog _category_dialog = SimpleDialog(
-//   title: const Text('Choose Business Category'),
-//   children: <Widget>[
-//     ultimate_business,
-//     governement_departments
-//   ],
-// );
-
  Widget set_up_categories_dialog(){
   return Container(
     height: MediaQuery.of(_scaffold_key.currentContext).size.height,
@@ -857,23 +694,3 @@ Widget set_up_province_dialog(){
   );
 }
 }
-//Text Form Fields
-//name
-//physical address
-//postal address
-//telephone
-//mobile
-//fax
-//email
-//company website
-//about us
-//category
-//province
-
-//#required
-//name
-//addrss
-//telephone
-//email
-//about_us
-

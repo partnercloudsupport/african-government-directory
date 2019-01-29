@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:government_directory/utilities/ui_data.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:validate/validate.dart';
 import 'package:http/http.dart' as http;
@@ -124,9 +122,6 @@ class _SignUpPageState extends State<SignUpPage> {
     var result = response.body;
     var user = json.decode(response.body);
 
-    //print(result);
-    //rint(user);
-
     if (user['id'] == 'error') {
       setState(() {
         account_error = user['error'];
@@ -143,7 +138,6 @@ class _SignUpPageState extends State<SignUpPage> {
       _set_local_data(_level_key, user['level']);
       _set_local_data(_status_key, user['status']);
 
-      //Navigator.pushReplacementNamed(context, '/home');
                             Navigator.of(context).pushNamedAndRemoveUntil(
                     '/home', (Route<dynamic> route) => false);
     }
@@ -195,15 +189,6 @@ class _SignUpPageState extends State<SignUpPage> {
         return null;
       }
     }
-
-    // if(value != ''){
-    //   print('confirm password is not null');
-    // }
-    // if(this._data.password != value){
-    //   return "Passwords are not the same";
-    // }
-
-    //return null;
   }
 
   String _validateEmail(String value) {
@@ -235,7 +220,6 @@ class _SignUpPageState extends State<SignUpPage> {
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             iconTheme: new IconThemeData(color: Colors.green)),
-        //iconTheme: new IconThemeData(color: Color(0xFF18D191))),
         body: ModalProgressHUD(
           child: Center(
             child: sign_up_body(),
@@ -247,11 +231,6 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   sign_up_body() => SingleChildScrollView(
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: <Widget>[sign_up_header(), sign_up_fields()],
-        // ),
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -433,186 +412,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 15.0,
                   ),
           ],
-        ),
-      );
-
-  sign_up_header() => Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          SizedBox(
-            height: 50.0,
-          ),
-          // FlutterLogo(
-          //   colors: Colors.grey,
-          //   size: 80.0,
-          // ),
-
-          Image.asset(
-            'assets/logo.png',
-          ),
-          SizedBox(
-            height: 30.0,
-          ),
-          Text(
-            'Welcome To ${UiData.app_name}',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w200,
-              //color: Colors.green,
-            ),
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Text(
-            'Create Account To Continue',
-            //style: TextStyle(color: Colors.blueGrey),
-          ),
-        ],
-      );
-
-  sign_up_fields() => Container(
-        child: new Form(
-          key: this._formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(
-                  //vertical: 8.0,
-                  horizontal: 30.0,
-                ),
-                child: new TextFormField(
-                  validator: this._validateName,
-                  onSaved: (String value) {
-                    this._data.name = value;
-                  },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Your Name',
-                    labelText: 'Name',
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  //vertical: 8.0,
-                  horizontal: 30.0,
-                ),
-                child: new TextFormField(
-                  validator: this._validateUsername,
-                  onSaved: (String value) {
-                    this._data.user_name = value;
-                  },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    hintText: 'Enter UserName',
-                    labelText: 'UserName',
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  //vertical: 8.0,
-                  horizontal: 30.0,
-                ),
-                child: new TextFormField(
-                  validator: this._validatePhoneNumber,
-                  onSaved: (String value) {
-                    this._data.cellphone = value;
-                  },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Phonenumber',
-                    labelText: 'Phonenumber',
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  //vertical: 8.0,
-                  horizontal: 30.0,
-                ),
-                child: new TextFormField(
-                  validator: this._validateEmail,
-                  onSaved: (String value) {
-                    this._data.email = value;
-                  },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Email',
-                    labelText: 'Email',
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  //vertical: 8.0,
-                  horizontal: 30.0,
-                ),
-                child: new TextFormField(
-                  obscureText: true,
-                  validator: this._validatePassword,
-                  onSaved: (String value) {
-                    this._data.password = value;
-                  },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Password',
-                    labelText: 'Password',
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  //vertical: 8.0,
-                  horizontal: 30.0,
-                ),
-                child: new TextFormField(
-                  obscureText: true,
-                  validator: this._validateConfirmPasssword,
-                  onSaved: (String value) {
-                    this._data.confirm_password = value;
-                  },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    hintText: 'Re-enter Password',
-                    labelText: 'Confirm Password',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 30.0),
-                width: double.infinity,
-                child: RaisedButton(
-                  padding: EdgeInsets.all(12.0),
-                  // shape: StadiumBorder(),
-                  child: Text(
-                    'CREATE ACCOUNT',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.purple,
-                  onPressed: this.submit,
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              new GestureDetector(
-                onTap: () {
-                  Navigator.pushReplacementNamed(context, '/login');
-                },
-                child: Text(
-                  'ALREADY HAVE AN ACCOUNT?',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
-            ],
-          ),
         ),
       );
 }

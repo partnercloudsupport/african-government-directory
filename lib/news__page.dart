@@ -154,16 +154,12 @@ Widget _getImageNetwork(url){
   }
 
   _launchURL(url,context) async {
-    //if(Platform.isAndroid) {
+    //if(Platform.isAndroid) 
       if (await canLaunch(url)) {
         await launch(url);
       } else {
         print('Could not launch $url');
       }
-    //}else{
-      //Clipboard.setData(new ClipboardData(text: url));
-      //_showDialog(context);
-    //}
   }
 
    Future shareNotice() async {
@@ -191,14 +187,4 @@ Widget _getImageNetwork(url){
       },
     );
   }
-}
-
-
-
-class Functions{
-
-  static String getImgResizeUrl(String url,height,width){
-    return 'http://104.131.18.84/notice/tim.php?src=$url&h=$height&w=$width';
-  }
-
 }

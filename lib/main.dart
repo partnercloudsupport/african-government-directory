@@ -6,13 +6,10 @@ import 'package:government_directory/search_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 //importing login page here
 
-void main() => runApp(
-  new MaterialApp(
+void main() => runApp(new MaterialApp(
       title: "Government Directory",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Roboto'
-      ),
+      theme: ThemeData(fontFamily: 'Roboto'),
       home: new _main_page(),
       initialRoute: '/',
       routes: {
@@ -23,7 +20,7 @@ void main() => runApp(
       },
     ));
 
-class _main_page extends StatefulWidget{
+class _main_page extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _main_page_state();
 }
@@ -35,18 +32,16 @@ const String _username_key = 'username';
 const String _level_key = 'level';
 const String _status_key = 'status';
 
-
-class _main_page_state extends State<_main_page>{
+class _main_page_state extends State<_main_page> {
   bool _logged_in;
   bool _in_async_call = false;
   SharedPreferences preferences;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
 
-
-        print('runned');
+    print('runned');
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       preferences = sp;
       setState(() {
@@ -67,7 +62,7 @@ class _main_page_state extends State<_main_page>{
         print('user logged in');
         print('logged in user is ${_get_local_data(_name_key)}');
 
-        setState((){
+        setState(() {
           _in_async_call = false;
         });
 
@@ -76,7 +71,7 @@ class _main_page_state extends State<_main_page>{
     });
   }
 
-    //init auto log in
+  //init auto log in
   void _auto_log_in(bool value) {
     setState(() {
       _logged_in = value;
@@ -84,7 +79,7 @@ class _main_page_state extends State<_main_page>{
     preferences?.setBool(_logged_in_key, value);
   }
 
-    //get pref data
+  //get pref data
   String _get_local_data(String key) {
     return preferences?.getString(key);
   }
@@ -92,137 +87,97 @@ class _main_page_state extends State<_main_page>{
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: _logged_in ? Center(child: CircularProgressIndicator(),) :  Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                Image.asset(
-                  'assets/logo.png',
-                ),
-                // new Container(
-                //   height: 60.0,
-                //   width: 60.0,
-                //   decoration: new BoxDecoration(
-                //       borderRadius: new BorderRadius.circular(50.0),
-                //       color: Color(0xFF18D191)),
-                //   child: new Icon(
-                //     Icons.local_offer,
-                //     color: Colors.white,
-                //   ),
-                // ),
-                // new Container(
-                //   margin: new EdgeInsets.only(right: 50.0, top: 50.0),
-                //   height: 60.0,
-                //   width: 60.0,
-                //   decoration: new BoxDecoration(
-                //       borderRadius: new BorderRadius.circular(50.0),
-                //       color: Color(0xFFFC6A7F)),
-                //   child: new Icon(
-                //     Icons.home,
-                //     color: Colors.white,
-                //   ),
-                // ),
-                // new Container(
-                //   margin: new EdgeInsets.only(left: 30.0, top: 50.0),
-                //   height: 60.0,
-                //   width: 60.0,
-                //   decoration: new BoxDecoration(
-                //       borderRadius: new BorderRadius.circular(50.0),
-                //       color: Color(0xFFFFCE56)),
-                //   child: new Icon(
-                //     Icons.local_car_wash,
-                //     color: Colors.white,
-                //   ),
-                // ),
-                // new Container(
-                //   margin: new EdgeInsets.only(left: 90.0, top: 40.0),
-                //   height: 60.0,
-                //   width: 60.0,
-                //   decoration: new BoxDecoration(
-                //       borderRadius: new BorderRadius.circular(50.0),
-                //       color: Color(0xFF45E0EC)),
-                //   child: new Icon(
-                //     Icons.place,
-                //     color: Colors.white,
-                //   ),
-                // )
-              ],
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 50.0),
-                  child: new Text(
-                    "Government Directory",
-                    style: new TextStyle(fontSize: 30.0),
-                  ),
-                )
-              ],
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 10.0),
-                    child: GestureDetector(
-                      onTap: () {
-                         Navigator.push(context, MaterialPageRoute(
-                           builder: (context) => LoginPage(),
-                         ));
-                      },
-                      child: new Container(
-                          alignment: Alignment.center,
-                          height: 60.0,
-                          decoration: new BoxDecoration(
-                            color: Colors.green,
-                             // color: Color(0xFF18D191),
-                            //  color: Color(0xFFA5D6A7),
-                              borderRadius: new BorderRadius.circular(9.0)),
-                          child: new Text("Sign In",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.white))),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 10.0),
-                    child: GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => SignUpPage(),
-                        ));
-                      },
-                    child: new Container(
-                        alignment: Alignment.center,
-                        height: 60.0,
-                        decoration: new BoxDecoration(
-                            color: Color(0xFF4364A1),
-                            borderRadius: new BorderRadius.circular(9.0)),
-                        child: new Text("Sign Up",
-                            style: new TextStyle(
-                                fontSize: 20.0, color: Colors.white))),
-                    )
-
-                  ),
-                ),
-              ],
+      body: _logged_in
+          ? Center(
+              child: CircularProgressIndicator(),
             )
-          ],
-        ),
-      ),
+          : Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/logo.png',
+                      ),
+                    ],
+                  ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 50.0),
+                        child: new Text(
+                          "Government Directory",
+                          style: new TextStyle(fontSize: 30.0),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20.0, right: 20.0, top: 10.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginPage(),
+                                  ));
+                            },
+                            child: new Container(
+                                alignment: Alignment.center,
+                                height: 60.0,
+                                decoration: new BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius:
+                                        new BorderRadius.circular(9.0)),
+                                child: new Text("Sign In",
+                                    style: new TextStyle(
+                                        fontSize: 20.0, color: Colors.white))),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20.0, right: 20.0, top: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SignUpPage(),
+                                    ));
+                              },
+                              child: new Container(
+                                  alignment: Alignment.center,
+                                  height: 60.0,
+                                  decoration: new BoxDecoration(
+                                      color: Color(0xFF4364A1),
+                                      borderRadius:
+                                          new BorderRadius.circular(9.0)),
+                                  child: new Text("Sign Up",
+                                      style: new TextStyle(
+                                          fontSize: 20.0,
+                                          color: Colors.white))),
+                            )),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
     );
   }
 }

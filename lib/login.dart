@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:government_directory/utilities/ui_data.dart';
 import 'package:validate/validate.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -152,8 +151,8 @@ class _LoginPageState extends State<LoginPage> {
 
       //Navigator.popAndPushNamed(context, '/home');
 
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/home', (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
     }
   }
 
@@ -193,107 +192,6 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           iconTheme: new IconThemeData(color: Colors.green)),
-      // iconTheme: new IconThemeData(color: Color(0xFF18D191))),
-      // body: ModalProgressHUD(
-      //   child: Center(
-      //   child: _logged_in ? Center(child: CircularProgressIndicator(),) : login_body(),
-      //  ),
-      //  inAsyncCall: _is_in_async_call,
-      //  opacity: 0.5,
-      //  progressIndicator: CircularProgressIndicator(),
-      // ),
-      // body: Container(
-      //   //width: double.infinity,
-      //   width: MediaQuery.of(context).size.width,
-      //   height: MediaQuery.of(context).size.height,
-      //   child: new Column(
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     children: <Widget>[
-      //             Image.asset(
-      //             'assets/logo.png',
-      //           ),
-      //       new Row(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: <Widget>[
-      //           Padding(
-      //             padding: const EdgeInsets.only(top: 8.0, bottom: 50.0),
-      //             child: new Text(
-      //               "Government Directory",
-      //               style: new TextStyle(fontSize: 30.0),
-      //             ),
-      //           )
-      //         ],
-      //       ),
-      //       Padding(
-      //         padding:
-      //             const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
-      //         child: new TextField(
-      //           decoration: new InputDecoration(labelText: 'Email'),
-      //         ),
-      //       ),
-      //       new SizedBox(
-      //         height: 15.0,
-      //       ),
-      //       Padding(
-      //         padding:
-      //             const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
-      //         child: new TextField(
-      //           obscureText: true,
-      //           decoration: new InputDecoration(labelText: 'Password'),
-      //         ),
-      //       ),
-      //       new Row(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: <Widget>[
-      //           Expanded(
-      //             child: Padding(
-      //               padding: const EdgeInsets.only(
-      //                   left: 20.0, right: 5.0, top: 10.0),
-      //               child: GestureDetector(
-      //                 onTap: () {
-
-      //                 },
-      //                                     child: new Container(
-      //                       alignment: Alignment.center,
-      //                       height: 60.0,
-      //                       decoration: new BoxDecoration(
-      //                           color: Color(0xFF18D191),
-      //                           borderRadius: new BorderRadius.circular(9.0)),
-      //                       child: new Text("Login",
-      //                           style: new TextStyle(
-      //                               fontSize: 20.0, color: Colors.white))),
-      //               ),
-      //             ),
-      //           ),
-      //           Expanded(
-      //             child: Padding(
-      //               padding: const EdgeInsets.only(
-      //                   left: 10.0, right: 20.0, top: 10.0),
-      //               child: new Container(
-      //                   alignment: Alignment.center,
-      //                   height: 60.0,
-      //                   child: new Text("Forgot Password?",
-      //                       style: new TextStyle(
-      //                           fontSize: 17.0, color: Color(0xFF18D191)))),
-      //             ),
-      //           )
-      //         ],
-      //       ),
-      //       Expanded(
-      //         child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.end,
-      //           children: <Widget>[
-      //             Padding(
-      //               padding: const EdgeInsets.only(bottom:18.0),
-      //               child: new Text("Create A New Account ",style: new TextStyle(
-      //                           fontSize: 17.0, color: Color(0xFF18D191),fontWeight: FontWeight.bold)),
-      //             ),
-      //           ],
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
       body: ModalProgressHUD(
         child: Center(
           child: login_body(),
@@ -306,10 +204,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   login_body() => SingleChildScrollView(
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //   children: <Widget>[login_header(), login_fields()],
-        // ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -336,14 +230,15 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20.0, vertical: 0.0),
                     child: new TextFormField(
-                  validator: this._validateusername,
-                  onSaved: (String value) {
-                    this._data.username = value;
-                  },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                      hintText: 'Enter Your username', labelText: 'Username'),
-                ),
+                      validator: this._validateusername,
+                      onSaved: (String value) {
+                        this._data.username = value;
+                      },
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                          hintText: 'Enter Your username',
+                          labelText: 'Username'),
+                    ),
                   ),
                   new SizedBox(
                     height: 15.0,
@@ -352,19 +247,19 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20.0, vertical: 0.0),
                     child: new TextFormField(
-                  validator: this._validatePassword,
-                  onSaved: (String value) {
-                    this._data.password = value;
-                  },
-                  maxLines: 1,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Your Password',
-                    labelText: 'Password',
+                      validator: this._validatePassword,
+                      onSaved: (String value) {
+                        this._data.password = value;
+                      },
+                      maxLines: 1,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Your Password',
+                        labelText: 'Password',
+                      ),
+                    ),
                   ),
-                ),
-                  ),
-                                    new SizedBox(
+                  new SizedBox(
                     height: 15.0,
                   ),
                 ],
@@ -413,103 +308,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ],
-        ),
-      );
-
-  login_header() => Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Image.asset(
-            'assets/logo.png',
-          ),
-          SizedBox(
-            height: 30.0,
-          ),
-          Text(
-            'Welcome to ${UiData.app_name}',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w200,
-              color: Colors.green,
-            ),
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Text(
-            'Sign in to continue',
-            style: TextStyle(color: Colors.grey),
-          ),
-        ],
-      );
-
-  login_fields() => Container(
-        child: new Form(
-          key: this._formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
-                child: new TextFormField(
-                  validator: this._validateusername,
-                  onSaved: (String value) {
-                    this._data.username = value;
-                  },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                      hintText: 'Enter Your username', labelText: 'Username'),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 30.0),
-                child: new TextFormField(
-                  validator: this._validatePassword,
-                  onSaved: (String value) {
-                    this._data.password = value;
-                  },
-                  maxLines: 1,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Your Password',
-                    labelText: 'Password',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 30.0),
-                width: double.infinity,
-                child: RaisedButton(
-                  padding: EdgeInsets.all(12.0),
-                  // shape: StadiumBorder(),
-                  child: Text(
-                    'SIGN IN',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.green,
-                  onPressed: this.submit,
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              new GestureDetector(
-                onTap: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => SignUpPage()));
-                  Navigator.pushReplacementNamed(context, '/signup');
-                },
-                child: Text(
-                  'SIGN UP FOR AN ACCCOUNT',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
-            ],
-          ),
         ),
       );
 }
