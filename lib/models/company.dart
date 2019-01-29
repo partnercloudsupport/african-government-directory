@@ -21,6 +21,7 @@ class Company{
   String classified_banner_promo_link;
   String promotions_ad_link;
   String url;
+  String advert_link;
 
   Company({
     this.id,
@@ -44,6 +45,7 @@ class Company{
     this.classified_banner_promo_link,
     this.promotions_ad_link,
     this.url,
+    this.advert_link,
   });
 
   factory Company.fromjson(Map<String, dynamic> json) => new Company(
@@ -68,6 +70,7 @@ class Company{
     classified_banner_promo_link: json['classified_banner_promo_link'],
     promotions_ad_link: json['promotions_ad_link'],
     url: json['url'],
+    advert_link: json['advert_link'],
   );
 
   Map<String, dynamic> toJson() => {
