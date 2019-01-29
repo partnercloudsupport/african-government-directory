@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:government_directory/add_advert.dart';
+import 'package:government_directory/all_news.dart';
 import 'package:government_directory/favourites.dart';
 import 'package:government_directory/models/news.dart';
 import 'package:government_directory/news__page.dart';
@@ -369,13 +370,14 @@ class body_ui extends StatelessWidget {
                       ),
                       Expanded(
                         child: GestureDetector(
-                          child: Text('View all', style: TextStyle(
+                          child: Text('View More', style: TextStyle(
                           color: Color(0XFF2BD093),
                         ),
-                                                  textAlign: TextAlign.end,
+                          textAlign: TextAlign.end,
                         ),
                         onTap: (){
                           print('view all clicked');
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => all_news_page()));
                         },
                         ) 
                       ),
