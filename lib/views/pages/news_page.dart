@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:government_directory/api/news_api.dart';
+import 'package:government_directory/models/data.dart';
 import 'package:government_directory/models/news.dart';
+import 'package:government_directory/models/news_category.dart';
 
 class all_news_page extends StatefulWidget {
   @override
@@ -9,7 +11,22 @@ class all_news_page extends StatefulWidget {
 
 class all_news_page_state extends State<all_news_page> {
   List _news = new List();
+  List<news_category> cats = [
+    news_category(id: '41',name: 'Top Stories'),
+    news_category(id: '18',name: 'Business'),
+    news_category(id: '9',name: 'World'),
+    news_category(id: '5',name: 'Technology'),
+    news_category(id: '6',name: 'Sports'),
+    news_category(id: '11',name: 'Entertainment'),
+    news_category(id: '7',name: 'South Africa'),
+    news_category(id: '22',name: 'Health')
+  ];
+
+  List<news_category> categories = [new news_category(),];
+
   var repository = new news_api();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +34,7 @@ class all_news_page_state extends State<all_news_page> {
         title: Text('news'),
         backgroundColor: Colors.green.withOpacity(0.8),
       ),
-      body: body_ui(),
+      body: body_ui(cats: cats),
     );
   }
 
@@ -34,12 +51,11 @@ class all_news_page_state extends State<all_news_page> {
 @override
 void initState(){
   super.initState();
- // load_news();
+ load_news_data();
 }
 
-load_news() async {
+load_news_data() async {
   List result = await repository.loadNews();
-
   setState((){
     result.forEach((item){
      // var news_item = new build_category_stories(category: 'news',);
@@ -52,6 +68,8 @@ load_news() async {
 }
 
 class body_ui extends StatelessWidget {
+  List<news_category> cats;
+  body_ui({this.cats});
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -101,7 +119,7 @@ class body_ui extends StatelessWidget {
                                       padding: EdgeInsets.only(
                                           left: 9.0, right: 9.0),
                                       child: Center(
-                                        child: new Text("1",
+                                        child: new Text(cats[0].name,
                                             style: new TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w700)),
@@ -138,7 +156,7 @@ class body_ui extends StatelessWidget {
                                         child: Padding(
                                           padding: EdgeInsets.only(
                                               left: 9.0, right: 9.0),
-                                          child: new Text('2',
+                                          child: new Text(cats[1].name,
                                               style: new TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.w700)),
@@ -167,7 +185,7 @@ class body_ui extends StatelessWidget {
                                       child: Padding(
                                         padding: EdgeInsets.only(
                                             left: 9.0, right: 9.0),
-                                        child: new Text('3',
+                                        child: new Text(cats[2].name,
                                             style: new TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w700)),
@@ -201,7 +219,7 @@ class body_ui extends StatelessWidget {
                                       child: Padding(
                                         padding: EdgeInsets.only(
                                             left: 9.0, right: 9.0),
-                                        child: new Text('4',
+                                        child: new Text(cats[3].name,
                                             style: new TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w700)),
@@ -229,7 +247,7 @@ class body_ui extends StatelessWidget {
                                     child: Padding(
                                       padding: EdgeInsets.only(
                                           left: 9.0, right: 9.0),
-                                      child: new Text('5',
+                                      child: new Text(cats[4].name,
                                           style: new TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w700)),
@@ -261,7 +279,7 @@ class body_ui extends StatelessWidget {
                             child: Center(
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
-                                child: new Text('6',
+                                child: new Text(cats[5].name,
                                     style: new TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700)),
@@ -288,7 +306,7 @@ class body_ui extends StatelessWidget {
                             child: Center(
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
-                                child: new Text('7',
+                                child: new Text(cats[6].name,
                                     style: new TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700)),
@@ -318,7 +336,7 @@ class body_ui extends StatelessWidget {
                             child: Center(
                               child: Padding(
                                 padding: EdgeInsets.only(left: 9.0, right: 9.0),
-                                child: new Text('8',
+                                child: new Text(cats[7].name,
                                     style: new TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700)),

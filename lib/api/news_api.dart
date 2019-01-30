@@ -13,7 +13,7 @@ class news_api{
     return jsonDecode(response.body);
   }
 
-  Future<List> get_news_by_category(String category) async{
+  Future<List> get_news_by_category(String id) async{
     final response = await http.get('https://government.co.za/api/news');
     return jsonDecode(response.body);
   }
