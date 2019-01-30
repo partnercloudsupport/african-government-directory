@@ -2,20 +2,18 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:government_directory/add_advert.dart';
-import 'package:government_directory/all_news.dart';
+// import 'package:government_directory/all_news.dart';
 import 'package:government_directory/favourites.dart';
 import 'package:government_directory/models/news.dart';
-import 'package:government_directory/news__page.dart';
+import 'package:government_directory/news_page.dart';
 import 'package:government_directory/search_page.dart';
-import 'models/government_category.dart';
-import 'package:http/http.dart' as http;
-import 'services/post_service.dart';
-import 'list_view_posts.dart';
-import 'models/GovCategory.dart';
-import 'GovCategory_list_tile.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:government_directory/views/pages/news_page.dart';
 
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:http/http.dart' as http;
+
+import 'models/GovCategory.dart';
+
+import 'package:flutter/cupertino.dart';
 
 //shared preferences import
 import 'package:shared_preferences/shared_preferences.dart';
