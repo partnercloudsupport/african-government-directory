@@ -50,7 +50,7 @@ class all_news_page_state extends State<all_news_page> {
           children: <Widget>[
             Container(
               height: 100.0,
-              child:             DrawerHeader(
+              child:  DrawerHeader(
               child: Center(
                 child: Text('Categories',textAlign: TextAlign.left,style: TextStyle(
                 fontSize: 20.0,
@@ -58,7 +58,6 @@ class all_news_page_state extends State<all_news_page> {
               ),),
               ) ,
               decoration: BoxDecoration(
-                color: Colors.white,
                 // image: DecorationImage(
                 //   image: NetworkImage(
                 //     'http://www.southdevonandtorbayccg.nhs.uk/news/PublishingImages/header-news.png'
