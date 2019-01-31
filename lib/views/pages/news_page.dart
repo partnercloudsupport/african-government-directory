@@ -97,278 +97,278 @@ class body_ui extends StatelessWidget {
               SizedBox(
                 height: 15.0,
               ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Browse by category',
-                      style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-              new SizedBox(
-                height: 10.0,
-              ),
-              Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      new Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              // print("${categories[0].name} Taped");
-                              //_show_companies(context, categories[0]);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 5.0),
-                              child: new Container(
-                                height: 100.0,
-                                decoration: new BoxDecoration(
-                                    // borderRadius: new BorderRadius.circular(5.0),
-                                    color: Color(0XFF1A2229)),
-                                child: new Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 9.0, right: 9.0),
-                                      child: Center(
-                                        child: new Text(cats[0].name,
-                                            style: new TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w700)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )),
-                      ),
-                      new Expanded(
-                          child: new Container(
-                        height: 100.0,
-                        child: Column(
-                          children: <Widget>[
-                            Expanded(
-                                child: GestureDetector(
-                              onTap: () {
-                                //print('${categories[13].name} Taped');
-                                //_show_companies(context, categories[13]);
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    bottom: 2.5, right: 2.5),
-                                child: new Container(
-                                  decoration: new BoxDecoration(
-                                    color: Color(0XFF1A2229),
-                                    //borderRadius: new BorderRadius.circular(5.0)
-                                  ),
-                                  child: new Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Center(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 9.0, right: 9.0),
-                                          child: new Text(cats[1].name,
-                                              style: new TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w700)),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            )),
-                            Expanded(
-                                child: GestureDetector(
-                              onTap: () {
-                                //print("${categories[5].name} Taped");
-                                //_show_companies(context, categories[5]);
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 2.5, right: 2.5),
-                                child: new Container(
-                                    decoration: new BoxDecoration(
-                                      color: Color(0XFF1A2229),
-                                      // borderRadius: new BorderRadius.circular(5.0)
-                                    ),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 9.0, right: 9.0),
-                                        child: new Text(cats[2].name,
-                                            style: new TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w700)),
-                                      ),
-                                    )),
-                              ),
-                            )),
-                          ],
-                        ),
-                      )),
-                      new Expanded(
-                          child: new Container(
-                        height: 100.0,
-                        child: Column(
-                          children: <Widget>[
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  //print("${categories[6].name} Taped");
-                                  //_show_companies(context, categories[6]);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 2.5, bottom: 2.5),
-                                  child: new Container(
-                                    decoration: new BoxDecoration(
-                                      color: Color(0XFF1A2229),
-                                      // borderRadius: new BorderRadius.circular(5.0)
-                                    ),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 9.0, right: 9.0),
-                                        child: new Text(cats[3].name,
-                                            style: new TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w700)),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                                child: GestureDetector(
-                              onTap: () {
-                                // print("${categories[12].name} Taped");
-                                // _show_companies(context, categories[12]);
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 2.5, top: 2.5),
-                                child: new Container(
-                                  decoration: new BoxDecoration(
-                                    color: Color(0XFF1A2229),
-                                    //borderRadius: new BorderRadius.circular(5.0)
-                                  ),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 9.0, right: 9.0),
-                                      child: new Text(cats[4].name,
-                                          style: new TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700)),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )),
-                          ],
-                        ),
-                      )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                          child: GestureDetector(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: new Container(
-                            height: 50.0,
-                            decoration: new BoxDecoration(
-                              color: Color(0XFF1A2229),
-                              // borderRadius: new BorderRadius.circular(5.0)
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 9.0, right: 9.0),
-                                child: new Text(cats[5].name,
-                                    style: new TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700)),
-                              ),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          //print("${categories[4].name} Taped");
-                          //_show_companies(context, categories[4]);
-                        },
-                      )),
-                      Expanded(
-                          child: GestureDetector(
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                          child: new Container(
-                            height: 50.0,
-                            decoration: new BoxDecoration(
-                              color: Color(0XFF1A2229),
-                              //borderRadius: new BorderRadius.circular(5.0)
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 9.0, right: 9.0),
-                                child: new Text(cats[6].name,
-                                    style: new TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700)),
-                              ),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          // print("${categories[7].name} Taped");
-                          // _show_companies(context, categories[7]);
-                        },
-                      )),
-                      new SizedBox(
-                        width: 5.0,
-                      ),
-                      Expanded(
-                          child: GestureDetector(
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 2.5, bottom: 2.5),
-                          child: new Container(
-                            height: 50.0,
-                            decoration: new BoxDecoration(
-                              color: Color(0XFF1A2229),
-                              //borderRadius: new BorderRadius.circular(5.0)
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 9.0, right: 9.0),
-                                child: new Text(cats[7].name,
-                                    style: new TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700)),
-                              ),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          //print("${categories[11].name} Taped");
-                          //_show_companies(context, categories[11]);
-                        },
-                      )),
-                    ],
-                  )
-                ],
-              ),
+              // Row(
+              //   children: <Widget>[
+              //     Expanded(
+              //       child: Text(
+              //         'Browse by category',
+              //         style: TextStyle(
+              //             fontSize: 20.0, fontWeight: FontWeight.bold),
+              //       ),
+              //     )
+              //   ],
+              // ),
+              // new SizedBox(
+              //   height: 10.0,
+              // ),
+              // Column(
+              //   children: <Widget>[
+              //     Row(
+              //       children: <Widget>[
+              //         new Expanded(
+              //           child: GestureDetector(
+              //               onTap: () {
+              //                 // print("${categories[0].name} Taped");
+              //                 //_show_companies(context, categories[0]);
+              //               },
+              //               child: Padding(
+              //                 padding: const EdgeInsets.only(right: 5.0),
+              //                 child: new Container(
+              //                   height: 100.0,
+              //                   decoration: new BoxDecoration(
+              //                       // borderRadius: new BorderRadius.circular(5.0),
+              //                       color: Color(0XFF1A2229)),
+              //                   child: new Column(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     children: <Widget>[
+              //                       Padding(
+              //                         padding: EdgeInsets.only(
+              //                             left: 9.0, right: 9.0),
+              //                         child: Center(
+              //                           child: new Text(cats[0].name,
+              //                               style: new TextStyle(
+              //                                   color: Colors.white,
+              //                                   fontWeight: FontWeight.w700)),
+              //                         ),
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 ),
+              //               )),
+              //         ),
+              //         new Expanded(
+              //             child: new Container(
+              //           height: 100.0,
+              //           child: Column(
+              //             children: <Widget>[
+              //               Expanded(
+              //                   child: GestureDetector(
+              //                 onTap: () {
+              //                   //print('${categories[13].name} Taped');
+              //                   //_show_companies(context, categories[13]);
+              //                 },
+              //                 child: Padding(
+              //                   padding: const EdgeInsets.only(
+              //                       bottom: 2.5, right: 2.5),
+              //                   child: new Container(
+              //                     decoration: new BoxDecoration(
+              //                       color: Color(0XFF1A2229),
+              //                       //borderRadius: new BorderRadius.circular(5.0)
+              //                     ),
+              //                     child: new Row(
+              //                       mainAxisAlignment: MainAxisAlignment.center,
+              //                       children: <Widget>[
+              //                         Center(
+              //                           child: Padding(
+              //                             padding: EdgeInsets.only(
+              //                                 left: 9.0, right: 9.0),
+              //                             child: new Text(cats[1].name,
+              //                                 style: new TextStyle(
+              //                                     color: Colors.white,
+              //                                     fontWeight: FontWeight.w700)),
+              //                           ),
+              //                         )
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ),
+              //               )),
+              //               Expanded(
+              //                   child: GestureDetector(
+              //                 onTap: () {
+              //                   //print("${categories[5].name} Taped");
+              //                   //_show_companies(context, categories[5]);
+              //                 },
+              //                 child: Padding(
+              //                   padding:
+              //                       const EdgeInsets.only(top: 2.5, right: 2.5),
+              //                   child: new Container(
+              //                       decoration: new BoxDecoration(
+              //                         color: Color(0XFF1A2229),
+              //                         // borderRadius: new BorderRadius.circular(5.0)
+              //                       ),
+              //                       child: Center(
+              //                         child: Padding(
+              //                           padding: EdgeInsets.only(
+              //                               left: 9.0, right: 9.0),
+              //                           child: new Text(cats[2].name,
+              //                               style: new TextStyle(
+              //                                   color: Colors.white,
+              //                                   fontWeight: FontWeight.w700)),
+              //                         ),
+              //                       )),
+              //                 ),
+              //               )),
+              //             ],
+              //           ),
+              //         )),
+              //         new Expanded(
+              //             child: new Container(
+              //           height: 100.0,
+              //           child: Column(
+              //             children: <Widget>[
+              //               Expanded(
+              //                 child: GestureDetector(
+              //                   onTap: () {
+              //                     //print("${categories[6].name} Taped");
+              //                     //_show_companies(context, categories[6]);
+              //                   },
+              //                   child: Padding(
+              //                     padding: const EdgeInsets.only(
+              //                         left: 2.5, bottom: 2.5),
+              //                     child: new Container(
+              //                       decoration: new BoxDecoration(
+              //                         color: Color(0XFF1A2229),
+              //                         // borderRadius: new BorderRadius.circular(5.0)
+              //                       ),
+              //                       child: Center(
+              //                         child: Padding(
+              //                           padding: EdgeInsets.only(
+              //                               left: 9.0, right: 9.0),
+              //                           child: new Text(cats[3].name,
+              //                               style: new TextStyle(
+              //                                   color: Colors.white,
+              //                                   fontWeight: FontWeight.w700)),
+              //                         ),
+              //                       ),
+              //                     ),
+              //                   ),
+              //                 ),
+              //               ),
+              //               Expanded(
+              //                   child: GestureDetector(
+              //                 onTap: () {
+              //                   // print("${categories[12].name} Taped");
+              //                   // _show_companies(context, categories[12]);
+              //                 },
+              //                 child: Padding(
+              //                   padding:
+              //                       const EdgeInsets.only(left: 2.5, top: 2.5),
+              //                   child: new Container(
+              //                     decoration: new BoxDecoration(
+              //                       color: Color(0XFF1A2229),
+              //                       //borderRadius: new BorderRadius.circular(5.0)
+              //                     ),
+              //                     child: Center(
+              //                       child: Padding(
+              //                         padding: EdgeInsets.only(
+              //                             left: 9.0, right: 9.0),
+              //                         child: new Text(cats[4].name,
+              //                             style: new TextStyle(
+              //                                 color: Colors.white,
+              //                                 fontWeight: FontWeight.w700)),
+              //                       ),
+              //                     ),
+              //                   ),
+              //                 ),
+              //               )),
+              //             ],
+              //           ),
+              //         )),
+              //       ],
+              //     ),
+              //     SizedBox(
+              //       height: 5.0,
+              //     ),
+              //     Row(
+              //       children: <Widget>[
+              //         Expanded(
+              //             child: GestureDetector(
+              //           child: Padding(
+              //             padding: const EdgeInsets.only(right: 5.0),
+              //             child: new Container(
+              //               height: 50.0,
+              //               decoration: new BoxDecoration(
+              //                 color: Color(0XFF1A2229),
+              //                 // borderRadius: new BorderRadius.circular(5.0)
+              //               ),
+              //               child: Center(
+              //                 child: Padding(
+              //                   padding: EdgeInsets.only(left: 9.0, right: 9.0),
+              //                   child: new Text(cats[5].name,
+              //                       style: new TextStyle(
+              //                           color: Colors.white,
+              //                           fontWeight: FontWeight.w700)),
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //           onTap: () {
+              //             //print("${categories[4].name} Taped");
+              //             //_show_companies(context, categories[4]);
+              //           },
+              //         )),
+              //         Expanded(
+              //             child: GestureDetector(
+              //           child: Padding(
+              //             padding:
+              //                 const EdgeInsets.only(left: 2.5, bottom: 2.5),
+              //             child: new Container(
+              //               height: 50.0,
+              //               decoration: new BoxDecoration(
+              //                 color: Color(0XFF1A2229),
+              //                 //borderRadius: new BorderRadius.circular(5.0)
+              //               ),
+              //               child: Center(
+              //                 child: Padding(
+              //                   padding: EdgeInsets.only(left: 9.0, right: 9.0),
+              //                   child: new Text(cats[6].name,
+              //                       style: new TextStyle(
+              //                           color: Colors.white,
+              //                           fontWeight: FontWeight.w700)),
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //           onTap: () {
+              //             // print("${categories[7].name} Taped");
+              //             // _show_companies(context, categories[7]);
+              //           },
+              //         )),
+              //         new SizedBox(
+              //           width: 5.0,
+              //         ),
+              //         Expanded(
+              //             child: GestureDetector(
+              //           child: Padding(
+              //             padding:
+              //                 const EdgeInsets.only(left: 2.5, bottom: 2.5),
+              //             child: new Container(
+              //               height: 50.0,
+              //               decoration: new BoxDecoration(
+              //                 color: Color(0XFF1A2229),
+              //                 //borderRadius: new BorderRadius.circular(5.0)
+              //               ),
+              //               child: Center(
+              //                 child: Padding(
+              //                   padding: EdgeInsets.only(left: 9.0, right: 9.0),
+              //                   child: new Text(cats[7].name,
+              //                       style: new TextStyle(
+              //                           color: Colors.white,
+              //                           fontWeight: FontWeight.w700)),
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //           onTap: () {
+              //             //print("${categories[11].name} Taped");
+              //             //_show_companies(context, categories[11]);
+              //           },
+              //         )),
+              //       ],
+              //     )
+              //   ],
+              // ),
               build_category_stories(news: news_list[0]),
               Divider(),
               build_category_stories(news: news_list[1]),
@@ -425,6 +425,8 @@ class build_category_stories extends StatelessWidget {
                   ),
                   Column(
                     children: <Widget>[
+                      Column(
+                        children: <Widget>[
                       Row(
                         children: <Widget>[
                           Expanded(
@@ -458,6 +460,9 @@ class build_category_stories extends StatelessWidget {
                           )
                         ],
                       ),
+                        ],
+                      ),
+
                       SizedBox(
                         height: 15.0,
                       ),
