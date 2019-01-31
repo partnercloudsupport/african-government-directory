@@ -814,6 +814,7 @@ class body_ui extends StatelessWidget {
                             child: new Text('${categories[3].name}',
                                 style: new TextStyle(
                                     color: Colors.white,
+                                    fontSize: 13.0,
                                     fontWeight: FontWeight.w700)),
                           ),
                         ),
