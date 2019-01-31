@@ -12,7 +12,7 @@ class all_news_page extends StatefulWidget {
 }
 
 class all_news_page_state extends State<all_news_page> {
-  List _news = [];
+  List<news_category> _news = [];
   List<news_category> cats = [
     news_category(id: '41',name: 'Top Stories'),
     news_category(id: '18',name: 'Business'),
@@ -48,7 +48,7 @@ class all_news_page_state extends State<all_news_page> {
         backgroundColor: Colors.green.withOpacity(0.8),
       ),
       drawer: new Drawer(
-        child: ListView(
+        child: _news.isEmpty ? null : ListView(
           children: <Widget>[
             Container(
               height: 100.0,
@@ -127,16 +127,6 @@ class all_news_page_state extends State<all_news_page> {
       body: _news.isEmpty ? Center(child: CircularProgressIndicator(),) : body_ui(cats: cats, news_list: _news,),
     );
   }
-
-  Widget _category_stories_list(){
-  var list = new ListView.builder(
-    itemCount: 8,
-    itemBuilder: (context,index){
-      return _news[index];
-    }
-  );
-  return list;
-}
 
 @override
 void initState(){
