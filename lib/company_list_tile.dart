@@ -33,6 +33,9 @@ class company_list_tile extends StatelessWidget {
                       padding: EdgeInsets.all(8.0),
                       child: Image.network(_rander_company_image(companies[position].url),height: 60,),
                     ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -47,7 +50,7 @@ class company_list_tile extends StatelessWidget {
                                     child: RichText(
                                       text: TextSpan(
                                         children: [
-                                          TextSpan(text: companies[position].name, style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0, color: Colors.black)),
+                                          TextSpan(text: companies[position].name, style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20.0, color: Colors.black)),
                                         ]
                                       ),overflow: TextOverflow.ellipsis,
                                     ),
@@ -64,7 +67,7 @@ class company_list_tile extends StatelessWidget {
                               children: <Widget>[
                                 Expanded(
                                   child: Container(
-                                    child: Text(companies[position].address,style: TextStyle(fontSize: 18.0),),
+                                    child: Text(companies[position].address,style: TextStyle(fontSize: 15.0),),
                                   ),
                                 )
                               ],
