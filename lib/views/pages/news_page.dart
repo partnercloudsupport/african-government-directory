@@ -370,12 +370,19 @@ class body_ui extends StatelessWidget {
                 ],
               ),
               build_category_stories(news: news_list[0]),
+              Divider(),
               build_category_stories(news: news_list[1]),
+              Divider(),
               build_category_stories(news: news_list[2]),
+              Divider(),
               build_category_stories(news: news_list[3]),
+              Divider(),
               build_category_stories(news: news_list[4]),
+              Divider(),
               build_category_stories(news: news_list[5]),
+              Divider(),
               build_category_stories(news: news_list[6]),
+              Divider(),
               build_category_stories(news: news_list[7]),
             ],
           ),
@@ -426,9 +433,10 @@ class build_category_stories extends StatelessWidget {
                               decoration: BoxDecoration(color: Colors.green,
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  news.news[0].image
+                                  news.news[0].thumbnail
                                 ),
-                                fit: BoxFit.fill
+                                fit: BoxFit.fill,
+                                
                               )
                               ),
                             ),
@@ -467,7 +475,7 @@ class build_category_stories extends StatelessWidget {
                                           image: DecorationImage(
                                             fit: BoxFit.fill,
                                             image: NetworkImage(
-                                              news.news[1].image
+                                              news.news[1].thumbnail
                                             )
                                           )),
                                     ),
@@ -504,7 +512,7 @@ class build_category_stories extends StatelessWidget {
                                           image: DecorationImage(
                                             fit: BoxFit.fill,
                                             image: NetworkImage(
-                                              news.news[2].image
+                                              news.news[2].thumbnail
                                             )
                                           )),
                                     ),
@@ -530,7 +538,7 @@ class build_category_stories extends StatelessWidget {
                       ),
 
                       SizedBox(
-                        height: 10.0,
+                        height: 20.0,
                       ),
 
                       Container(
