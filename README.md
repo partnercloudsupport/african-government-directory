@@ -1,8 +1,2 @@
 # government_directory
-
-A new Flutter project.
-
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+This is the official government directory mobile app
