@@ -582,13 +582,25 @@ class build_category_stories extends StatelessWidget {
                                 SizedBox(
                                   width: 15.0,
                                 ),
-                                new FadeInImage.assetNetwork(
-                                    placeholder: '',
-                                    image:
-                                        news.news[3].thumbnail,
-                                    fit: BoxFit.cover,
-                                    width: 100.0,
-                                    height: 100.0),
+                                // new FadeInImage.assetNetwork(
+                                //     placeholder: '',
+                                //     image:
+                                //         news.news[3].thumbnail,
+                                //     fit: BoxFit.cover,
+                                //     width: 100.0,
+                                //     height: 100.0),
+                                                                Container(
+                                  width: 100.0,
+                                  height: 100.0,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                        news.news[3].thumbnail
+                                      ),
+                                      fit: BoxFit.cover
+                                    )
+                                  ),
+                                )
                               ],
                             ),
                           ),
