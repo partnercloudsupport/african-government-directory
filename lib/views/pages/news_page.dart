@@ -3,6 +3,7 @@ import 'package:government_directory/api/news_api.dart';
 import 'package:government_directory/models/data.dart';
 import 'package:government_directory/models/news.dart';
 import 'package:government_directory/models/news_category.dart';
+import 'package:government_directory/news_page.dart';
 
 class all_news_page extends StatefulWidget {
   @override
@@ -50,51 +51,76 @@ class all_news_page_state extends State<all_news_page> {
             Container(
               height: 100.0,
               child:             DrawerHeader(
-              child: Text(''),
+              child: Center(
+                child: Text('Categories',textAlign: TextAlign.left,style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold
+              ),),
+              ) ,
               decoration: BoxDecoration(
                 color: Colors.white,
-                image: DecorationImage(
-                  image: NetworkImage(
-                    'http://www.southdevonandtorbayccg.nhs.uk/news/PublishingImages/header-news.png'
-                  )
-                )
+                // image: DecorationImage(
+                //   image: NetworkImage(
+                //     'http://www.southdevonandtorbayccg.nhs.uk/news/PublishingImages/header-news.png'
+                //   )
+                // )
               ),
             ),
             ),
 
             ListTile(
               title: Text('Top Stories'),
+              onTap: (){
+
+              },
             ),
                         ListTile(
-              title: Text('Business'),
+              title: Text('Business'),onTap: (){
+                
+              },
             ),
                         ListTile(
-              title: Text('World'),
+              title: Text('World'),onTap: (){
+                
+              },
             ),
                         ListTile(
-              title: Text('Entertainment'),
+              title: Text('Entertainment'),onTap: (){
+                
+              },
             ),
                         ListTile(
-              title: Text('South Africa'),
+              title: Text('South Africa'),onTap: (){
+                
+              },
             ),
                         ListTile(
-              title: Text('Technology'),
+              title: Text('Technology'),onTap: (){
+                
+              },
             ),
                         ListTile(
-              title: Text('Sports'),
+              title: Text('Sports'),onTap: (){
+                
+              },
             ),
                         ListTile(
-              title: Text('Health'),
+              title: Text('Health'),onTap: (){
+                
+              },
             ),
           ],
         )
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Builder(
-        builder: (context) => FloatingActionButton(
+        builder: (context) => FloatingActionButton.extended(
           onPressed: (){
             Scaffold.of(context).openDrawer();
           },
-          child: Icon(Icons.add),
+          backgroundColor: Colors.green,
+          label: Text('Categories'),
+          icon: Icon(Icons.category),
         ),
       ),
       body: _news.isEmpty ? Center(child: CircularProgressIndicator(),) : body_ui(cats: cats, news_list: _news,),
@@ -447,6 +473,9 @@ class body_ui extends StatelessWidget {
               build_category_stories(news: news_list[6]),
               Divider(),
               build_category_stories(news: news_list[7]),
+              SizedBox(
+                height: 70.0,
+              ),
             ],
           ),
         )
@@ -466,6 +495,9 @@ class build_category_stories extends StatelessWidget {
 
   build_category_stories({this.news});
 
+  _open_news_(News _news, context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => new news_page(news: _news)));
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -488,7 +520,11 @@ class build_category_stories extends StatelessWidget {
                   ),
                   Column(
                     children: <Widget>[
-                      Column(
+                      GestureDetector(
+                        onTap: (){
+                          _open_news_(news.news[0],context);
+                        },
+                        child: Column(
                         children: <Widget>[
                       Row(
                         children: <Widget>[
@@ -525,14 +561,21 @@ class build_category_stories extends StatelessWidget {
                       ),
                         ],
                       ),
+                      ),
+                      
 
                       SizedBox(
                         height: 15.0,
                       ),
+                      
                       Row(
                         children: <Widget>[
                           Expanded(
-                            child: Padding(
+                            child: GestureDetector(
+                              onTap: (){
+                                _open_news_(news.news[1],context);
+                              },
+                              child: Padding(
                                 padding: EdgeInsets.only(right: 5.0),
                                 child: Column(
                                   children: <Widget>[
@@ -564,12 +607,17 @@ class build_category_stories extends StatelessWidget {
                                     )
                                   ],
                                 )),
+                            ) ,
                           ),
                           SizedBox(
                             width: 25.0,
                           ),
                           Expanded(
-                            child: Padding(
+                            child: GestureDetector(
+                              onTap: (){
+                                _open_news_(news.news[2],context);
+                              },
+                              child: Padding(
                                 padding: EdgeInsets.only(right: 5.0),
                                 child: Column(
                                   children: <Widget>[
@@ -601,6 +649,7 @@ class build_category_stories extends StatelessWidget {
                                     )
                                   ],
                                 )),
+                            ) ,
                           )
                         ],
                       ),
@@ -608,8 +657,11 @@ class build_category_stories extends StatelessWidget {
                       SizedBox(
                         height: 20.0,
                       ),
-
-                      Container(
+                      GestureDetector(
+                        onTap: (){
+                          _open_news_(news.news[3],context);
+                        },
+                        child: Container(
                         //margin: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0, top: 0.0),
                         child: Material(
                           child: Container(
@@ -669,6 +721,8 @@ class build_category_stories extends StatelessWidget {
                           ),
                         ),
                       ),
+                      )
+                      ,
                         SizedBox(
                         height: 10.0,
                       ),
