@@ -45,7 +45,12 @@ class all_news_page_state extends State<all_news_page> {
             child: Icon(Icons.arrow_back),
           ),
         ),
-        title: Text('news'),
+        title: Text('news'.toUpperCase(),
+          style: TextStyle(
+            fontWeight: FontWeight.w300,
+            color: Colors.white,
+            fontSize: 16.0,
+          )),
         backgroundColor: Colors.green.withOpacity(0.8),
       ),
       drawer: new Drawer(

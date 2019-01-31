@@ -38,7 +38,12 @@ class news_category_page_state extends State<news_category_page>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text(category.name),
+        title: Text(category.name.toUpperCase(),
+          style: TextStyle(
+            fontWeight: FontWeight.w300,
+            color: Colors.white,
+            fontSize: 16.0,
+          )),
         backgroundColor: Colors.green,
       ),
       body: news.isEmpty ? Center(child: CircularProgressIndicator(),) : news_list_tile(news: news),
