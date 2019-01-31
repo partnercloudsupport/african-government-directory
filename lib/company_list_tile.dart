@@ -50,7 +50,7 @@ class company_list_tile extends StatelessWidget {
                                     child: RichText(
                                       text: TextSpan(
                                         children: [
-                                          TextSpan(text: companies[position].name, style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20.0, color: Colors.black)),
+                                          TextSpan(text: companies[position].name, style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0, color: Colors.black)),
                                         ]
                                       ),overflow: TextOverflow.ellipsis,
                                     ),
