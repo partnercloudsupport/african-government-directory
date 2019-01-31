@@ -10,7 +10,7 @@ class all_news_page extends StatefulWidget {
 }
 
 class all_news_page_state extends State<all_news_page> {
-  List _news = new List();
+  List _news = [];
   List<news_category> cats = [
     news_category(id: '41',name: 'Top Stories'),
     news_category(id: '18',name: 'Business'),
@@ -34,7 +34,7 @@ class all_news_page_state extends State<all_news_page> {
         title: Text('news'),
         backgroundColor: Colors.green.withOpacity(0.8),
       ),
-      body: body_ui(cats: cats),
+      body: _news.isEmpty ? Center(child: CircularProgressIndicator(),) : body_ui(cats: cats, news_list: _news,),
     );
   }
 
@@ -51,7 +51,20 @@ class all_news_page_state extends State<all_news_page> {
 @override
 void initState(){
   super.initState();
- load_news_data();
+ //oad_news_data();
+// print('entered');
+ load_recents();
+}
+
+load_recents() async{
+  List results = await repository.get_recent().then((res){
+    print('name');
+    print(res);
+
+    setState((){
+      _news = res;
+    });
+  });
 }
 
 load_news_data() async {
@@ -69,7 +82,10 @@ load_news_data() async {
 
 class body_ui extends StatelessWidget {
   List<news_category> cats;
-  body_ui({this.cats});
+  List news_list = [];
+
+  //List<News> news;
+  body_ui({this.cats,this.news_list});
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -353,14 +369,14 @@ class body_ui extends StatelessWidget {
                   )
                 ],
               ),
-              build_category_stories(),
-              build_category_stories(),
-              build_category_stories(),
-              build_category_stories(),
-              build_category_stories(),
-              build_category_stories(),
-              build_category_stories(),
-              build_category_stories(),
+              build_category_stories(news: news_list[0]),
+              build_category_stories(news: news_list[1]),
+              build_category_stories(news: news_list[2]),
+              build_category_stories(news: news_list[3]),
+              build_category_stories(news: news_list[4]),
+              build_category_stories(news: news_list[5]),
+              build_category_stories(news: news_list[6]),
+              build_category_stories(news: news_list[7]),
             ],
           ),
         )
@@ -373,9 +389,12 @@ class body_ui extends StatelessWidget {
 
 //this component builds a stories based on category
 class build_category_stories extends StatelessWidget {
-  String category;
-  News news;
-  build_category_stories({this.category, this.news});
+  //String category;
+  //News news;
+
+  news_category news;
+
+  build_category_stories({this.news});
 
   @override
   Widget build(BuildContext context) {
@@ -388,7 +407,7 @@ class build_category_stories extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          'Category Name',
+                          news.name,
                           style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -404,7 +423,14 @@ class build_category_stories extends StatelessWidget {
                           Expanded(
                             child: Container(
                               height: 200.0,
-                              decoration: BoxDecoration(color: Colors.green),
+                              decoration: BoxDecoration(color: Colors.green,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  news.news[0].image
+                                ),
+                                fit: BoxFit.fill
+                              )
+                              ),
                             ),
                           )
                         ],
@@ -416,7 +442,7 @@ class build_category_stories extends StatelessWidget {
                         children: <Widget>[
                           Expanded(
                             child: Text(
-                              'news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title',
+                              news.news[0].title,
                               maxLines: 2,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 25.0),
@@ -437,7 +463,13 @@ class build_category_stories extends StatelessWidget {
                                     Container(
                                       height: 100,
                                       decoration:
-                                          BoxDecoration(color: Colors.green),
+                                          BoxDecoration(color: Colors.green,
+                                          image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: NetworkImage(
+                                              news.news[1].image
+                                            )
+                                          )),
                                     ),
                                     SizedBox(
                                       height: 10.0,
@@ -446,7 +478,7 @@ class build_category_stories extends StatelessWidget {
                                       children: <Widget>[
                                         Expanded(
                                           child: Text(
-                                            'fgdfgfdg fg dfg dfg dfnews title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title',
+                                          news.news[1].title,
                                             maxLines: 2,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,fontSize: 20.0),
@@ -468,7 +500,13 @@ class build_category_stories extends StatelessWidget {
                                     Container(
                                       height: 100,
                                       decoration:
-                                          BoxDecoration(color: Colors.green),
+                                          BoxDecoration(color: Colors.green,
+                                          image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: NetworkImage(
+                                              news.news[2].image
+                                            )
+                                          )),
                                     ),
                                     SizedBox(
                                       height: 10.0,
@@ -477,7 +515,7 @@ class build_category_stories extends StatelessWidget {
                                       children: <Widget>[
                                         Expanded(
                                           child: Text(
-                                            'fgdfgfdg fg dfg dfg dfnews title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title news title',
+                                            news.news[2].title,
                                             maxLines: 2,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,fontSize: 20.0),
@@ -512,7 +550,7 @@ class build_category_stories extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
-                                          'title title title title title title title title title title title ',
+                                          news.news[3].title,
                                           maxLines: 1,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,fontSize: 20.0),
@@ -520,7 +558,7 @@ class build_category_stories extends StatelessWidget {
                                         Container(
                                           margin: EdgeInsets.only(top: 5.0),
                                           child: Text(
-                                            'content content content content content content content content content content content ',
+                                            news.news[3].content,
                                             maxLines: 3,
                                           ),
                                         )
@@ -534,7 +572,7 @@ class build_category_stories extends StatelessWidget {
                                 new FadeInImage.assetNetwork(
                                     placeholder: '',
                                     image:
-                                        'https://www.newspages.co.za/wp-content/uploads/2018/11/RESTAURANTS.jpg',
+                                        news.news[3].thumbnail,
                                     fit: BoxFit.cover,
                                     width: 100.0,
                                     height: 100.0),
