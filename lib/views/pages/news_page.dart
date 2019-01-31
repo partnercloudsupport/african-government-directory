@@ -26,13 +26,76 @@ class all_news_page_state extends State<all_news_page> {
 
   var repository = new news_api();
 
-
+  GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldkey,
       appBar: AppBar(
+        leading: Container(
+          child: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back),
+          ),
+        ),
         title: Text('news'),
         backgroundColor: Colors.green.withOpacity(0.8),
+      ),
+      drawer: new Drawer(
+        elevation: 20.0,
+        child: ListView(
+          children: <Widget>[
+            Container(
+              height: 100.0,
+              child:             DrawerHeader(
+              child: Text(''),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                image: DecorationImage(
+                  image: NetworkImage(
+                    'http://www.southdevonandtorbayccg.nhs.uk/news/PublishingImages/header-news.png'
+                  )
+                )
+              ),
+            ),
+            ),
+
+            ListTile(
+              title: Text('Top Stories'),
+            ),
+                        ListTile(
+              title: Text('Business'),
+            ),
+                        ListTile(
+              title: Text('World'),
+            ),
+                        ListTile(
+              title: Text('Entertainment'),
+            ),
+                        ListTile(
+              title: Text('South Africa'),
+            ),
+                        ListTile(
+              title: Text('Technology'),
+            ),
+                        ListTile(
+              title: Text('Sports'),
+            ),
+                        ListTile(
+              title: Text('Health'),
+            ),
+          ],
+        )
+      ),
+      floatingActionButton: Builder(
+        builder: (context) => FloatingActionButton(
+          onPressed: (){
+            Scaffold.of(context).openDrawer();
+          },
+          child: Icon(Icons.add),
+        ),
       ),
       body: _news.isEmpty ? Center(child: CircularProgressIndicator(),) : body_ui(cats: cats, news_list: _news,),
     );
