@@ -45,7 +45,6 @@ class all_news_page_state extends State<all_news_page> {
         backgroundColor: Colors.green.withOpacity(0.8),
       ),
       drawer: new Drawer(
-        elevation: 20.0,
         child: ListView(
           children: <Widget>[
             Container(
