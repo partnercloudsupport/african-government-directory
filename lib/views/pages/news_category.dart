@@ -24,6 +24,15 @@ class news_category_page_state extends State<news_category_page>{
   void initState(){
     super.initState();
 
+    _load_news();
+  }
+
+  _load_news() async{
+    List server_news;
+    server_news = await repository.get_news_by_category(category.id);
+    setState(() {
+     news = server_news;
+    });
   }
   @override
   Widget build(BuildContext context){
@@ -81,6 +90,7 @@ class news_list_tile extends  StatelessWidget{
                                         text: TextSpan(
                                           children: [TextSpan(text: news[position].title, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0, color: Colors.black)),]
                                         ),overflow: TextOverflow.ellipsis,
+                                        
                                       ),
                                     ),
                                   )
@@ -94,7 +104,7 @@ class news_list_tile extends  StatelessWidget{
                                 children: <Widget>[
                                   Expanded(
                                     child: Container(
-                                      child: Text(news[position].content,style: TextStyle(fontSize: 15.0),),
+                                      child: Text(news[position].content,style: TextStyle(fontSize: 15.0),maxLines: 2,),
                                     ),
                                   )
                                 ],

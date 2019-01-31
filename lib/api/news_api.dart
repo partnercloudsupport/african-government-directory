@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:government_directory/models/news.dart';
 import 'package:government_directory/models/news_category.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -15,9 +16,21 @@ class news_api{
     return jsonDecode(response.body);
   }
 
-  Future<List> get_news_by_category(String id) async{
-    final response = await http.get('https://government.co.za/api/news');
-    return jsonDecode(response.body);
+  Future<List<News>> get_news_by_category(String id) async{
+    var news = List<News>();
+    
+    final response = await http.get('https://government.co.za/api/news_category/${id}');
+    //print(jsonDecode(response.body));
+
+    news = parse_news(response.body);
+    return news;
+
+    //return jsonDecode(response.body);
+  }
+
+  List<News> parse_news(String response){
+    final parsed_data = json.decode(response).cast<Map<String, dynamic>>();
+    return parsed_data.map<News>((json) => News.fromjson(json)).toList();
   }
 
   Future<List<news_category>> get_recent() async{
