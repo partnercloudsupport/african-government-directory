@@ -37,6 +37,7 @@ class all_news_page_state extends State<all_news_page> {
       key: _scaffoldkey,
       appBar: AppBar(
         leading: Container(
+
           child: GestureDetector(
             onTap: (){
               Navigator.pop(context);
@@ -48,14 +49,18 @@ class all_news_page_state extends State<all_news_page> {
         backgroundColor: Colors.green.withOpacity(0.8),
       ),
       drawer: new Drawer(
-        child: _news.isEmpty ? null : ListView(
+        child: _news.isEmpty ? null : Container(
+          color: Colors.green,
+          child: ListView(
           children: <Widget>[
             Container(
+              color: Color(0XFFe5e5e5),
               height: 100.0,
               child:  DrawerHeader(
               child: Center(
-                child: Text('Categories',textAlign: TextAlign.left,style: TextStyle(
+                child: Text('Featured Categories',textAlign: TextAlign.left,style: TextStyle(
                 fontSize: 20.0,
+                color: Color(0XFF333333),
                 fontWeight: FontWeight.bold
               ),),
               ) ,
@@ -70,48 +75,57 @@ class all_news_page_state extends State<all_news_page> {
             ),
 
             ListTile(
-              title: Text(_news[0].name),
+              leading: Icon(Icons.chat, color: Colors.white,),
+              title: Text(_news[0].name,style: TextStyle(color: Colors.white),),
               onTap: (){
                 _open_news_category(_news[0],context);
               },
             ),
+            Divider(),
                         ListTile(
-              title: Text(_news[1].name),onTap: (){
+                          leading: Icon(Icons.business_center, color: Colors.white,),
+              title: Text(_news[1].name,style: TextStyle(color: Colors.white),),onTap: (){
                 _open_news_category(_news[1],context);
               },
             ),
                         ListTile(
-              title: Text(_news[2].name),onTap: (){
+                          leading: Icon(Icons.public, color: Colors.white,),
+              title: Text(_news[2].name,style: TextStyle(color: Colors.white),),onTap: (){
                 _open_news_category(_news[2],context);
               },
             ),
                         ListTile(
-              title: Text(_news[3].name),onTap: (){
+                          leading: Icon(Icons.laptop, color: Colors.white,),
+              title: Text(_news[3].name,style: TextStyle(color: Colors.white),),onTap: (){
                 _open_news_category(_news[3],context);
               },
             ),
                         ListTile(
-              title: Text(_news[4].name),onTap: (){
+                          leading: Icon(Icons.directions_bike, color: Colors.white,),
+              title: Text(_news[4].name,style: TextStyle(color: Colors.white),),onTap: (){
                 _open_news_category(_news[4],context);
               },
             ),
                         ListTile(
-              title: Text(_news[5].name),onTap: (){
+                          leading: Icon(Icons.subscriptions, color: Colors.white,),
+              title: Text(_news[5].name,style: TextStyle(color: Colors.white),),onTap: (){
                 _open_news_category(_news[5],context);
               },
             ),
                         ListTile(
-              title: Text(_news[6].name),onTap: (){
+                          leading: Icon(Icons.location_on, color: Colors.white,),
+              title: Text(_news[6].name,style: TextStyle(color: Colors.white),),onTap: (){
                 _open_news_category(_news[6],context);
               },
             ),
                         ListTile(
-              title: Text(_news[7].name),onTap: (){
+                          leading: Icon(Icons.local_hospital, color: Colors.white,),
+              title: Text(_news[7].name,style: TextStyle(color: Colors.white),),onTap: (){
                 _open_news_category(_news[7],context);
               },
             ),
           ],
-        )
+        ),) 
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Builder(
