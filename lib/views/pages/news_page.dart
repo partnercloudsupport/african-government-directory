@@ -4,6 +4,7 @@ import 'package:government_directory/models/data.dart';
 import 'package:government_directory/models/news.dart';
 import 'package:government_directory/models/news_category.dart';
 import 'package:government_directory/news_page.dart';
+import 'package:government_directory/views/pages/news_category.dart';
 
 class all_news_page extends StatefulWidget {
   @override
@@ -26,7 +27,9 @@ class all_news_page_state extends State<all_news_page> {
   List<news_category> categories = [new news_category(),];
 
   var repository = new news_api();
-
+  _open_news_category(news_category _news_category, context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => new news_category_page(category: _news_category)));
+  }
   GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -67,44 +70,44 @@ class all_news_page_state extends State<all_news_page> {
             ),
 
             ListTile(
-              title: Text('Top Stories'),
+              title: Text(_news[0].name),
               onTap: (){
-
+                _open_news_category(_news[0],context);
               },
             ),
                         ListTile(
-              title: Text('Business'),onTap: (){
-                
+              title: Text(_news[1].name),onTap: (){
+                _open_news_category(_news[1],context);
               },
             ),
                         ListTile(
-              title: Text('World'),onTap: (){
-                
+              title: Text(_news[2].name),onTap: (){
+                _open_news_category(_news[2],context);
               },
             ),
                         ListTile(
-              title: Text('Entertainment'),onTap: (){
-                
+              title: Text(_news[3].name),onTap: (){
+                _open_news_category(_news[3],context);
               },
             ),
                         ListTile(
-              title: Text('South Africa'),onTap: (){
-                
+              title: Text(_news[4].name),onTap: (){
+                _open_news_category(_news[4],context);
               },
             ),
                         ListTile(
-              title: Text('Technology'),onTap: (){
-                
+              title: Text(_news[5].name),onTap: (){
+                _open_news_category(_news[5],context);
               },
             ),
                         ListTile(
-              title: Text('Sports'),onTap: (){
-                
+              title: Text(_news[6].name),onTap: (){
+                _open_news_category(_news[6],context);
               },
             ),
                         ListTile(
-              title: Text('Health'),onTap: (){
-                
+              title: Text(_news[7].name),onTap: (){
+                _open_news_category(_news[7],context);
               },
             ),
           ],
@@ -496,6 +499,8 @@ class build_category_stories extends StatelessWidget {
   _open_news_(News _news, context){
     Navigator.push(context, MaterialPageRoute(builder: (context) => new news_page(news: _news)));
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
