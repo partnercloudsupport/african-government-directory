@@ -22,7 +22,7 @@ class _add_advert extends State<add_advert>{
       key: _scaffold_key,
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('Add Advert'.toUpperCase(), style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15.0),),
+        title: Text('Add Free Listing'.toUpperCase(), style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15.0),),
       backgroundColor: Colors.green,
       ),
       //body: _form_view,
@@ -36,6 +36,9 @@ class _add_advert extends State<add_advert>{
         key: _form_key,
         child: Column(
           children: <Widget>[
+                                  SizedBox(
+            height: _space_between_fields,
+          ),
             _name_field(),
                       SizedBox(
             height: _space_between_fields,
@@ -333,8 +336,8 @@ void _on_business_category_form_field_click(){
 
   static final _form_key = GlobalKey<FormState>();
   var _form_view = Container(
-    margin: EdgeInsets.all(8.0),
-    padding: EdgeInsets.all(8.0),
+    //margin: EdgeInsets.all(8.0),
+    //padding: EdgeInsets.all(8.0),
     child: SingleChildScrollView(
       child: Form(
         key: _form_key,

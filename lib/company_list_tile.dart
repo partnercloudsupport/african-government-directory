@@ -102,7 +102,7 @@ class company_list_tile extends StatelessWidget {
     }
 
     if(_empty){
-      return 'https://www.labx.com/images/image-not-found.png';
+      return 'https://www.massinsight.org/wp-content/uploads/2016/05/placeholder-4-351x246.png';
     }else{
       return 'http://cdn.adslive.com/${image__url}';
     }

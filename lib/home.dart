@@ -213,21 +213,21 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: (context) => FavouritesPage()));
               },
             ),
-            ListTile(
-              leading: Icon(Icons.videocam),
-              title: Text('Video Channel',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    color: Colors.black,
-                    fontSize: 16.0,
-                  )),
-              onTap: () {
-                print('video channel tabbed');
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.videocam),
+            //   title: Text('Video Channel',
+            //       style: TextStyle(
+            //         fontWeight: FontWeight.w300,
+            //         color: Colors.black,
+            //         fontSize: 16.0,
+            //       )),
+            //   onTap: () {
+            //     print('video channel tabbed');
+            //   },
+            // ),
             ListTile(
               leading: Icon(Icons.add),
-              title: Text('Add A Free Advert',
+              title: Text('Add Free Listing',
                   style: TextStyle(
                     fontWeight: FontWeight.w300,
                     color: Colors.black,
@@ -344,7 +344,7 @@ class body_ui extends StatelessWidget {
                               height: 190.0,
                               width: MediaQuery.of(context).size.width - 100.0,
                               decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: Colors.grey,
                                 image: DecorationImage(
                                   image: new NetworkImage(
                                     news[position].thumbnail

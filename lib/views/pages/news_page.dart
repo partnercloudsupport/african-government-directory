@@ -5,6 +5,8 @@ import 'package:government_directory/models/news.dart';
 import 'package:government_directory/models/news_category.dart';
 import 'package:government_directory/news_page.dart';
 import 'package:government_directory/views/pages/news_category.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class all_news_page extends StatefulWidget {
   @override
@@ -62,6 +64,10 @@ class all_news_page_state extends State<all_news_page> {
               color: Color(0XFFe5e5e5),
               height: 100.0,
               child:  DrawerHeader(
+                margin: EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                  color: Color(0XFFe5e5e5),
+                ),
               child: Center(
                 child: Text('Featured Categories',textAlign: TextAlign.left,style: TextStyle(
                 fontSize: 20.0,
@@ -69,13 +75,6 @@ class all_news_page_state extends State<all_news_page> {
                 fontWeight: FontWeight.bold
               ),),
               ) ,
-              decoration: BoxDecoration(
-                // image: DecorationImage(
-                //   image: NetworkImage(
-                //     'http://www.southdevonandtorbayccg.nhs.uk/news/PublishingImages/header-news.png'
-                //   )
-                // )
-              ),
             ),
             ),
 
@@ -86,7 +85,6 @@ class all_news_page_state extends State<all_news_page> {
                 _open_news_category(_news[0],context);
               },
             ),
-            Divider(),
                         ListTile(
                           leading: Icon(Icons.business_center, color: Colors.white,),
               title: Text(_news[1].name,style: TextStyle(color: Colors.white),),onTap: (){
@@ -129,6 +127,29 @@ class all_news_page_state extends State<all_news_page> {
                 _open_news_category(_news[7],context);
               },
             ),
+
+            new Divider(),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child:             Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text('Powered By', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      _launchURL("http://adslive.com/",context);
+                    },
+                    child:                   Container(
+                    height: 100,
+                    child: SvgPicture.network('http://adslive.com/assets/images/logos/adslive_new.svg'),
+                  ),
+                  )
+                ],
+              ),
+            )
           ],
         ),) 
       ),
@@ -174,6 +195,15 @@ load_news_data() async {
     });
   });
 }
+
+  _launchURL(url,context) async {
+    //if(Platform.isAndroid) 
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        print('Could not launch $url');
+      }
+  }
 
 
 

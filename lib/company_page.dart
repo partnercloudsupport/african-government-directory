@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:government_directory/add_advert.dart';
 import 'package:government_directory/favourites.dart';
+import 'package:government_directory/home.dart';
 import 'package:government_directory/search_page.dart';
 import 'package:government_directory/view_advert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/company.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class company_page extends StatefulWidget {
   final Company company;
@@ -34,6 +36,10 @@ class _company_page_state extends State<company_page>
   DecorationImage type;
 
   bool _has_advert = false;
+  bool _phone_number_available = false;
+  bool _email_address_available = false;
+  bool _website_address_available = false;
+  bool _location_available = false;
 
   double _appBarHeight = 256.0;
   AppBarBehavior _appBarBehavior = AppBarBehavior.pinned;
@@ -200,11 +206,14 @@ class _company_page_state extends State<company_page>
       if (action == 'phone') {
         //show company phone number
         connection_icon = new Icon(Icons.phone, color: Colors.cyan);
-        title = 'company phone number';
+        title = 'Contact Number';
         if (company.mobile.isEmpty) {
           _empty = true;
         } else {
           _empty = false;
+          setState(() {
+           _phone_number_available = true; 
+          });
           company_connection_data = '${company.mobile}';
         }
       }
@@ -217,7 +226,7 @@ class _company_page_state extends State<company_page>
       if (action == 'fax') {
         //show company fax number
         connection_icon = new Icon(Icons.print, color: Colors.cyan);
-        title = 'company fax number';
+        title = 'Fax Number';
         if (company.fax.isEmpty) {
           _empty = true;
         } else {
@@ -234,11 +243,14 @@ class _company_page_state extends State<company_page>
       if (action == 'email') {
         //show company email
         connection_icon = new Icon(Icons.email, color: Colors.cyan);
-        title = 'company email address';
+        title = 'Email Address';
         if (company.email.isEmpty) {
           _empty = true;
         } else {
           _empty = false;
+          setState(() {
+           _email_address_available = true; 
+          });
           company_connection_data = '${company.email}';
         }
       }
@@ -251,11 +263,14 @@ class _company_page_state extends State<company_page>
       if (action == 'web') {
         //show company website
         connection_icon = new Icon(Icons.web, color: Colors.cyan);
-        title = 'company website';
+        title = 'Website';
         if (company.website.isEmpty) {
           _empty = true;
         } else {
           _empty = false;
+          setState(() {
+           _website_address_available = true; 
+          });
           company_connection_data = '${company.website}';
         }
       }
@@ -269,11 +284,14 @@ class _company_page_state extends State<company_page>
       if (action == 'location') {
         //show company location
         connection_icon = new Icon(Icons.location_on, color: Colors.cyan);
-        title = 'company location';
+        title = 'Address';
         if (company.address.isEmpty) {
           _empty = true;
         } else {
           _empty = false;
+          setState(() {
+           _location_available = true; 
+          });
           company_connection_data = '${company.address}';
         }
       }
@@ -294,9 +312,9 @@ class _company_page_state extends State<company_page>
               ),
               new ListTile(
                 leading: new Text(''),
-                title: _empty
-                    ? Text('This company has no ${title}')
-                    : Text('${company_connection_data}'),
+                title: _empty ? Text('${title} Not Applicable') : _lauch_data(action, company_connection_data)
+                    // ? Text('${title} Not Applicable')
+                    // : Text('${company_connection_data}'),
               ),
               SizedBox(
                 height: 15.0,
@@ -304,6 +322,71 @@ class _company_page_state extends State<company_page>
             ],
           );
         });
+  }
+
+  _lauch_data(data_type,data){
+    if(data_type == 'phone'){
+      return GestureDetector(
+        onTap: () async{
+          if(await canLaunch('tel:${data}')){
+            await launch('tel:${data}');
+          }else{
+            throw 'cant launch phone';
+          }
+        },
+        child: Text(data,style: TextStyle(color: Colors.blueAccent),),
+      );
+    }
+    if(data_type == 'email'){
+      return GestureDetector(
+        onTap: () async{
+          if(await canLaunch('mailto:${data}')){
+            await launch('mailto:${data}');
+          }else{
+            throw 'cant launch email';
+          }
+        },
+        child: Text(data,style: TextStyle(color: Colors.blueAccent),),
+      );
+    }
+    if(data_type == 'location'){
+      return GestureDetector(
+        onTap: () async{
+          if(await canLaunch('http:${data}')){
+            await launch('http:www.google.com/maps/search/${data}');
+          }else{
+            throw 'cant launch maps';
+          }
+        },
+        child: Text(data,style: TextStyle(color: Colors.blueAccent),),
+      );
+    }
+    if(data_type == 'fax'){
+      return Text(data);
+    }
+
+    if(data_type == 'web'){
+      return GestureDetector(
+        onTap: () async{
+          if(await canLaunch('http:${data}')){
+            await launch('http:${data}');
+          }else{
+            throw 'cant launch web';
+          }
+        },
+        child: Text(data,style: TextStyle(color: Colors.blueAccent),),
+      );
+    }
+  }
+
+  _lauch_phone() async{
+    const url = "tel:0613619024";
+
+    if(await canLaunch(url)){
+      await launch(url);
+    }else{
+      throw 'launching phone failed';
+    }
   }
 
   void _menu(BuildContext context) {
@@ -314,8 +397,23 @@ class _company_page_state extends State<company_page>
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
+                leading: Icon(Icons.home),
+                title: Text('Home',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )),
+                onTap: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.favorite),
-                title: Text('Favourites'),
+                title: Text('Favourites',style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                  fontSize: 16.0,
+                )),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -323,16 +421,16 @@ class _company_page_state extends State<company_page>
                           builder: (context) => FavouritesPage()));
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.videocam),
-                title: Text('Video Channel'),
-                onTap: () {
-                  print('video channel tabbed');
-                },
-              ),
+              // ListTile(
+              //   leading: Icon(Icons.videocam),
+              //   title: Text('Video Channel'),
+              //   onTap: () {
+              //     print('video channel tabbed');
+              //   },
+              // ),
               ListTile(
                 leading: Icon(Icons.add),
-                title: Text('Add A Free Advert',style: TextStyle(
+                title: Text('Add Free Listing',style: TextStyle(
                   fontWeight: FontWeight.w300,
                   color: Colors.black,
                   fontSize: 16.0,
