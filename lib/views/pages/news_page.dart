@@ -144,7 +144,8 @@ class all_news_page_state extends State<all_news_page> {
                     },
                     child:                   Container(
                     height: 100,
-                    child: SvgPicture.network('http://adslive.com/assets/images/logos/adslive_new.svg'),
+                    width: 200,
+                    child: Image.network('http://adsproof.com/assets/crm_adslive_signature/adslive_logo.png',fit: BoxFit.fitWidth,),
                   ),
                   )
                 ],
